@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tfiGemstones",
+  "name": "TFI: Gemstones",
+  "description": "A TFI mod about gems in stones.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "levinaxr.com/gemstones",
+  "updateUrl": "",
+  "authorList": ["Levinaxr"],
+  "credits": "Fabbe50 for his help getting this mod started.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["tficore"]
+}
+]

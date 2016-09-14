@@ -699,7 +699,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Resources/TFICore-1.10.2-1.1.0-alpha21.jar!/" />
+          <root url="jar://$MODULE_DIR$/../TFICore/build/libs/TFICore-1.10.2-1.1.0-alpha21.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

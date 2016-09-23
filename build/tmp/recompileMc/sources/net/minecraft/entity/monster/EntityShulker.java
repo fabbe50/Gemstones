@@ -155,9 +155,9 @@ public class EntityShulker extends EntityGolem implements IMob
         return new EntityShulker.BodyHelper(this);
     }
 
-    public static void func_189757_b(DataFixer p_189757_0_)
+    public static void registerFixesShulker(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189757_0_, "Shulker");
+        EntityLiving.registerFixesMob(fixer, "Shulker");
     }
 
     /**

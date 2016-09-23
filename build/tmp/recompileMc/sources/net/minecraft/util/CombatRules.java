@@ -4,11 +4,11 @@ import net.minecraft.util.math.MathHelper;
 
 public class CombatRules
 {
-    public static float getDamageAfterAbsorb(float p_189427_0_, float p_189427_1_, float p_189427_2_)
+    public static float getDamageAfterAbsorb(float damage, float totalArmor, float toughnessAttribute)
     {
-        float f = 2.0F + p_189427_2_ / 4.0F;
-        float f1 = MathHelper.clamp_float(p_189427_1_ - p_189427_0_ / f, p_189427_1_ * 0.2F, 20.0F);
-        return p_189427_0_ * (1.0F - f1 / 25.0F);
+        float f = 2.0F + toughnessAttribute / 4.0F;
+        float f1 = MathHelper.clamp_float(totalArmor - damage / f, totalArmor * 0.2F, 20.0F);
+        return damage * (1.0F - f1 / 25.0F);
     }
 
     public static float getDamageAfterMagicAbsorb(float p_188401_0_, float p_188401_1_)

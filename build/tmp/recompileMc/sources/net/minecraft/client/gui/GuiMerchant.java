@@ -56,8 +56,8 @@ public class GuiMerchant extends GuiContainer
         super.initGui();
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
-        this.nextButton = (GuiMerchant.MerchantButton)this.func_189646_b(new GuiMerchant.MerchantButton(1, i + 120 + 27, j + 24 - 1, true));
-        this.previousButton = (GuiMerchant.MerchantButton)this.func_189646_b(new GuiMerchant.MerchantButton(2, i + 36 - 19, j + 24 - 1, false));
+        this.nextButton = (GuiMerchant.MerchantButton)this.addButton(new GuiMerchant.MerchantButton(1, i + 120 + 27, j + 24 - 1, true));
+        this.previousButton = (GuiMerchant.MerchantButton)this.addButton(new GuiMerchant.MerchantButton(2, i + 36 - 19, j + 24 - 1, false));
         this.nextButton.enabled = false;
         this.previousButton.enabled = false;
     }

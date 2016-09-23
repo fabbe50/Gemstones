@@ -373,7 +373,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryChangedListen
     {
         int i = MathHelper.floor_double(this.posX);
         int j = MathHelper.floor_double(this.posZ);
-        this.worldObj.getBiomeGenForCoords(new BlockPos(i, 0, j));
+        this.worldObj.getBiome(new BlockPos(i, 0, j));
         return true;
     }
 
@@ -1317,11 +1317,11 @@ public class EntityHorse extends EntityAnimal implements IInventoryChangedListen
         }
     }
 
-    public static void func_189803_b(DataFixer p_189803_0_)
+    public static void registerFixesHorse(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189803_0_, "EntityHorse");
-        p_189803_0_.registerWalker(FixTypes.ENTITY, new ItemStackDataLists("EntityHorse", new String[] {"Items"}));
-        p_189803_0_.registerWalker(FixTypes.ENTITY, new ItemStackData("EntityHorse", new String[] {"ArmorItem", "SaddleItem"}));
+        EntityLiving.registerFixesMob(fixer, "EntityHorse");
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackDataLists("EntityHorse", new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackData("EntityHorse", new String[] {"ArmorItem", "SaddleItem"}));
     }
 
     /**

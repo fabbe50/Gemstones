@@ -176,8 +176,8 @@ public abstract class EntityLivingBase extends Entity
     protected int ticksElytraFlying;
     /** The BlockPos the entity had during the previous tick. */
     private BlockPos prevBlockpos;
-    private DamageSource field_189750_bF;
-    private long field_189751_bG;
+    private DamageSource lastDamageSource;
+    private long lastDamageStamp;
 
     /**
      * Called by the /kill command.
@@ -1072,8 +1072,8 @@ public abstract class EntityLivingBase extends Entity
 
                 if (!flag || amount > 0.0F)
                 {
-                    this.field_189750_bF = source;
-                    this.field_189751_bG = this.worldObj.getTotalWorldTime();
+                    this.lastDamageSource = source;
+                    this.lastDamageStamp = this.worldObj.getTotalWorldTime();
                 }
 
                 return !flag || amount > 0.0F;
@@ -1082,14 +1082,14 @@ public abstract class EntityLivingBase extends Entity
     }
 
     @Nullable
-    public DamageSource func_189748_bU()
+    public DamageSource getLastDamageSource()
     {
-        if (this.worldObj.getTotalWorldTime() - this.field_189751_bG > 40L)
+        if (this.worldObj.getTotalWorldTime() - this.lastDamageStamp > 40L)
         {
-            this.field_189750_bF = null;
+            this.lastDamageSource = null;
         }
 
-        return this.field_189750_bF;
+        return this.lastDamageSource;
     }
 
     protected void playHurtSound(DamageSource source)
@@ -1858,7 +1858,7 @@ public abstract class EntityLivingBase extends Entity
         this.motionY += 0.03999999910593033D;
     }
 
-    protected float func_189749_co()
+    protected float getWaterSlowDown()
     {
         return 0.8F;
     }
@@ -2002,7 +2002,7 @@ public abstract class EntityLivingBase extends Entity
 
                             if (!this.worldObj.isRemote || this.worldObj.isBlockLoaded(blockpos$pooledmutableblockpos) && this.worldObj.getChunkFromBlockCoords(blockpos$pooledmutableblockpos).isLoaded())
                             {
-                                if (!this.func_189652_ae())
+                                if (!this.hasNoGravity())
                                 {
                                     this.motionY -= 0.08D;
                                 }
@@ -2032,7 +2032,7 @@ public abstract class EntityLivingBase extends Entity
                     this.motionY *= 0.5D;
                     this.motionZ *= 0.5D;
 
-                    if (!this.func_189652_ae())
+                    if (!this.hasNoGravity())
                     {
                         this.motionY -= 0.02D;
                     }
@@ -2046,7 +2046,7 @@ public abstract class EntityLivingBase extends Entity
             else
             {
                 double d0 = this.posY;
-                float f1 = this.func_189749_co();
+                float f1 = this.getWaterSlowDown();
                 float f2 = 0.02F;
                 float f3 = (float)EnchantmentHelper.getDepthStriderModifier(this);
 
@@ -2072,7 +2072,7 @@ public abstract class EntityLivingBase extends Entity
                 this.motionY *= 0.800000011920929D;
                 this.motionZ *= (double)f1;
 
-                if (!this.func_189652_ae())
+                if (!this.hasNoGravity())
                 {
                     this.motionY -= 0.02D;
                 }

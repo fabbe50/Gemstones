@@ -26,7 +26,7 @@ public interface IBlockAccess
     boolean isAirBlock(BlockPos pos);
 
     @SideOnly(Side.CLIENT)
-    Biome getBiomeGenForCoords(BlockPos pos);
+    Biome getBiome(BlockPos pos);
 
     int getStrongPower(BlockPos pos, EnumFacing direction);
 

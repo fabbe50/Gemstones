@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 
 public class EntityDataManager
 {
-    private static final Logger field_190303_a = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final Map < Class <? extends Entity > , Integer > NEXT_ID_MAP = Maps. < Class <? extends Entity > , Integer > newHashMap();
     /** The entity that this data manager is for. */
     private final Entity entity;
@@ -39,7 +39,7 @@ public class EntityDataManager
 
     public static <T> DataParameter<T> createKey(Class <? extends Entity > clazz, DataSerializer<T> serializer)
     {
-        if (field_190303_a.isDebugEnabled())
+        if (LOGGER.isDebugEnabled())
         {
             try
             {
@@ -47,7 +47,7 @@ public class EntityDataManager
 
                 if (!oclass.equals(clazz))
                 {
-                    field_190303_a.debug("defineId called for: {} from {}", new Object[] {clazz, oclass, new RuntimeException()});
+                    LOGGER.debug("defineId called for: {} from {}", new Object[] {clazz, oclass, new RuntimeException()});
                 }
             }
             catch (ClassNotFoundException var5)

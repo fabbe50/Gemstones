@@ -105,13 +105,13 @@ public class EntityTrackerEntry
     public boolean playerEntitiesUpdated;
     public final Set<EntityPlayerMP> trackingPlayers = Sets.<EntityPlayerMP>newHashSet();
 
-    public EntityTrackerEntry(Entity entityIn, int p_i46837_2_, int p_i46837_3_, int p_i46837_4_, boolean p_i46837_5_)
+    public EntityTrackerEntry(Entity entityIn, int rangeIn, int maxRangeIn, int updateFrequencyIn, boolean sendVelocityUpdatesIn)
     {
         this.trackedEntity = entityIn;
-        this.range = p_i46837_2_;
-        this.maxRange = p_i46837_3_;
-        this.updateFrequency = p_i46837_4_;
-        this.sendVelocityUpdates = p_i46837_5_;
+        this.range = rangeIn;
+        this.maxRange = maxRangeIn;
+        this.updateFrequency = updateFrequencyIn;
+        this.sendVelocityUpdates = sendVelocityUpdatesIn;
         this.encodedPosX = EntityTracker.getPositionLong(entityIn.posX);
         this.encodedPosY = EntityTracker.getPositionLong(entityIn.posY);
         this.encodedPosZ = EntityTracker.getPositionLong(entityIn.posZ);
@@ -669,9 +669,9 @@ public class EntityTrackerEntry
         return this.trackedEntity;
     }
 
-    public void setMaxRange(int p_187259_1_)
+    public void setMaxRange(int maxRangeIn)
     {
-        this.maxRange = p_187259_1_;
+        this.maxRange = maxRangeIn;
     }
 
     public void resetPlayerVisibility()

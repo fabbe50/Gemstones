@@ -91,7 +91,10 @@ public class RenderChunk
         return this.vertexBuffers[layer];
     }
 
-    public void setOrigin(int p_189562_1_, int p_189562_2_, int p_189562_3_)
+    /**
+     * Sets the RenderChunk base position
+     */
+    public void setPosition(int p_189562_1_, int p_189562_2_, int p_189562_3_)
     {
         if (p_189562_1_ != this.position.getX() || p_189562_2_ != this.position.getY() || p_189562_3_ != this.position.getZ())
         {
@@ -163,7 +166,7 @@ public class RenderChunk
 
                 if (block.hasTileEntity(iblockstate))
                 {
-                    TileEntity tileentity = this.region.func_190300_a(blockpos$mutableblockpos, Chunk.EnumCreateEntityType.CHECK);
+                    TileEntity tileentity = this.region.getTileEntity(blockpos$mutableblockpos, Chunk.EnumCreateEntityType.CHECK);
 
                     if (tileentity != null)
                     {
@@ -267,7 +270,7 @@ public class RenderChunk
         {
             this.finishCompileTask();
             this.compileTask = new ChunkCompileTaskGenerator(this, ChunkCompileTaskGenerator.Type.REBUILD_CHUNK, this.getDistanceSq());
-            this.createRegion();
+            this.resetChunkCache();
             chunkcompiletaskgenerator = this.compileTask;
         }
         finally
@@ -278,7 +281,7 @@ public class RenderChunk
         return chunkcompiletaskgenerator;
     }
 
-    private void createRegion()
+    private void resetChunkCache()
     {
         int i = 1;
         ChunkCache cache = createRegionRenderCache(this.world, this.position.add(-1, -1, -1), this.position.add(16, 16, 16), 1);

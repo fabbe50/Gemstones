@@ -23,9 +23,9 @@ public class EntityCaveSpider extends EntitySpider
         this.setSize(0.7F, 0.5F);
     }
 
-    public static void func_189775_b(DataFixer p_189775_0_)
+    public static void registerFixesCaveSpider(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189775_0_, "CaveSpider");
+        EntityLiving.registerFixesMob(fixer, "CaveSpider");
     }
 
     protected void applyEntityAttributes()

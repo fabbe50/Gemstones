@@ -417,7 +417,7 @@ public class ComponentScatteredFeaturePieces
                     Rotation[] arotation = Rotation.values();
                     MinecraftServer minecraftserver = worldIn.getMinecraftServer();
                     TemplateManager templatemanager = worldIn.getSaveHandler().getStructureTemplateManager();
-                    PlacementSettings placementsettings = (new PlacementSettings()).setRotation(arotation[randomIn.nextInt(arotation.length)]).setReplacedBlock(Blocks.field_189881_dj).setBoundingBox(structureboundingbox);
+                    PlacementSettings placementsettings = (new PlacementSettings()).setRotation(arotation[randomIn.nextInt(arotation.length)]).setReplacedBlock(Blocks.STRUCTURE_VOID).setBoundingBox(structureboundingbox);
                     Template template = templatemanager.getTemplate(minecraftserver, IGLOO_TOP_ID);
                     template.addBlocksToWorldChunk(worldIn, blockpos, placementsettings);
 

@@ -55,13 +55,13 @@ public class ChunkProviderClient implements IChunkProvider
             chunk.onChunkUnload();
         }
 
-        this.chunkMapping.remove(ChunkPos.chunkXZ2Int(x, z));
+        this.chunkMapping.remove(ChunkPos.asLong(x, z));
     }
 
     @Nullable
     public Chunk getLoadedChunk(int x, int z)
     {
-        return (Chunk)this.chunkMapping.get(ChunkPos.chunkXZ2Int(x, z));
+        return (Chunk)this.chunkMapping.get(ChunkPos.asLong(x, z));
     }
 
     /**
@@ -70,7 +70,7 @@ public class ChunkProviderClient implements IChunkProvider
     public Chunk loadChunk(int chunkX, int chunkZ)
     {
         Chunk chunk = new Chunk(this.worldObj, chunkX, chunkZ);
-        this.chunkMapping.put(ChunkPos.chunkXZ2Int(chunkX, chunkZ), chunk);
+        this.chunkMapping.put(ChunkPos.asLong(chunkX, chunkZ), chunk);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.ChunkEvent.Load(chunk));
         chunk.setChunkLoaded(true);
         return chunk;

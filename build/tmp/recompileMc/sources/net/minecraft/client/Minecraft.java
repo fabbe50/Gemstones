@@ -2090,7 +2090,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         }
         else if (p_184122_1_ == 34)
         {
-            boolean flag = this.debugRenderer.func_190075_b();
+            boolean flag = this.debugRenderer.toggleDebugScreen();
             this.debugChatMessage("Chunk borders: {0}", new Object[] {flag ? "shown" : "hidden"});
             return true;
         }
@@ -3272,7 +3272,10 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         return this.itemColors;
     }
 
-    public boolean func_189648_am()
+    /**
+     * Whether to use reduced debug info
+     */
+    public boolean isReducedDebug()
     {
         return this.thePlayer != null && this.thePlayer.hasReducedDebug() || this.gameSettings.reducedDebugInfo;
     }

@@ -33,9 +33,9 @@ public class EntityMinecartTNT extends EntityMinecart
         super(worldIn, x, y, z);
     }
 
-    public static void func_189674_a(DataFixer p_189674_0_)
+    public static void registerFixesMinecartTNT(DataFixer fixer)
     {
-        EntityMinecart.func_189669_a(p_189674_0_, "MinecartTNT");
+        EntityMinecart.registerFixesMinecart(fixer, "MinecartTNT");
     }
 
     public EntityMinecart.Type getType()

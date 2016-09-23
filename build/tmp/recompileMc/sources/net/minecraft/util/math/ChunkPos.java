@@ -22,9 +22,9 @@ public class ChunkPos
     }
 
     /**
-     * converts a chunk coordinate pair to an integer (suitable for hashing)
+     * Converts the chunk coordinate pair to a long
      */
-    public static long chunkXZ2Int(int x, int z)
+    public static long asLong(int x, int z)
     {
         return (long)x & 4294967295L | ((long)z & 4294967295L) << 32;
     }
@@ -53,12 +53,12 @@ public class ChunkPos
         }
     }
 
-    public double getDistanceSq(Entity p_185327_1_)
+    public double getDistanceSq(Entity entityIn)
     {
         double d0 = (double)(this.chunkXPos * 16 + 8);
         double d1 = (double)(this.chunkZPos * 16 + 8);
-        double d2 = d0 - p_185327_1_.posX;
-        double d3 = d1 - p_185327_1_.posZ;
+        double d2 = d0 - entityIn.posX;
+        double d3 = d1 - entityIn.posZ;
         return d2 * d2 + d3 * d3;
     }
 

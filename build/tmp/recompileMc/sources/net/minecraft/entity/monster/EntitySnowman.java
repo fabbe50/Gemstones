@@ -40,9 +40,9 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
         this.setSize(0.7F, 1.9F);
     }
 
-    public static void func_189783_b(DataFixer p_189783_0_)
+    public static void registerFixesSnowman(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189783_0_, "SnowMan");
+        EntityLiving.registerFixesMob(fixer, "SnowMan");
     }
 
     protected void initEntityAI()
@@ -86,7 +86,7 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
                 this.attackEntityFrom(DamageSource.drown, 1.0F);
             }
 
-            if (this.worldObj.getBiomeGenForCoords(new BlockPos(i, 0, k)).getFloatTemperature(new BlockPos(i, j, k)) > 1.0F)
+            if (this.worldObj.getBiome(new BlockPos(i, 0, k)).getFloatTemperature(new BlockPos(i, j, k)) > 1.0F)
             {
                 this.attackEntityFrom(DamageSource.onFire, 1.0F);
             }
@@ -103,7 +103,7 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
                 k = MathHelper.floor_double(this.posZ + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(i, j, k);
 
-                if (this.worldObj.getBlockState(blockpos).getMaterial() == Material.AIR && this.worldObj.getBiomeGenForCoords(new BlockPos(i, 0, k)).getFloatTemperature(blockpos) < 0.8F && Blocks.SNOW_LAYER.canPlaceBlockAt(this.worldObj, blockpos))
+                if (this.worldObj.getBlockState(blockpos).getMaterial() == Material.AIR && this.worldObj.getBiome(new BlockPos(i, 0, k)).getFloatTemperature(blockpos) < 0.8F && Blocks.SNOW_LAYER.canPlaceBlockAt(this.worldObj, blockpos))
                 {
                     this.worldObj.setBlockState(blockpos, Blocks.SNOW_LAYER.getDefaultState());
                 }
@@ -119,8 +119,10 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
 
     /**
      * Attack the specified entity using a ranged attack.
+     *  
+     * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float p_82196_2_)
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         EntitySnowball entitysnowball = new EntitySnowball(this.worldObj, this);
         double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;

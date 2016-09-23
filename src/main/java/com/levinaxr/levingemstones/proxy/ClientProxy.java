@@ -1,5 +1,6 @@
 package com.levinaxr.levingemstones.proxy;
 
+import com.levinaxr.levingemstones.init.BlockRegistry;
 import com.levinaxr.levingemstones.init.ItemRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -14,7 +15,7 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
 
-        //BlockRegistry.renderInit(); //Register block-rendering
+        BlockRegistry.renderInit(); //Register block-rendering
         ItemRegistry.renderInit(); //Register item-rendering
     }
 

@@ -176,7 +176,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
     private static final DataParameter<String> CUSTOM_NAME = EntityDataManager.<String>createKey(Entity.class, DataSerializers.STRING);
     private static final DataParameter<Boolean> CUSTOM_NAME_VISIBLE = EntityDataManager.<Boolean>createKey(Entity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SILENT = EntityDataManager.<Boolean>createKey(Entity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> field_189655_aD = EntityDataManager.<Boolean>createKey(Entity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> NO_GRAVITY = EntityDataManager.<Boolean>createKey(Entity.class, DataSerializers.BOOLEAN);
     /** Has this entity been added to the chunk its within */
     public boolean addedToChunk;
     public int chunkCoordX;
@@ -246,7 +246,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         this.dataManager.register(CUSTOM_NAME_VISIBLE, Boolean.valueOf(false));
         this.dataManager.register(CUSTOM_NAME, "");
         this.dataManager.register(SILENT, Boolean.valueOf(false));
-        this.dataManager.register(field_189655_aD, Boolean.valueOf(false));
+        this.dataManager.register(NO_GRAVITY, Boolean.valueOf(false));
         this.entityInit();
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityEvent.EntityConstructing(this));
         capabilities = net.minecraftforge.event.ForgeEventFactory.gatherCapabilities(this);
@@ -1098,14 +1098,14 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         this.dataManager.set(SILENT, Boolean.valueOf(isSilent));
     }
 
-    public boolean func_189652_ae()
+    public boolean hasNoGravity()
     {
-        return ((Boolean)this.dataManager.get(field_189655_aD)).booleanValue();
+        return ((Boolean)this.dataManager.get(NO_GRAVITY)).booleanValue();
     }
 
-    public void func_189654_d(boolean p_189654_1_)
+    public void setNoGravity(boolean noGravity)
     {
-        this.dataManager.set(field_189655_aD, Boolean.valueOf(p_189654_1_));
+        this.dataManager.set(NO_GRAVITY, Boolean.valueOf(noGravity));
     }
 
     /**
@@ -1736,47 +1736,47 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         }
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound p_189511_1_)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         try
         {
-            p_189511_1_.setTag("Pos", this.newDoubleNBTList(new double[] {this.posX, this.posY, this.posZ}));
-            p_189511_1_.setTag("Motion", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
-            p_189511_1_.setTag("Rotation", this.newFloatNBTList(new float[] {this.rotationYaw, this.rotationPitch}));
-            p_189511_1_.setFloat("FallDistance", this.fallDistance);
-            p_189511_1_.setShort("Fire", (short)this.fire);
-            p_189511_1_.setShort("Air", (short)this.getAir());
-            p_189511_1_.setBoolean("OnGround", this.onGround);
-            p_189511_1_.setInteger("Dimension", this.dimension);
-            p_189511_1_.setBoolean("Invulnerable", this.invulnerable);
-            p_189511_1_.setInteger("PortalCooldown", this.timeUntilPortal);
-            p_189511_1_.setUniqueId("UUID", this.getUniqueID());
+            compound.setTag("Pos", this.newDoubleNBTList(new double[] {this.posX, this.posY, this.posZ}));
+            compound.setTag("Motion", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
+            compound.setTag("Rotation", this.newFloatNBTList(new float[] {this.rotationYaw, this.rotationPitch}));
+            compound.setFloat("FallDistance", this.fallDistance);
+            compound.setShort("Fire", (short)this.fire);
+            compound.setShort("Air", (short)this.getAir());
+            compound.setBoolean("OnGround", this.onGround);
+            compound.setInteger("Dimension", this.dimension);
+            compound.setBoolean("Invulnerable", this.invulnerable);
+            compound.setInteger("PortalCooldown", this.timeUntilPortal);
+            compound.setUniqueId("UUID", this.getUniqueID());
 
             if (this.getCustomNameTag() != null && !this.getCustomNameTag().isEmpty())
             {
-                p_189511_1_.setString("CustomName", this.getCustomNameTag());
+                compound.setString("CustomName", this.getCustomNameTag());
             }
 
             if (this.getAlwaysRenderNameTag())
             {
-                p_189511_1_.setBoolean("CustomNameVisible", this.getAlwaysRenderNameTag());
+                compound.setBoolean("CustomNameVisible", this.getAlwaysRenderNameTag());
             }
 
-            this.cmdResultStats.writeStatsToNBT(p_189511_1_);
+            this.cmdResultStats.writeStatsToNBT(compound);
 
             if (this.isSilent())
             {
-                p_189511_1_.setBoolean("Silent", this.isSilent());
+                compound.setBoolean("Silent", this.isSilent());
             }
 
-            if (this.func_189652_ae())
+            if (this.hasNoGravity())
             {
-                p_189511_1_.setBoolean("NoGravity", this.func_189652_ae());
+                compound.setBoolean("NoGravity", this.hasNoGravity());
             }
 
             if (this.glowing)
             {
-                p_189511_1_.setBoolean("Glowing", this.glowing);
+                compound.setBoolean("Glowing", this.glowing);
             }
 
             if (this.tags.size() > 0)
@@ -1788,13 +1788,13 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
                     nbttaglist.appendTag(new NBTTagString(s));
                 }
 
-                p_189511_1_.setTag("Tags", nbttaglist);
+                compound.setTag("Tags", nbttaglist);
             }
 
-            if (customEntityData != null) p_189511_1_.setTag("ForgeData", customEntityData);
-            if (this.capabilities != null) p_189511_1_.setTag("ForgeCaps", this.capabilities.serializeNBT());
+            if (customEntityData != null) compound.setTag("ForgeData", customEntityData);
+            if (this.capabilities != null) compound.setTag("ForgeCaps", this.capabilities.serializeNBT());
 
-            this.writeEntityToNBT(p_189511_1_);
+            this.writeEntityToNBT(compound);
 
             if (this.isBeingRidden())
             {
@@ -1812,11 +1812,11 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
 
                 if (!nbttaglist1.hasNoTags())
                 {
-                    p_189511_1_.setTag("Passengers", nbttaglist1);
+                    compound.setTag("Passengers", nbttaglist1);
                 }
             }
 
-            return p_189511_1_;
+            return compound;
         }
         catch (Throwable throwable)
         {
@@ -1901,7 +1901,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
             this.setAlwaysRenderNameTag(compound.getBoolean("CustomNameVisible"));
             this.cmdResultStats.readStatsFromNBT(compound);
             this.setSilent(compound.getBoolean("Silent"));
-            this.func_189654_d(compound.getBoolean("NoGravity"));
+            this.setNoGravity(compound.getBoolean("NoGravity"));
             this.setGlowing(compound.getBoolean("Glowing"));
 
             if (compound.hasKey("ForgeData")) customEntityData = compound.getCompoundTag("ForgeData");
@@ -2243,17 +2243,20 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         return null;
     }
 
+    /**
+     * returns the Entity's pitch and yaw as a Vec2f
+     */
     @SideOnly(Side.CLIENT)
-    public Vec2f func_189653_aC()
+    public Vec2f getPitchYaw()
     {
         Vec2f vec2f = new Vec2f(this.rotationPitch, this.rotationYaw);
         return vec2f;
     }
 
     @SideOnly(Side.CLIENT)
-    public Vec3d func_189651_aD()
+    public Vec3d getForward()
     {
-        return Vec3d.func_189984_a(this.func_189653_aC());
+        return Vec3d.fromPitchYawVector(this.getPitchYaw());
     }
 
     /**

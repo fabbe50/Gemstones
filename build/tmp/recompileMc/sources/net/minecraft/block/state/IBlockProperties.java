@@ -26,7 +26,7 @@ public interface IBlockProperties
 
     boolean isFullBlock();
 
-    boolean func_189884_a(Entity p_189884_1_);
+    boolean canEntitySpawn(Entity entityIn);
 
     @Deprecated //Forge location aware version below
     int getLightOpacity();

@@ -203,10 +203,10 @@ public class EntityPotion extends EntityThrowable
         }
     }
 
-    public static void func_189665_a(DataFixer p_189665_0_)
+    public static void registerFixesPotion(DataFixer fixer)
     {
-        EntityThrowable.func_189661_a(p_189665_0_, "ThrownPotion");
-        p_189665_0_.registerWalker(FixTypes.ENTITY, new ItemStackData("ThrownPotion", new String[] {"Potion"}));
+        EntityThrowable.registerFixesThrowable(fixer, "ThrownPotion");
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackData("ThrownPotion", new String[] {"Potion"}));
     }
 
     /**

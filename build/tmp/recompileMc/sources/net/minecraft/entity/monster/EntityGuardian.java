@@ -91,9 +91,9 @@ public class EntityGuardian extends EntityMob
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
     }
 
-    public static void func_189766_b(DataFixer p_189766_0_)
+    public static void registerFixesGuardian(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189766_0_, "Guardian");
+        EntityLiving.registerFixesMob(fixer, "Guardian");
     }
 
     /**

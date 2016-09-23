@@ -33,13 +33,17 @@ public abstract class BlockContainer extends Block implements ITileEntityProvide
     }
 
     /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
+     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      */
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
         return EnumBlockRenderType.INVISIBLE;
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         super.breakBlock(worldIn, pos, state);
@@ -51,9 +55,6 @@ public abstract class BlockContainer extends Block implements ITileEntityProvide
      * changes to the world, like pistons replacing the block with an extended base. On the client, the update may
      * involve replacing tile entities, playing sounds, or performing other visual actions to reflect the server side
      * changes.
-     *  
-     * @param state The block state retrieved from the block position prior to this method being invoked
-     * @param pos The position of the block event. Can be used to retrieve tile entities.
      */
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
     {

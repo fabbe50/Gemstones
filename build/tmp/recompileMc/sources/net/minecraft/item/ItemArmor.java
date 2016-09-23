@@ -62,7 +62,7 @@ public class ItemArmor extends Item
 
     public static ItemStack dispenseArmor(IBlockSource blockSource, ItemStack stack)
     {
-        BlockPos blockpos = blockSource.getBlockPos().offset((EnumFacing)blockSource.func_189992_e().getValue(BlockDispenser.FACING));
+        BlockPos blockpos = blockSource.getBlockPos().offset((EnumFacing)blockSource.getBlockState().getValue(BlockDispenser.FACING));
         List<EntityLivingBase> list = blockSource.getWorld().<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(blockpos), Predicates.<EntityLivingBase>and(EntitySelectors.NOT_SPECTATING, new EntitySelectors.ArmoredMob(stack)));
 
         if (list.isEmpty())
@@ -296,14 +296,14 @@ public class ItemArmor extends Item
         //Added by forge for custom Armor materials.
         public Item customCraftingMaterial = null;
 
-        private ArmorMaterial(String p_i47117_3_, int p_i47117_4_, int[] p_i47117_5_, int p_i47117_6_, SoundEvent p_i47117_7_, float p_i47117_8_)
+        private ArmorMaterial(String nameIn, int maxDamageFactorIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundEventIn, float toughnessIn)
         {
-            this.name = p_i47117_3_;
-            this.maxDamageFactor = p_i47117_4_;
-            this.damageReductionAmountArray = p_i47117_5_;
-            this.enchantability = p_i47117_6_;
-            this.soundEvent = p_i47117_7_;
-            this.toughness = p_i47117_8_;
+            this.name = nameIn;
+            this.maxDamageFactor = maxDamageFactorIn;
+            this.damageReductionAmountArray = damageReductionAmountArrayIn;
+            this.enchantability = enchantabilityIn;
+            this.soundEvent = soundEventIn;
+            this.toughness = toughnessIn;
         }
 
         /**

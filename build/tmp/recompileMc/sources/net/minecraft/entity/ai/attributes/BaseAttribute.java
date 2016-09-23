@@ -9,9 +9,9 @@ public abstract class BaseAttribute implements IAttribute
     private final double defaultValue;
     private boolean shouldWatch;
 
-    protected BaseAttribute(@Nullable IAttribute p_i45892_1_, String unlocalizedNameIn, double defaultValueIn)
+    protected BaseAttribute(@Nullable IAttribute parentIn, String unlocalizedNameIn, double defaultValueIn)
     {
-        this.parent = p_i45892_1_;
+        this.parent = parentIn;
         this.unlocalizedName = unlocalizedNameIn;
         this.defaultValue = defaultValueIn;
 

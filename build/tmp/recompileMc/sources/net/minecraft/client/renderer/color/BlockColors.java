@@ -146,7 +146,7 @@ public class BlockColors
         return blockcolors;
     }
 
-    public int func_189991_a(IBlockState p_189991_1_)
+    public int getColor(IBlockState p_189991_1_)
     {
         IBlockColor iblockcolor = (IBlockColor)this.blockColorMap.get(p_189991_1_.getBlock().delegate);
 

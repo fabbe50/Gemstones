@@ -15,7 +15,7 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem
     {
         ItemStack itemstack = this.dispenseStack(source, stack);
         this.playDispenseSound(source);
-        this.spawnDispenseParticles(source, (EnumFacing)source.func_189992_e().getValue(BlockDispenser.FACING));
+        this.spawnDispenseParticles(source, (EnumFacing)source.getBlockState().getValue(BlockDispenser.FACING));
         return itemstack;
     }
 
@@ -24,7 +24,7 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem
      */
     protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
     {
-        EnumFacing enumfacing = (EnumFacing)source.func_189992_e().getValue(BlockDispenser.FACING);
+        EnumFacing enumfacing = (EnumFacing)source.getBlockState().getValue(BlockDispenser.FACING);
         IPosition iposition = BlockDispenser.getDispensePosition(source);
         ItemStack itemstack = stack.splitStack(1);
         doDispense(source.getWorld(), itemstack, 6, enumfacing, iposition);

@@ -126,9 +126,9 @@ public class EntityPigZombie extends EntityZombie
         return this.worldObj.checkNoEntityCollision(this.getEntityBoundingBox(), this) && this.worldObj.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty() && !this.worldObj.containsAnyLiquid(this.getEntityBoundingBox());
     }
 
-    public static void func_189781_b(DataFixer p_189781_0_)
+    public static void registerFixesPigZombie(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189781_0_, "PigZombie");
+        EntityLiving.registerFixesMob(fixer, "PigZombie");
     }
 
     /**
@@ -255,7 +255,7 @@ public class EntityPigZombie extends EntityZombie
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
     {
         super.onInitialSpawn(difficulty, livingdata);
-        this.func_189778_a(ZombieType.NORMAL);
+        this.setZombieType(ZombieType.NORMAL);
         return livingdata;
     }
 

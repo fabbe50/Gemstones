@@ -313,7 +313,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile
         this.motionY *= (double)f1;
         this.motionZ *= (double)f1;
 
-        if (!this.func_189652_ae())
+        if (!this.hasNoGravity())
         {
             this.motionY -= (double)f2;
         }
@@ -334,7 +334,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile
      */
     protected abstract void onImpact(RayTraceResult result);
 
-    public static void func_189661_a(DataFixer p_189661_0_, String p_189661_1_)
+    public static void registerFixesThrowable(DataFixer fixer, String name)
     {
     }
 

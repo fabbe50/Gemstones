@@ -292,9 +292,9 @@ public class BlockStateContainer
                 return this.block.isFullBlock(this);
             }
 
-            public boolean func_189884_a(Entity p_189884_1_)
+            public boolean canEntitySpawn(Entity entityIn)
             {
-                return this.block.func_189872_a(this, p_189884_1_);
+                return this.block.canEntitySpawn(this, entityIn);
             }
 
             public int getLightOpacity()
@@ -464,9 +464,6 @@ public class BlockStateContainer
              * additional changes to the world, like pistons replacing the block with an extended base. On the client,
              * the update may involve replacing tile entities, playing sounds, or performing other visual actions to
              * reflect the server side changes.
-             *  
-             * @param worldIn The world the block event is taking place in
-             * @param pos The position of the block event taking place
              */
             public boolean onBlockEventReceived(World worldIn, BlockPos pos, int id, int param)
             {
@@ -478,9 +475,9 @@ public class BlockStateContainer
              * neighbor change. Cases may include when redstone power is updated, cactus blocks popping off due to a
              * neighboring solid block, etc.
              */
-            public void neighborChanged(World worldIn, BlockPos pos, Block p_189546_3_)
+            public void neighborChanged(World worldIn, BlockPos pos, Block blockIn)
             {
-                this.block.neighborChanged(this, worldIn, pos, p_189546_3_);
+                this.block.neighborChanged(this, worldIn, pos, blockIn);
             }
 
             //Forge Start

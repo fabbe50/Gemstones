@@ -11,24 +11,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class LayerSkeletonType implements LayerRenderer<EntitySkeleton>
 {
-    private static final ResourceLocation field_190092_a = new ResourceLocation("textures/entity/skeleton/stray_overlay.png");
-    private final RenderLivingBase<?> field_190093_b;
-    private ModelSkeleton field_190094_c;
+    private static final ResourceLocation STRAY_CLOTHES_TEXTURES = new ResourceLocation("textures/entity/skeleton/stray_overlay.png");
+    private final RenderLivingBase<?> renderer;
+    private ModelSkeleton layerModel;
 
     public LayerSkeletonType(RenderLivingBase<?> p_i47131_1_)
     {
-        this.field_190093_b = p_i47131_1_;
-        this.field_190094_c = new ModelSkeleton(0.25F, true);
+        this.renderer = p_i47131_1_;
+        this.layerModel = new ModelSkeleton(0.25F, true);
     }
 
     public void doRenderLayer(EntitySkeleton entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
-        if (entitylivingbaseIn.func_189771_df() == SkeletonType.STRAY)
+        if (entitylivingbaseIn.getSkeletonType() == SkeletonType.STRAY)
         {
-            this.field_190094_c.setModelAttributes(this.field_190093_b.getMainModel());
-            this.field_190094_c.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
-            this.field_190093_b.bindTexture(field_190092_a);
-            this.field_190094_c.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            this.layerModel.setModelAttributes(this.renderer.getMainModel());
+            this.layerModel.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
+            this.renderer.bindTexture(STRAY_CLOTHES_TEXTURES);
+            this.layerModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         }
     }
 

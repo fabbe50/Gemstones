@@ -106,9 +106,9 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
         this.dataManager.register(INVULNERABILITY_TIME, Integer.valueOf(0));
     }
 
-    public static void func_189782_b(DataFixer p_189782_0_)
+    public static void registerFixesWither(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189782_0_, "WitherBoss");
+        EntityLiving.registerFixesMob(fixer, "WitherBoss");
     }
 
     /**
@@ -530,8 +530,10 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
     /**
      * Attack the specified entity using a ranged attack.
+     *  
+     * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float p_82196_2_)
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         this.launchWitherSkullToEntity(0, target);
     }

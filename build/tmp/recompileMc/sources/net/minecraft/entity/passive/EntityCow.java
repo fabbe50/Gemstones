@@ -33,9 +33,9 @@ public class EntityCow extends EntityAnimal
         this.setSize(0.9F, 1.4F);
     }
 
-    public static void func_189790_b(DataFixer p_189790_0_)
+    public static void registerFixesCow(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189790_0_, "Cow");
+        EntityLiving.registerFixesMob(fixer, "Cow");
     }
 
     protected void initEntityAI()

@@ -15,7 +15,7 @@ public class PotionType extends net.minecraftforge.fml.common.registry.IForgeReg
     private static final ResourceLocation WATER = new ResourceLocation("water");
     public static final RegistryNamespacedDefaultedByKey<ResourceLocation, PotionType> REGISTRY = net.minecraftforge.fml.common.registry.GameData.getPotionTypesRegistry();
     private static int nextPotionTypeId;
-    /** The PotionType that this PotionType is a derivative of */
+    /** The unlocalized name of this PotionType. If null, the registry name is used. */
     private final String baseName;
     private final ImmutableList<PotionEffect> effects;
 
@@ -48,6 +48,9 @@ public class PotionType extends net.minecraftforge.fml.common.registry.IForgeReg
         this.effects = ImmutableList.copyOf(p_i46740_2_);
     }
 
+    /**
+     * Gets the name of this PotionType with a prefix (such as "Splash" or "Lingering") prepended
+     */
     public String getNamePrefixed(String p_185174_1_)
     {
         return this.baseName == null ? p_185174_1_ + ((ResourceLocation)REGISTRY.getNameForObject(this)).getResourcePath() : p_185174_1_ + this.baseName;

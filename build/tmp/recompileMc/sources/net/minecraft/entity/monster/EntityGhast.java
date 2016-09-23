@@ -168,9 +168,9 @@ public class EntityGhast extends EntityFlying implements IMob
         return 1;
     }
 
-    public static void func_189756_b(DataFixer p_189756_0_)
+    public static void registerFixesGhast(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189756_0_, "Ghast");
+        EntityLiving.registerFixesMob(fixer, "Ghast");
     }
 
     /**

@@ -228,9 +228,9 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         net.minecraftforge.event.ForgeEventFactory.onPotionBrewed(brewingItemStacks);
     }
 
-    public static void func_189675_a(DataFixer p_189675_0_)
+    public static void registerFixesBrewingStand(DataFixer fixer)
     {
-        p_189675_0_.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Cauldron", new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Cauldron", new String[] {"Items"}));
     }
 
     public void readFromNBT(NBTTagCompound compound)
@@ -335,7 +335,7 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Don't rename this method to canInteractWith due to conflicts with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
@@ -351,7 +351,8 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
     }
 
     /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
      */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {

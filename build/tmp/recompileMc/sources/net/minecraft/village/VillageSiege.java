@@ -178,7 +178,7 @@ public class VillageSiege
             {
                 entityzombie = new EntityZombie(this.worldObj);
                 entityzombie.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(entityzombie)), (IEntityLivingData)null);
-                entityzombie.func_189778_a(ZombieType.NORMAL);
+                entityzombie.setZombieType(ZombieType.NORMAL);
             }
             catch (Exception exception)
             {

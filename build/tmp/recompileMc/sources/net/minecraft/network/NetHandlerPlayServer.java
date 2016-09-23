@@ -1500,7 +1500,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
                 return;
             }
 
-            if (!this.playerEntity.func_189808_dh())
+            if (!this.playerEntity.canUseCommandBlock())
             {
                 this.playerEntity.addChatMessage(new TextComponentTranslation("advMode.notAllowed", new Object[0]));
                 return;
@@ -1562,7 +1562,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
                 return;
             }
 
-            if (!this.playerEntity.func_189808_dh())
+            if (!this.playerEntity.canUseCommandBlock())
             {
                 this.playerEntity.addChatMessage(new TextComponentTranslation("advMode.notAllowed", new Object[0]));
                 return;
@@ -1682,7 +1682,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
         }
         else if ("MC|Struct".equals(s))
         {
-            if (!this.playerEntity.func_189808_dh())
+            if (!this.playerEntity.canUseCommandBlock())
             {
                 return;
             }
@@ -1716,11 +1716,11 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
                     tileentitystructure.setRotation(Rotation.valueOf(s3));
                     tileentitystructure.setMetadata(packetbuffer5.readStringFromBuffer(128));
                     tileentitystructure.setIgnoresEntities(packetbuffer5.readBoolean());
-                    tileentitystructure.func_189703_e(packetbuffer5.readBoolean());
-                    tileentitystructure.func_189710_f(packetbuffer5.readBoolean());
-                    tileentitystructure.func_189718_a(MathHelper.clamp_float(packetbuffer5.readFloat(), 0.0F, 1.0F));
-                    tileentitystructure.func_189725_a(packetbuffer5.readVarLong());
-                    String s4 = tileentitystructure.func_189715_d();
+                    tileentitystructure.setShowAir(packetbuffer5.readBoolean());
+                    tileentitystructure.setShowBoundingBox(packetbuffer5.readBoolean());
+                    tileentitystructure.setIntegrity(MathHelper.clamp_float(packetbuffer5.readFloat(), 0.0F, 1.0F));
+                    tileentitystructure.setSeed(packetbuffer5.readVarLong());
+                    String s4 = tileentitystructure.getName();
 
                     if (l1 == 2)
                     {
@@ -1735,7 +1735,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
                     }
                     else if (l1 == 3)
                     {
-                        if (!tileentitystructure.func_189709_F())
+                        if (!tileentitystructure.isStructureLoadable())
                         {
                             this.playerEntity.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", new Object[] {s4}));
                         }

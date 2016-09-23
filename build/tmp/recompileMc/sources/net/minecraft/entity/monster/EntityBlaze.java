@@ -49,9 +49,9 @@ public class EntityBlaze extends EntityMob
         this.experienceValue = 10;
     }
 
-    public static void func_189761_b(DataFixer p_189761_0_)
+    public static void registerFixesBlaze(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189761_0_, "Blaze");
+        EntityLiving.registerFixesMob(fixer, "Blaze");
     }
 
     protected void initEntityAI()

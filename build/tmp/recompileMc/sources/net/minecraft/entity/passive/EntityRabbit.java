@@ -302,9 +302,9 @@ public class EntityRabbit extends EntityAnimal
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
     }
 
-    public static void func_189801_b(DataFixer p_189801_0_)
+    public static void registerFixesRabbit(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189801_0_, "Rabbit");
+        EntityLiving.registerFixesMob(fixer, "Rabbit");
     }
 
     /**
@@ -471,7 +471,7 @@ public class EntityRabbit extends EntityAnimal
 
     private int getRandomRabbitType()
     {
-        Biome biome = this.worldObj.getBiomeGenForCoords(new BlockPos(this));
+        Biome biome = this.worldObj.getBiome(new BlockPos(this));
         int i = this.rand.nextInt(100);
         return biome.isSnowyBiome() ? (i < 80 ? 1 : 3) : (biome instanceof BiomeDesert ? 4 : (i < 50 ? 0 : (i < 90 ? 5 : 2)));
     }

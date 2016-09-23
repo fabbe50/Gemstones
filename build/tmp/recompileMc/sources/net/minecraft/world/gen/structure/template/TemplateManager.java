@@ -28,7 +28,7 @@ public class TemplateManager
 
     public Template getTemplate(@Nullable MinecraftServer server, ResourceLocation id)
     {
-        Template template = this.func_189942_b(server, id);
+        Template template = this.get(server, id);
 
         if (template == null)
         {
@@ -40,7 +40,7 @@ public class TemplateManager
     }
 
     @Nullable
-    public Template func_189942_b(@Nullable MinecraftServer p_189942_1_, ResourceLocation p_189942_2_)
+    public Template get(@Nullable MinecraftServer p_189942_1_, ResourceLocation p_189942_2_)
     {
         String s = p_189942_2_.getResourcePath();
 
@@ -192,7 +192,7 @@ public class TemplateManager
         }
     }
 
-    public void func_189941_a(ResourceLocation p_189941_1_)
+    public void remove(ResourceLocation p_189941_1_)
     {
         this.templates.remove(p_189941_1_.getResourcePath());
     }

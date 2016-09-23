@@ -195,7 +195,7 @@ public class ChunkProviderEnd implements IChunkGenerator
         this.chunkX = x; this.chunkZ = z;
         this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
-        this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+        this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.setBlocksInChunk(x, z, chunkprimer);
         this.buildSurfaces(chunkprimer);
 
@@ -358,7 +358,7 @@ public class ChunkProviderEnd implements IChunkGenerator
             this.endCityGen.generateStructure(this.worldObj, this.rand, new ChunkPos(x, z));
         }
 
-        this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16)).decorate(this.worldObj, this.worldObj.rand, blockpos);
+        this.worldObj.getBiome(blockpos.add(16, 0, 16)).decorate(this.worldObj, this.worldObj.rand, blockpos);
         long i = (long)x * (long)x + (long)z * (long)z;
 
         if (i > 4096L)
@@ -409,7 +409,7 @@ public class ChunkProviderEnd implements IChunkGenerator
 
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
     {
-        return this.worldObj.getBiomeGenForCoords(pos).getSpawnableList(creatureType);
+        return this.worldObj.getBiome(pos).getSpawnableList(creatureType);
     }
 
     @Nullable

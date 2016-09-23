@@ -162,9 +162,9 @@ public class EntityChicken extends EntityAnimal
         return this.isChickenJockey() ? 10 : super.getExperiencePoints(player);
     }
 
-    public static void func_189789_b(DataFixer p_189789_0_)
+    public static void registerFixesChicken(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189789_0_, "Chicken");
+        EntityLiving.registerFixesMob(fixer, "Chicken");
     }
 
     /**

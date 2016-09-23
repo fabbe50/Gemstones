@@ -24,9 +24,9 @@ public class EntityExpBottle extends EntityThrowable
         super(worldIn, x, y, z);
     }
 
-    public static void func_189666_a(DataFixer p_189666_0_)
+    public static void registerFixesExpBottle(DataFixer fixer)
     {
-        EntityThrowable.func_189661_a(p_189666_0_, "ThrowableExpBottle");
+        EntityThrowable.registerFixesThrowable(fixer, "ThrowableExpBottle");
     }
 
     /**

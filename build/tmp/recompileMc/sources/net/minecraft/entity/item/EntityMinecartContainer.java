@@ -118,7 +118,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Don't rename this method to canInteractWith due to conflicts with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
@@ -134,7 +134,8 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     }
 
     /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
      */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
@@ -177,10 +178,10 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         this.dropContentsWhenDead = dropWhenDead;
     }
 
-    public static void func_189680_b(DataFixer p_189680_0_, String p_189680_1_)
+    public static void registerFixesMinecartContainer(DataFixer fixer, String name)
     {
-        EntityMinecart.func_189669_a(p_189680_0_, p_189680_1_);
-        p_189680_0_.registerWalker(FixTypes.ENTITY, new ItemStackDataLists(p_189680_1_, new String[] {"Items"}));
+        EntityMinecart.registerFixesMinecart(fixer, name);
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackDataLists(name, new String[] {"Items"}));
     }
 
     /**

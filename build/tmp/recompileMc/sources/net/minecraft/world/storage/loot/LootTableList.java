@@ -39,7 +39,7 @@ public class LootTableList
     public static final ResourceLocation ENTITIES_RABBIT = register("entities/rabbit");
     public static final ResourceLocation ENTITIES_CHICKEN = register("entities/chicken");
     public static final ResourceLocation ENTITIES_PIG = register("entities/pig");
-    public static final ResourceLocation field_189969_E = register("entities/polar_bear");
+    public static final ResourceLocation ENTITIES_POLAR_BEAR = register("entities/polar_bear");
     public static final ResourceLocation ENTITIES_HORSE = register("entities/horse");
     public static final ResourceLocation ENTITIES_ZOMBIE_HORSE = register("entities/zombie_horse");
     public static final ResourceLocation ENTITIES_SKELETON_HORSE = register("entities/skeleton_horse");
@@ -74,7 +74,7 @@ public class LootTableList
     public static final ResourceLocation ENTITIES_ZOMBIE_PIGMAN = register("entities/zombie_pigman");
     public static final ResourceLocation ENTITIES_SKELETON = register("entities/skeleton");
     public static final ResourceLocation ENTITIES_WITHER_SKELETON = register("entities/wither_skeleton");
-    public static final ResourceLocation field_189968_an = register("entities/stray");
+    public static final ResourceLocation ENTITIES_STRAY = register("entities/stray");
     public static final ResourceLocation GAMEPLAY_FISHING = register("gameplay/fishing");
     public static final ResourceLocation GAMEPLAY_FISHING_JUNK = register("gameplay/fishing/junk");
     public static final ResourceLocation GAMEPLAY_FISHING_TREASURE = register("gameplay/fishing/treasure");

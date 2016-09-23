@@ -134,8 +134,8 @@ public abstract class EntityPlayer extends EntityLivingBase
     public double chasingPosZ;
     /** Boolean value indicating weather a player is sleeping or not */
     protected boolean sleeping;
-    /** the current location of the player */
-    public BlockPos playerLocation;
+    /** The location of the bed the player is sleeping in, or {@code null} if they are not sleeping */
+    public BlockPos bedLocation;
     private int sleepTimer;
     public float renderOffsetX;
     @SideOnly(Side.CLIENT)
@@ -933,9 +933,9 @@ public abstract class EntityPlayer extends EntityLivingBase
         return net.minecraftforge.event.ForgeEventFactory.doPlayerHarvestCheck(this, state, this.inventory.canHarvestBlock(state));
     }
 
-    public static void func_189806_a(DataFixer p_189806_0_)
+    public static void registerFixesPlayer(DataFixer fixer)
     {
-        p_189806_0_.registerWalker(FixTypes.PLAYER, new IDataWalker()
+        fixer.registerWalker(FixTypes.PLAYER, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {
@@ -972,7 +972,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
         if (this.sleeping)
         {
-            this.playerLocation = new BlockPos(this);
+            this.bedLocation = new BlockPos(this);
             this.wakeUpPlayer(true, true, false);
         }
 
@@ -1195,15 +1195,15 @@ public abstract class EntityPlayer extends EntityLivingBase
     {
     }
 
-    public void displayGuiEditCommandCart(CommandBlockBaseLogic p_184809_1_)
+    public void displayGuiEditCommandCart(CommandBlockBaseLogic commandBlock)
     {
     }
 
-    public void displayGuiCommandBlock(TileEntityCommandBlock p_184824_1_)
+    public void displayGuiCommandBlock(TileEntityCommandBlock commandBlock)
     {
     }
 
-    public void func_189807_a(TileEntityStructure p_189807_1_)
+    public void openEditStructure(TileEntityStructure structure)
     {
     }
 
@@ -1685,7 +1685,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
         this.sleeping = true;
         this.sleepTimer = 0;
-        this.playerLocation = bedLocation;
+        this.bedLocation = bedLocation;
         this.motionX = 0.0D;
         this.motionY = 0.0D;
         this.motionZ = 0.0D;
@@ -1726,16 +1726,16 @@ public abstract class EntityPlayer extends EntityLivingBase
     {
         net.minecraftforge.event.ForgeEventFactory.onPlayerWakeup(this, immediately, updateWorldFlag, setSpawn);
         this.setSize(0.6F, 1.8F);
-        IBlockState iblockstate = this.worldObj.getBlockState(this.playerLocation);
+        IBlockState iblockstate = this.worldObj.getBlockState(this.bedLocation);
 
-        if (this.playerLocation != null && iblockstate.getBlock().isBed(iblockstate, worldObj, playerLocation, this))
+        if (this.bedLocation != null && iblockstate.getBlock().isBed(iblockstate, worldObj, bedLocation, this))
         {
-            iblockstate.getBlock().setBedOccupied(worldObj, playerLocation, this, false);
-            BlockPos blockpos = iblockstate.getBlock().getBedSpawnPosition(iblockstate, worldObj, playerLocation, this);
+            iblockstate.getBlock().setBedOccupied(worldObj, bedLocation, this, false);
+            BlockPos blockpos = iblockstate.getBlock().getBedSpawnPosition(iblockstate, worldObj, bedLocation, this);
 
             if (blockpos == null)
             {
-                blockpos = this.playerLocation.up();
+                blockpos = this.bedLocation.up();
             }
 
             this.setPosition((double)((float)blockpos.getX() + 0.5F), (double)((float)blockpos.getY() + 0.1F), (double)((float)blockpos.getZ() + 0.5F));
@@ -1756,13 +1756,13 @@ public abstract class EntityPlayer extends EntityLivingBase
 
         if (setSpawn)
         {
-            this.setSpawnPoint(this.playerLocation, false);
+            this.setSpawnPoint(this.bedLocation, false);
         }
     }
 
     private boolean isInBed()
     {
-        return net.minecraftforge.event.ForgeEventFactory.fireSleepingLocationCheck(this, this.playerLocation);
+        return net.minecraftforge.event.ForgeEventFactory.fireSleepingLocationCheck(this, this.bedLocation);
     }
 
     /**
@@ -1799,10 +1799,10 @@ public abstract class EntityPlayer extends EntityLivingBase
     @SideOnly(Side.CLIENT)
     public float getBedOrientationInDegrees()
     {
-        IBlockState state = this.playerLocation == null ? null : this.worldObj.getBlockState(playerLocation);
-        if (state != null && state.getBlock().isBed(state, worldObj, playerLocation, this))
+        IBlockState state = this.bedLocation == null ? null : this.worldObj.getBlockState(bedLocation);
+        if (state != null && state.getBlock().isBed(state, worldObj, bedLocation, this))
         {
-            EnumFacing enumfacing = state.getBlock().getBedDirection(state, worldObj, playerLocation);
+            EnumFacing enumfacing = state.getBlock().getBedDirection(state, worldObj, bedLocation);
 
             switch (enumfacing)
             {
@@ -2702,7 +2702,10 @@ public abstract class EntityPlayer extends EntityLivingBase
         return (float)this.getEntityAttribute(SharedMonsterAttributes.LUCK).getAttributeValue();
     }
 
-    public boolean func_189808_dh()
+    /**
+     * Can the player use command blocks. It checks if the player is on Creative mode and has permissions (is he OP)
+     */
+    public boolean canUseCommandBlock()
     {
         return this.capabilities.isCreativeMode && this.canCommandSenderUseCommand(2, "");
     }

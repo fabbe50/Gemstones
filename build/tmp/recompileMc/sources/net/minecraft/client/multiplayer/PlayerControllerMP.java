@@ -159,7 +159,7 @@ public class PlayerControllerMP
             IBlockState iblockstate = world.getBlockState(pos);
             Block block = iblockstate.getBlock();
 
-            if ((block instanceof BlockCommandBlock || block instanceof BlockStructure) && !this.mc.thePlayer.func_189808_dh())
+            if ((block instanceof BlockCommandBlock || block instanceof BlockStructure) && !this.mc.thePlayer.canUseCommandBlock())
             {
                 return false;
             }
@@ -468,7 +468,7 @@ public class PlayerControllerMP
                 }
                 else
                 {
-                    if (stack.getItem() instanceof ItemBlock && !player.func_189808_dh())
+                    if (stack.getItem() instanceof ItemBlock && !player.canUseCommandBlock())
                     {
                         Block block = ((ItemBlock)stack.getItem()).getBlock();
 

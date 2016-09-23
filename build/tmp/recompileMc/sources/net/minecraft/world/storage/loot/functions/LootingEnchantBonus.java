@@ -17,13 +17,13 @@ import net.minecraft.world.storage.loot.conditions.LootCondition;
 public class LootingEnchantBonus extends LootFunction
 {
     private final RandomValueRange count;
-    private final int field_189971_b;
+    private final int limit;
 
     public LootingEnchantBonus(LootCondition[] p_i47145_1_, RandomValueRange p_i47145_2_, int p_i47145_3_)
     {
         super(p_i47145_1_);
         this.count = p_i47145_2_;
-        this.field_189971_b = p_i47145_3_;
+        this.limit = p_i47145_3_;
     }
 
     public ItemStack apply(ItemStack stack, Random rand, LootContext context)
@@ -42,9 +42,9 @@ public class LootingEnchantBonus extends LootFunction
             float f = (float)i * this.count.generateFloat(rand);
             stack.stackSize += Math.round(f);
 
-            if (this.field_189971_b != 0 && stack.stackSize > this.field_189971_b)
+            if (this.limit != 0 && stack.stackSize > this.limit)
             {
-                stack.stackSize = this.field_189971_b;
+                stack.stackSize = this.limit;
             }
         }
 
@@ -62,9 +62,9 @@ public class LootingEnchantBonus extends LootFunction
             {
                 object.add("count", serializationContext.serialize(functionClazz.count));
 
-                if (functionClazz.field_189971_b > 0)
+                if (functionClazz.limit > 0)
                 {
-                    object.add("limit", serializationContext.serialize(Integer.valueOf(functionClazz.field_189971_b)));
+                    object.add("limit", serializationContext.serialize(Integer.valueOf(functionClazz.limit)));
                 }
             }
 

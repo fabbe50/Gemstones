@@ -39,14 +39,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityPolarBear extends EntityAnimal
 {
-    private static final DataParameter<Boolean> field_189798_bx = EntityDataManager.<Boolean>createKey(EntityPolarBear.class, DataSerializers.BOOLEAN);
-    private float field_189799_by;
-    private float field_189800_bz;
-    private int field_189797_bB;
+    private static final DataParameter<Boolean> IS_STANDING = EntityDataManager.<Boolean>createKey(EntityPolarBear.class, DataSerializers.BOOLEAN);
+    private float clientSideStandAnimation0;
+    private float clientSideStandAnimation;
+    private int warningSoundTicks;
 
-    public EntityPolarBear(World p_i47154_1_)
+    public EntityPolarBear(World worldIn)
     {
-        super(p_i47154_1_);
+        super(worldIn);
         this.setSize(1.3F, 1.4F);
     }
 
@@ -90,43 +90,43 @@ public class EntityPolarBear extends EntityAnimal
 
     protected SoundEvent getAmbientSound()
     {
-        return this.isChild() ? SoundEvents.field_190027_es : SoundEvents.field_190026_er;
+        return this.isChild() ? SoundEvents.ENTITY_POLAR_BEAR_BABY_AMBIENT : SoundEvents.ENTITY_POLAR_BEAR_AMBIENT;
     }
 
     protected SoundEvent getHurtSound()
     {
-        return SoundEvents.field_190029_eu;
+        return SoundEvents.ENTITY_POLAR_BEAR_HURT;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return SoundEvents.field_190028_et;
+        return SoundEvents.ENTITY_POLAR_BEAR_DEATH;
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundEvents.field_190030_ev, 0.15F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_POLAR_BEAR_STEP, 0.15F, 1.0F);
     }
 
-    protected void func_189796_de()
+    protected void playWarningSound()
     {
-        if (this.field_189797_bB <= 0)
+        if (this.warningSoundTicks <= 0)
         {
-            this.playSound(SoundEvents.field_190031_ew, 1.0F, 1.0F);
-            this.field_189797_bB = 40;
+            this.playSound(SoundEvents.ENTITY_POLAR_BEAR_WARNING, 1.0F, 1.0F);
+            this.warningSoundTicks = 40;
         }
     }
 
     @Nullable
     protected ResourceLocation getLootTable()
     {
-        return LootTableList.field_189969_E;
+        return LootTableList.ENTITIES_POLAR_BEAR;
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(field_189798_bx, Boolean.valueOf(false));
+        this.dataManager.register(IS_STANDING, Boolean.valueOf(false));
     }
 
     /**
@@ -154,21 +154,21 @@ public class EntityPolarBear extends EntityAnimal
 
         if (this.worldObj.isRemote)
         {
-            this.field_189799_by = this.field_189800_bz;
+            this.clientSideStandAnimation0 = this.clientSideStandAnimation;
 
-            if (this.func_189793_df())
+            if (this.isStanding())
             {
-                this.field_189800_bz = MathHelper.clamp_float(this.field_189800_bz + 1.0F, 0.0F, 6.0F);
+                this.clientSideStandAnimation = MathHelper.clamp_float(this.clientSideStandAnimation + 1.0F, 0.0F, 6.0F);
             }
             else
             {
-                this.field_189800_bz = MathHelper.clamp_float(this.field_189800_bz - 1.0F, 0.0F, 6.0F);
+                this.clientSideStandAnimation = MathHelper.clamp_float(this.clientSideStandAnimation - 1.0F, 0.0F, 6.0F);
             }
         }
 
-        if (this.field_189797_bB > 0)
+        if (this.warningSoundTicks > 0)
         {
-            --this.field_189797_bB;
+            --this.warningSoundTicks;
         }
     }
 
@@ -184,23 +184,23 @@ public class EntityPolarBear extends EntityAnimal
         return flag;
     }
 
-    public boolean func_189793_df()
+    public boolean isStanding()
     {
-        return ((Boolean)this.dataManager.get(field_189798_bx)).booleanValue();
+        return ((Boolean)this.dataManager.get(IS_STANDING)).booleanValue();
     }
 
-    public void func_189794_p(boolean p_189794_1_)
+    public void setStanding(boolean standing)
     {
-        this.dataManager.set(field_189798_bx, Boolean.valueOf(p_189794_1_));
+        this.dataManager.set(IS_STANDING, Boolean.valueOf(standing));
     }
 
     @SideOnly(Side.CLIENT)
-    public float func_189795_r(float p_189795_1_)
+    public float getStandingAnimationScale(float p_189795_1_)
     {
-        return (this.field_189799_by + (this.field_189800_bz - this.field_189799_by) * p_189795_1_) / 6.0F;
+        return (this.clientSideStandAnimation0 + (this.clientSideStandAnimation - this.clientSideStandAnimation0) * p_189795_1_) / 6.0F;
     }
 
-    protected float func_189749_co()
+    protected float getWaterSlowDown()
     {
         return 0.98F;
     }
@@ -213,7 +213,7 @@ public class EntityPolarBear extends EntityAnimal
     {
         if (livingdata instanceof EntityPolarBear.GroupData)
         {
-            if (((EntityPolarBear.GroupData)livingdata).field_190101_a)
+            if (((EntityPolarBear.GroupData)livingdata).madeParent)
             {
                 this.setGrowingAge(-24000);
             }
@@ -221,7 +221,7 @@ public class EntityPolarBear extends EntityAnimal
         else
         {
             EntityPolarBear.GroupData entitypolarbear$groupdata = new EntityPolarBear.GroupData();
-            entitypolarbear$groupdata.field_190101_a = true;
+            entitypolarbear$groupdata.madeParent = true;
             livingdata = entitypolarbear$groupdata;
         }
 
@@ -284,7 +284,7 @@ public class EntityPolarBear extends EntityAnimal
 
             if (EntityPolarBear.this.isChild())
             {
-                this.func_190105_f();
+                this.alertOthers();
                 this.resetTask();
             }
         }
@@ -305,7 +305,7 @@ public class EntityPolarBear extends EntityAnimal
             super(EntityPolarBear.this, 1.25D, true);
         }
 
-        protected void func_190102_a(EntityLivingBase p_190102_1_, double p_190102_2_)
+        protected void checkAndPerformAttack(EntityLivingBase p_190102_1_, double p_190102_2_)
         {
             double d0 = this.getAttackReachSqr(p_190102_1_);
 
@@ -313,26 +313,26 @@ public class EntityPolarBear extends EntityAnimal
             {
                 this.attackTick = 20;
                 this.attacker.attackEntityAsMob(p_190102_1_);
-                EntityPolarBear.this.func_189794_p(false);
+                EntityPolarBear.this.setStanding(false);
             }
             else if (p_190102_2_ <= d0 * 2.0D)
             {
                 if (this.attackTick <= 0)
                 {
-                    EntityPolarBear.this.func_189794_p(false);
+                    EntityPolarBear.this.setStanding(false);
                     this.attackTick = 20;
                 }
 
                 if (this.attackTick <= 10)
                 {
-                    EntityPolarBear.this.func_189794_p(true);
-                    EntityPolarBear.this.func_189796_de();
+                    EntityPolarBear.this.setStanding(true);
+                    EntityPolarBear.this.playWarningSound();
                 }
             }
             else
             {
                 this.attackTick = 20;
-                EntityPolarBear.this.func_189794_p(false);
+                EntityPolarBear.this.setStanding(false);
             }
         }
 
@@ -341,7 +341,7 @@ public class EntityPolarBear extends EntityAnimal
          */
         public void resetTask()
         {
-            EntityPolarBear.this.func_189794_p(false);
+            EntityPolarBear.this.setStanding(false);
             super.resetTask();
         }
 
@@ -369,7 +369,7 @@ public class EntityPolarBear extends EntityAnimal
 
     static class GroupData implements IEntityLivingData
         {
-            public boolean field_190101_a;
+            public boolean madeParent;
 
             private GroupData()
             {

@@ -126,9 +126,9 @@ public class EntityOcelot extends EntityTameable
     {
     }
 
-    public static void func_189787_b(DataFixer p_189787_0_)
+    public static void registerFixesOcelot(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189787_0_, "Ozelot");
+        EntityLiving.registerFixesMob(fixer, "Ozelot");
     }
 
     /**

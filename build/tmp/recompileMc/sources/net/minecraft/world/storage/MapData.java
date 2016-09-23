@@ -109,17 +109,17 @@ public class MapData extends WorldSavedData
         }
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound p_189551_1_)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        p_189551_1_.setInteger("dimension", this.dimension);
-        p_189551_1_.setInteger("xCenter", this.xCenter);
-        p_189551_1_.setInteger("zCenter", this.zCenter);
-        p_189551_1_.setByte("scale", this.scale);
-        p_189551_1_.setShort("width", (short)128);
-        p_189551_1_.setShort("height", (short)128);
-        p_189551_1_.setByteArray("colors", this.colors);
-        p_189551_1_.setBoolean("trackingPosition", this.trackingPosition);
-        return p_189551_1_;
+        compound.setInteger("dimension", this.dimension);
+        compound.setInteger("xCenter", this.xCenter);
+        compound.setInteger("zCenter", this.zCenter);
+        compound.setByte("scale", this.scale);
+        compound.setShort("width", (short)128);
+        compound.setShort("height", (short)128);
+        compound.setByteArray("colors", this.colors);
+        compound.setBoolean("trackingPosition", this.trackingPosition);
+        return compound;
     }
 
     /**

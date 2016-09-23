@@ -1,37 +1,37 @@
-[11:33:27] [main/INFO]: username: devLev
-[11:33:27] [main/INFO]: Extra: []
-[11:33:27] [main/INFO]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/fabbe50/.gradle/caches/minecraft/assets, --assetIndex, 1.10, --accessToken{REDACTED}, --version, 1.10.2, --username, devLev, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
-[11:33:27] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[11:33:27] [main/INFO]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[11:33:27] [main/INFO]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
-[11:33:27] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
-[11:33:27] [main/INFO]: Forge Mod Loader version 12.18.1.2073 for Minecraft 1.10.2 loading
-[11:33:27] [main/INFO]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_65, running on Windows 10:amd64:10.0, installed at C:\Program Files\Java\jre1.8.0_65
-[11:33:28] [main/INFO]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-[11:33:28] [main/INFO]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
-[11:33:28] [main/INFO]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
-[11:33:28] [main/INFO]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
-[11:33:28] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[11:33:28] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[11:33:28] [main/INFO]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[11:33:28] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[11:33:28] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[11:33:28] [main/INFO]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[11:33:28] [main/ERROR]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
-[11:33:29] [main/ERROR]: FML appears to be missing any signature data. This is not a good thing
-[11:33:29] [main/INFO]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[11:33:29] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[11:33:30] [main/INFO]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[11:33:30] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
-[11:33:30] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
-[11:33:30] [main/INFO]: Launching wrapped minecraft {net.minecraft.client.main.Main}
-[11:33:32] [Client thread/INFO]: Setting user: devLev
-[11:33:36] [Client thread/WARN]: Skipping bad option: lastServer:
-[11:33:36] [Client thread/INFO]: LWJGL Version: 2.9.4
-[11:33:38] [Client thread/INFO]: [net.minecraftforge.fml.client.SplashProgress:start:221]: ---- Minecraft Crash Report ----
-// I just don't know what went wrong :(
+[12:58:50] [main/INFO]: username: devLev
+[12:58:50] [main/INFO]: Extra: []
+[12:58:50] [main/INFO]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/heatb/.gradle/caches/minecraft/assets, --assetIndex, 1.10, --accessToken{REDACTED}, --version, 1.10.2, --username, devLev, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[12:58:50] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[12:58:50] [main/INFO]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[12:58:50] [main/INFO]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[12:58:50] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[12:58:50] [main/INFO]: Forge Mod Loader version 12.18.1.2073 for Minecraft 1.10.2 loading
+[12:58:50] [main/INFO]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_101, running on Windows 10:amd64:10.0, installed at C:\Program Files\Java\jdk1.8.0_101\jre
+[12:58:50] [main/INFO]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[12:58:50] [main/INFO]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[12:58:50] [main/INFO]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[12:58:50] [main/INFO]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[12:58:50] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[12:58:50] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[12:58:50] [main/INFO]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[12:58:50] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[12:58:50] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[12:58:50] [main/INFO]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[12:58:50] [main/ERROR]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
+[12:58:51] [main/ERROR]: FML appears to be missing any signature data. This is not a good thing
+[12:58:51] [main/INFO]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[12:58:51] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[12:58:52] [main/INFO]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[12:58:52] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[12:58:52] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[12:58:52] [main/INFO]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[12:58:53] [Client thread/INFO]: Setting user: devLev
+[12:58:56] [Client thread/WARN]: Skipping bad option: lastServer:
+[12:58:56] [Client thread/INFO]: LWJGL Version: 2.9.4
+[12:58:57] [Client thread/INFO]: [net.minecraftforge.fml.client.SplashProgress:start:221]: ---- Minecraft Crash Report ----
+// You're mean.
 
-Time: 14/09/16 11:33
+Time: 23/09/16 12:58
 Description: Loading screen debug info
 
 This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
@@ -44,118 +44,148 @@ A detailed walkthrough of the error, its code path and all known details is as f
 Details:
 	Minecraft Version: 1.10.2
 	Operating System: Windows 10 (amd64) version 10.0
-	Java Version: 1.8.0_65, Oracle Corporation
+	Java Version: 1.8.0_101, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 1578430424 bytes (1505 MB) / 2058354688 bytes (1963 MB) up to 2058354688 bytes (1963 MB)
+	Memory: 1593103320 bytes (1519 MB) / 2058354688 bytes (1963 MB) up to 2058354688 bytes (1963 MB)
 	JVM Flags: 2 total; -Xmx2048m -Xms2048m
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	FML: 
 	Loaded coremods (and transformers): 
-	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.5.0 NVIDIA 361.91' Renderer: 'GeForce GTX 960M/PCIe/SSE2'
-[11:33:38] [Client thread/INFO]: MinecraftForge v12.18.1.2073 Initialized
-[11:33:38] [Client thread/INFO]: Replaced 233 ore recipes
-[11:33:38] [Client thread/INFO]: Found 0 mods from the command line. Injecting into mod discoverer
-[11:33:38] [Client thread/INFO]: Searching D:\fabbe50\Documents\GitHub\Gemstones\run\mods for mods
-[11:33:39] [Client thread/INFO]: Forge Mod Loader has identified 5 mods to load
-[11:33:40] [Client thread/INFO]: Attempting connection with missing mods [mcp, FML, Forge, levingemstones, tficore] at CLIENT
-[11:33:40] [Client thread/INFO]: Attempting connection with missing mods [mcp, FML, Forge, levingemstones, tficore] at SERVER
-[11:33:40] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:TFI: Gemstones, FMLFileResourcePack:TFICore
-[11:33:40] [Client thread/INFO]: Processing ObjectHolder annotations
-[11:33:41] [Client thread/INFO]: Found 423 ObjectHolder annotations
-[11:33:41] [Client thread/INFO]: Identifying ItemStackHolder annotations
-[11:33:41] [Client thread/INFO]: Found 0 ItemStackHolder annotations
-[11:33:41] [Client thread/INFO]: Configured a dormant chunk cache size of 0
-[11:33:41] [Forge Version Check/INFO]: [Forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
-[11:33:41] [Client thread/INFO]: [com.levinaxr.levingemstones.Main:preInit:21]: TFI: Gemstones - PreInit
-[11:33:41] [Client thread/INFO]: Added item: levingemstones:amethystGem
-[11:33:41] [Client thread/INFO]: Pre-Initializing
-[11:33:41] [Client thread/INFO]: Adding Blocks
-[11:33:41] [Client thread/INFO]: Added Block: tficore:testBlock
-[11:33:41] [Client thread/INFO]: Done
-[11:33:41] [Client thread/INFO]: Adding MetaBlocks
-[11:33:41] [Client thread/INFO]: Done
-[11:33:41] [Client thread/INFO]: Added item: tficore:testItem
-[11:33:41] [Client thread/INFO]: Done
-[11:33:41] [Client thread/INFO]: Applying holder lookups
-[11:33:41] [Client thread/INFO]: Holder lookups applied
-[11:33:41] [Client thread/INFO]: Injecting itemstacks
-[11:33:41] [Client thread/INFO]: Itemstack injection complete
-[11:33:42] [Forge Version Check/INFO]: [Forge] Found status: OUTDATED Target: 12.18.1.2086
-[11:33:44] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[11:33:44] [Thread-8/INFO]: Initializing LWJGL OpenAL
-[11:33:44] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[11:33:44] [Thread-8/INFO]: OpenAL initialized.
-[11:33:45] [Sound Library Loader/INFO]: Sound engine started
-[11:33:49] [Client thread/INFO]: Max texture size: 16384
-[11:33:49] [Client thread/INFO]: Created: 16x16 textures-atlas
-[11:33:50] [Client thread/INFO]: [com.levinaxr.levingemstones.Main:init:27]: TFI: Gemstones - Init
-[11:33:50] [Client thread/INFO]: Registered renderdata for item with registry-name: levingemstones:amethystGem
-[11:33:50] [Client thread/INFO]: Initializing
-[11:33:50] [Client thread/INFO]: Adding Shaped Recipes
-[11:33:50] [Client thread/INFO]: Done
-[11:33:50] [Client thread/INFO]: Adding Shapeless Recipes
-[11:33:50] [Client thread/INFO]: Done
-[11:33:50] [Client thread/INFO]: Adding Block-Renderer
-[11:33:50] [Client thread/INFO]: Registered renderdata for block with registry-name: tficore:testBlock
-[11:33:50] [Client thread/INFO]: Adding MetaBlock-Renderer
-[11:33:50] [Client thread/INFO]: Adding Item-renderer
-[11:33:50] [Client thread/INFO]: Registered renderdata for item with registry-name: tficore:testItem
-[11:33:50] [Client thread/INFO]: Done
-[11:33:50] [Client thread/INFO]: Injecting itemstacks
-[11:33:50] [Client thread/INFO]: Itemstack injection complete
-[11:33:50] [Client thread/INFO]: [com.levinaxr.levingemstones.Main:postInit:33]: TFI: Gemstones - PostInit
-[11:33:50] [Client thread/INFO]: Post-Initializing
-[11:33:50] [Client thread/INFO]: Done
-[11:33:50] [Client thread/INFO]: Forge Mod Loader has successfully loaded 5 mods
-[11:33:50] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:TFI: Gemstones, FMLFileResourcePack:TFICore
-[11:33:53] [Client thread/INFO]: SoundSystem shutting down...
-[11:33:53] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[11:33:53] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[11:33:54] [Thread-10/INFO]: Initializing LWJGL OpenAL
-[11:33:54] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[11:33:54] [Thread-10/INFO]: OpenAL initialized.
-[11:33:54] [Sound Library Loader/INFO]: Sound engine started
-[11:33:57] [Client thread/INFO]: Max texture size: 16384
-[11:33:57] [Client thread/INFO]: Created: 1024x512 textures-atlas
-[11:33:58] [Client thread/WARN]: Skipping bad option: lastServer:
-[11:33:59] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
-[11:34:05] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
-[11:34:05] [Server thread/INFO]: Generating keypair
-[11:34:05] [Server thread/ERROR]: This world was saved with mod assets/levingemstones which appears to be missing, things may not work well
-[11:34:05] [Server thread/INFO]: Injecting existing block and item data into this server instance
-[11:34:05] [Server thread/INFO]: Found a missing id from the world examplemod:Block
-[11:34:05] [Server thread/INFO]: Found a missing id from the world assets/levingemstones:amethystGem
-[11:34:05] [Server thread/ERROR]: There are unidentified mappings in this world - we are going to attempt to process anyway
-[11:34:05] [Server thread/ERROR]: Unidentified item: assets/levingemstones:amethystGem, id 4098
-[11:34:09] [Server thread/INFO]: World backup created at D:\fabbe50\Documents\GitHub\Gemstones\run\saves\New World-20160914-113409.zip.
-[11:34:09] [Server thread/WARN]: This world contains block and item mappings that may cause world breakage
-[11:34:09] [Server thread/INFO]: Applying holder lookups
-[11:34:09] [Server thread/INFO]: Holder lookups applied
-[11:34:09] [Server thread/INFO]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@4ce63977)
-[11:34:09] [Server thread/INFO]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@4ce63977)
-[11:34:09] [Server thread/INFO]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@4ce63977)
-[11:34:09] [Server thread/INFO]: Preparing start region for level 0
-[11:34:10] [Server thread/INFO]: Preparing spawn area: 45%
-[11:34:11] [Server thread/INFO]: Running ServerStarting-event
-[11:34:11] [Server thread/INFO]: Adding GameRules
-[11:34:11] [Server thread/INFO]: Adding Commands
-[11:34:11] [Server thread/INFO]: Done
-[11:34:11] [Server thread/INFO]: Running ServerStarted-event
-[11:34:11] [Server thread/INFO]: Adding EventRainVote
-[11:34:11] [Server thread/INFO]: Done
-[11:34:11] [Server thread/INFO]: Changing view distance to 12, from 10
-[11:34:12] [Netty Local Client IO #0/INFO]: Server protocol version 2
-[11:34:12] [Netty Server IO #1/INFO]: Client protocol version 2
-[11:34:12] [Netty Server IO #1/INFO]: Client attempting to join with 5 mods : levingemstones@1.0,tficore@1.1.0-alpha2121,FML@8.0.99.99,Forge@12.18.1.2073,mcp@9.19
-[11:34:12] [Netty Local Client IO #0/INFO]: [Netty Local Client IO #0] Client side modded connection established
-[11:34:12] [Server thread/INFO]: [Server thread] Server side modded connection established
-[11:34:12] [Server thread/INFO]: devLev[local:E:b669eb77] logged in with entity id 322 at (311.427834840316, 64.0, 230.52869487869083)
-[11:34:12] [Server thread/INFO]: devLev joined the game
-[11:34:13] [Server thread/INFO]: Saving and pausing game...
-[11:34:13] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[11:34:14] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[11:34:14] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[11:34:14] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@2f29e995[id=aac0a0fa-5862-31cc-920d-a06554f1d560,name=devLev,properties={},legacy=false]
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.5.0 NVIDIA 372.90' Renderer: 'GeForce GTX 970/PCIe/SSE2'
+[12:58:57] [Client thread/INFO]: MinecraftForge v12.18.1.2073 Initialized
+[12:58:57] [Client thread/INFO]: Replaced 233 ore recipes
+[12:58:57] [Client thread/INFO]: Found 0 mods from the command line. Injecting into mod discoverer
+[12:58:57] [Client thread/INFO]: Searching D:\Projects\GitHub\Gemstones\run\mods for mods
+[12:58:58] [Client thread/INFO]: Forge Mod Loader has identified 5 mods to load
+[12:58:58] [Client thread/INFO]: Attempting connection with missing mods [mcp, FML, Forge, levingemstones, tficore] at CLIENT
+[12:58:58] [Client thread/INFO]: Attempting connection with missing mods [mcp, FML, Forge, levingemstones, tficore] at SERVER
+[12:58:59] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:TFI: Gemstones, FMLFileResourcePack:TFICore
+[12:58:59] [Client thread/INFO]: Processing ObjectHolder annotations
+[12:58:59] [Client thread/INFO]: Found 423 ObjectHolder annotations
+[12:58:59] [Client thread/INFO]: Identifying ItemStackHolder annotations
+[12:58:59] [Client thread/INFO]: Found 0 ItemStackHolder annotations
+[12:58:59] [Client thread/INFO]: Configured a dormant chunk cache size of 0
+[12:58:59] [Forge Version Check/INFO]: [Forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[12:58:59] [Client thread/INFO]: [com.levinaxr.levingemstones.Main:preInit:21]: TFI: Gemstones - PreInit
+[12:58:59] [Client thread/INFO]: Added Block: levingemstones:crumbleCobble
+[12:58:59] [Client thread/INFO]: Added item: levingemstones:amethystGem
+[12:58:59] [Client thread/INFO]: Pre-Initializing
+[12:58:59] [Client thread/INFO]: Adding Blocks
+[12:58:59] [Client thread/INFO]: Added Block: tficore:testBlock
+[12:58:59] [Client thread/INFO]: Added Block: tficore:fuserock
+[12:58:59] [Client thread/INFO]: Added Block: tficore:fuserocknether
+[12:58:59] [Client thread/INFO]: Added Block: tficore:fuserockend
+[12:58:59] [Client thread/INFO]: Done
+[12:58:59] [Client thread/INFO]: Adding MetaBlocks
+[12:58:59] [Client thread/INFO]: Done
+[12:58:59] [Client thread/INFO]: Added item: tficore:testItem
+[12:58:59] [Client thread/INFO]: Done
+[12:58:59] [Client thread/INFO]: Applying holder lookups
+[12:58:59] [Client thread/INFO]: Holder lookups applied
+[12:58:59] [Client thread/INFO]: Injecting itemstacks
+[12:58:59] [Client thread/INFO]: Itemstack injection complete
+[12:58:59] [Forge Version Check/INFO]: [Forge] Found status: OUTDATED Target: 12.18.1.2094
+[12:59:01] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:59:01] [Thread-8/INFO]: Initializing LWJGL OpenAL
+[12:59:01] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:59:01] [Thread-8/INFO]: OpenAL initialized.
+[12:59:02] [Sound Library Loader/INFO]: Sound engine started
+[12:59:04] [Client thread/INFO]: Max texture size: 16384
+[12:59:04] [Client thread/INFO]: Created: 16x16 textures-atlas
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:04] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:05] [Client thread/INFO]: [com.levinaxr.levingemstones.Main:init:27]: TFI: Gemstones - Init
+[12:59:05] [Client thread/INFO]: Registered renderdata for block with registry-name: levingemstones:crumbleCobble
+[12:59:05] [Client thread/INFO]: Registered renderdata for item with registry-name: levingemstones:amethystGem
+[12:59:05] [Client thread/INFO]: Initializing
+[12:59:05] [Client thread/INFO]: Adding Shaped Recipes
+[12:59:05] [Client thread/INFO]: Done
+[12:59:05] [Client thread/INFO]: Adding Shapeless Recipes
+[12:59:05] [Client thread/INFO]: Done
+[12:59:05] [Client thread/INFO]: Adding Block-Renderer
+[12:59:05] [Client thread/INFO]: Registered renderdata for block with registry-name: tficore:testBlock
+[12:59:05] [Client thread/INFO]: Registered renderdata for block with registry-name: tficore:fuserock
+[12:59:05] [Client thread/INFO]: Registered renderdata for block with registry-name: tficore:fuserocknether
+[12:59:05] [Client thread/INFO]: Registered renderdata for block with registry-name: tficore:fuserockend
+[12:59:05] [Client thread/INFO]: Adding MetaBlock-Renderer
+[12:59:05] [Client thread/INFO]: Adding Item-renderer
+[12:59:05] [Client thread/INFO]: Registered renderdata for item with registry-name: tficore:testItem
+[12:59:05] [Client thread/INFO]: Done
+[12:59:05] [Client thread/INFO]: Injecting itemstacks
+[12:59:05] [Client thread/INFO]: Itemstack injection complete
+[12:59:05] [Client thread/INFO]: [com.levinaxr.levingemstones.Main:postInit:33]: TFI: Gemstones - PostInit
+[12:59:05] [Client thread/INFO]: Post-Initializing
+[12:59:05] [Client thread/INFO]: Done
+[12:59:05] [Client thread/INFO]: Forge Mod Loader has successfully loaded 5 mods
+[12:59:05] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:TFI: Gemstones, FMLFileResourcePack:TFICore
+[12:59:07] [Client thread/INFO]: SoundSystem shutting down...
+[12:59:07] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[12:59:07] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:59:08] [Thread-10/INFO]: Initializing LWJGL OpenAL
+[12:59:08] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:59:08] [Thread-10/INFO]: OpenAL initialized.
+[12:59:08] [Sound Library Loader/INFO]: Sound engine started
+[12:59:10] [Client thread/INFO]: Max texture size: 16384
+[12:59:10] [Client thread/INFO]: Created: 1024x512 textures-atlas
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:10] [Client thread/WARN]: Unable to resolve texture due to upward reference: #all in minecraft:models/block/cube_all
+[12:59:11] [Client thread/WARN]: Skipping bad option: lastServer:
+[12:59:11] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[12:59:19] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
+[12:59:19] [Server thread/INFO]: Generating keypair
+[12:59:19] [Server thread/INFO]: Injecting existing block and item data into this server instance
+[12:59:19] [Server thread/INFO]: Found a missing id from the world examplemod:Block
+[12:59:19] [Server thread/INFO]: Found a missing id from the world levingemstones:crumbleBlock
+[12:59:19] [Server thread/INFO]: Applying holder lookups
+[12:59:19] [Server thread/INFO]: Holder lookups applied
+[12:59:19] [Server thread/INFO]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@569a5812)
+[12:59:19] [Server thread/INFO]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@569a5812)
+[12:59:19] [Server thread/INFO]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@569a5812)
+[12:59:19] [Server thread/INFO]: Preparing start region for level 0
+[12:59:20] [Server thread/INFO]: Preparing spawn area: 99%
+[12:59:20] [Server thread/INFO]: Running ServerStarting-event
+[12:59:20] [Server thread/INFO]: Adding GameRules
+[12:59:20] [Server thread/INFO]: Adding Commands
+[12:59:20] [Server thread/INFO]: Done
+[12:59:20] [Server thread/INFO]: Running ServerStarted-event
+[12:59:20] [Server thread/INFO]: Done
+[12:59:20] [Server thread/INFO]: Changing view distance to 12, from 10
+[12:59:21] [Netty Local Client IO #0/INFO]: Server protocol version 2
+[12:59:21] [Netty Server IO #1/INFO]: Client protocol version 2
+[12:59:21] [Netty Server IO #1/INFO]: Client attempting to join with 5 mods : levingemstones@1.0,tficore@1.1.0-alpha2626,FML@8.0.99.99,Forge@12.18.1.2073,mcp@9.19
+[12:59:21] [Netty Local Client IO #0/INFO]: [Netty Local Client IO #0] Client side modded connection established
+[12:59:21] [Server thread/INFO]: [Server thread] Server side modded connection established
+[12:59:21] [Server thread/INFO]: devLev[local:E:fe60a4f9] logged in with entity id 306 at (320.34506120474595, 69.09739405603352, 226.33279866983526)
+[12:59:21] [Server thread/INFO]: devLev joined the game
+[12:59:22] [Server thread/INFO]: Saving and pausing game...
+[12:59:22] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[12:59:22] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[12:59:22] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[12:59:22] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@344adf5d[id=aac0a0fa-5862-31cc-920d-a06554f1d560,name=devLev,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:65) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:175) [YggdrasilMinecraftSessionService.class:?]
@@ -172,28 +202,30 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:165) [YggdrasilMinecraftSessionService.class:?]
 	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3060) [Minecraft.class:?]
 	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:131) [SkinManager$3.class:?]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_65]
-	at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_65]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_65]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_65]
-	at java.lang.Thread.run(Unknown Source) [?:1.8.0_65]
-[11:34:27] [Server thread/INFO]: [devLev: Set the time to 1000]
-[11:34:27] [Client thread/INFO]: [CHAT] Set the time to 1000
-[11:34:38] [Server thread/INFO]: Saving and pausing game...
-[11:34:38] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[11:34:38] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[11:34:38] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[11:35:01] [Server thread/INFO]: Stopping server
-[11:35:01] [Server thread/INFO]: Saving players
-[11:35:01] [Server thread/INFO]: Saving worlds
-[11:35:01] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[11:35:01] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[11:35:01] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[11:35:01] [Server thread/INFO]: Unloading dimension 0
-[11:35:01] [Server thread/INFO]: Unloading dimension -1
-[11:35:01] [Server thread/INFO]: Unloading dimension 1
-[11:35:02] [Server thread/INFO]: Applying holder lookups
-[11:35:02] [Server thread/INFO]: Holder lookups applied
-[11:35:03] [Client thread/INFO]: Stopping!
-[11:35:03] [Client thread/INFO]: SoundSystem shutting down...
-[11:35:03] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_101]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_101]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_101]
+[13:00:00] [Server thread/INFO]: [devLev: Set own game mode to Survival Mode]
+[13:00:00] [Client thread/INFO]: [CHAT] Your game mode has been updated to Survival Mode
+[13:00:07] [Server thread/INFO]: [devLev: Set own game mode to Creative Mode]
+[13:00:07] [Client thread/INFO]: [CHAT] Your game mode has been updated to Creative Mode
+[13:00:36] [Server thread/INFO]: Saving and pausing game...
+[13:00:36] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[13:00:36] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[13:00:36] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[13:00:37] [Server thread/INFO]: Stopping server
+[13:00:37] [Server thread/INFO]: Saving players
+[13:00:37] [Server thread/INFO]: Saving worlds
+[13:00:37] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[13:00:37] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[13:00:37] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[13:00:38] [Server thread/INFO]: Unloading dimension 0
+[13:00:38] [Server thread/INFO]: Unloading dimension -1
+[13:00:38] [Server thread/INFO]: Unloading dimension 1
+[13:00:38] [Server thread/INFO]: Applying holder lookups
+[13:00:38] [Server thread/INFO]: Holder lookups applied
+[13:00:39] [Client thread/INFO]: Stopping!
+[13:00:39] [Client thread/INFO]: SoundSystem shutting down...
+[13:00:39] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com

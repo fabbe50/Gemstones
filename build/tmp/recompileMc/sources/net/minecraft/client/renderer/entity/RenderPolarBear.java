@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderPolarBear extends RenderLiving<EntityPolarBear>
 {
-    private static final ResourceLocation field_190090_a = new ResourceLocation("textures/entity/bear/polarbear.png");
+    private static final ResourceLocation POLAR_BEAR_TEXTURE = new ResourceLocation("textures/entity/bear/polarbear.png");
 
     public RenderPolarBear(RenderManager p_i47132_1_, ModelBase p_i47132_2_, float p_i47132_3_)
     {
@@ -22,7 +22,7 @@ public class RenderPolarBear extends RenderLiving<EntityPolarBear>
      */
     protected ResourceLocation getEntityTexture(EntityPolarBear entity)
     {
-        return field_190090_a;
+        return POLAR_BEAR_TEXTURE;
     }
 
     /**

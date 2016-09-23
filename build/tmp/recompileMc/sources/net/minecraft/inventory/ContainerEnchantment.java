@@ -71,7 +71,7 @@ public class ContainerEnchantment extends Container
         this.addSlotToContainer(new Slot(this.tableInventory, 0, 15, 47)
         {
             /**
-             * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
+             * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
              */
             public boolean isItemValid(@Nullable ItemStack stack)
             {
@@ -90,7 +90,7 @@ public class ContainerEnchantment extends Container
         {
             java.util.List<ItemStack> ores = net.minecraftforge.oredict.OreDictionary.getOres("gemLapis");
             /**
-             * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
+             * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
              */
             public boolean isItemValid(@Nullable ItemStack stack)
             {
@@ -309,7 +309,7 @@ public class ContainerEnchantment extends Container
                     this.tableInventory.markDirty();
                     this.xpSeed = playerIn.getXPSeed();
                     this.onCraftMatrixChanged(this.tableInventory);
-                    this.worldPointer.playSound((EntityPlayer)null, this.position, SoundEvents.field_190021_aL, SoundCategory.BLOCKS, 1.0F, this.worldPointer.rand.nextFloat() * 0.1F + 0.9F);
+                    this.worldPointer.playSound((EntityPlayer)null, this.position, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, this.worldPointer.rand.nextFloat() * 0.1F + 0.9F);
                 }
             }
 

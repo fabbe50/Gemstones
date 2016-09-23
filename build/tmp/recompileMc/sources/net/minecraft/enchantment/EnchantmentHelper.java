@@ -296,9 +296,15 @@ public class EnchantmentHelper
         return getMaxEnchantmentLevel(Enchantments.AQUA_AFFINITY, p_185287_0_) > 0;
     }
 
-    public static boolean func_189869_j(EntityLivingBase p_189869_0_)
+    /**
+     * Checks if the player has any armor enchanted with the frost walker enchantment. 
+     *  @return If player has equipment with frost walker
+     *  
+     * @param player The player to check enchantment for
+     */
+    public static boolean hasFrostWalkerEnchantment(EntityLivingBase player)
     {
-        return getMaxEnchantmentLevel(Enchantments.FROST_WALKER, p_189869_0_) > 0;
+        return getMaxEnchantmentLevel(Enchantments.FROST_WALKER, player) > 0;
     }
 
     @Nullable

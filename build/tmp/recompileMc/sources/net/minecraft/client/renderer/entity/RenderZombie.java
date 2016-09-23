@@ -27,7 +27,7 @@ public class RenderZombie extends RenderBiped<EntityZombie>
     private static final ResourceLocation ZOMBIE_VILLAGER_SMITH_LOCATION = new ResourceLocation("textures/entity/zombie_villager/zombie_smith.png");
     private static final ResourceLocation ZOMBIE_VILLAGER_BUTCHER_LOCATION = new ResourceLocation("textures/entity/zombie_villager/zombie_butcher.png");
     private static final ResourceLocation ZOMBIE_TEXTURES = new ResourceLocation("textures/entity/zombie/zombie.png");
-    private static final ResourceLocation field_190086_r = new ResourceLocation("textures/entity/zombie/husk.png");
+    private static final ResourceLocation HUSK_ZOMBIE_TEXTURES = new ResourceLocation("textures/entity/zombie/husk.png");
     private final ModelBiped defaultModel;
     private final ModelZombieVillager zombieVillagerModel;
     private final List<LayerRenderer<EntityZombie>> villagerLayers;
@@ -67,7 +67,7 @@ public class RenderZombie extends RenderBiped<EntityZombie>
      */
     protected void preRenderCallback(EntityZombie entitylivingbaseIn, float partialTickTime)
     {
-        if (entitylivingbaseIn.func_189777_di() == ZombieType.HUSK)
+        if (entitylivingbaseIn.getZombieType() == ZombieType.HUSK)
         {
             float f = 1.0625F;
             GlStateManager.scale(1.0625F, 1.0625F, 1.0625F);
@@ -96,7 +96,7 @@ public class RenderZombie extends RenderBiped<EntityZombie>
         }
         else
         {
-            return entity.func_189777_di() == ZombieType.HUSK ? field_190086_r : ZOMBIE_TEXTURES;
+            return entity.getZombieType() == ZombieType.HUSK ? HUSK_ZOMBIE_TEXTURES : ZOMBIE_TEXTURES;
         }
     }
 

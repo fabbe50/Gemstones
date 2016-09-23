@@ -16,7 +16,7 @@ public class RenderSkeleton extends RenderBiped<EntitySkeleton>
 {
     private static final ResourceLocation SKELETON_TEXTURES = new ResourceLocation("textures/entity/skeleton/skeleton.png");
     private static final ResourceLocation WITHER_SKELETON_TEXTURES = new ResourceLocation("textures/entity/skeleton/wither_skeleton.png");
-    private static final ResourceLocation field_190084_m = new ResourceLocation("textures/entity/skeleton/stray.png");
+    private static final ResourceLocation STRAY_SKELETON_TEXTURES = new ResourceLocation("textures/entity/skeleton/stray.png");
 
     public RenderSkeleton(RenderManager renderManagerIn)
     {
@@ -38,7 +38,7 @@ public class RenderSkeleton extends RenderBiped<EntitySkeleton>
      */
     protected void preRenderCallback(EntitySkeleton entitylivingbaseIn, float partialTickTime)
     {
-        if (entitylivingbaseIn.func_189771_df() == SkeletonType.WITHER)
+        if (entitylivingbaseIn.getSkeletonType() == SkeletonType.WITHER)
         {
             GlStateManager.scale(1.2F, 1.2F, 1.2F);
         }
@@ -54,7 +54,7 @@ public class RenderSkeleton extends RenderBiped<EntitySkeleton>
      */
     protected ResourceLocation getEntityTexture(EntitySkeleton entity)
     {
-        SkeletonType skeletontype = entity.func_189771_df();
-        return skeletontype == SkeletonType.WITHER ? WITHER_SKELETON_TEXTURES : (skeletontype == SkeletonType.STRAY ? field_190084_m : SKELETON_TEXTURES);
+        SkeletonType skeletontype = entity.getSkeletonType();
+        return skeletontype == SkeletonType.WITHER ? WITHER_SKELETON_TEXTURES : (skeletontype == SkeletonType.STRAY ? STRAY_SKELETON_TEXTURES : SKELETON_TEXTURES);
     }
 }

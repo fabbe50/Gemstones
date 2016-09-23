@@ -155,10 +155,10 @@ public class EntityAIAttackMelee extends EntityAIBase
         }
 
         this.attackTick = Math.max(this.attackTick - 1, 0);
-        this.func_190102_a(entitylivingbase, d0);
+        this.checkAndPerformAttack(entitylivingbase, d0);
     }
 
-    protected void func_190102_a(EntityLivingBase p_190102_1_, double p_190102_2_)
+    protected void checkAndPerformAttack(EntityLivingBase p_190102_1_, double p_190102_2_)
     {
         double d0 = this.getAttackReachSqr(p_190102_1_);
 

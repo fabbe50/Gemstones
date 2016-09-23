@@ -1,6 +1,10 @@
 package com.levinaxr.levingemstones.proxy;
 
+import com.levinaxr.levingemstones.init.ConfigurationHandler;
 import com.levinaxr.levingemstones.init.ItemRegistry;
+import com.levinaxr.levingemstones.init.BlockRegistry;
+import com.levinaxr.levingemstones.init.CraftingRegistry;
+
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -8,12 +12,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
-        //BlockRegistry.init();	//Initialize Blocks
+        ConfigurationHandler.init(event);    //Reads and handles the config
+        BlockRegistry.init();	//Initialize Blocks
         ItemRegistry.init();	//Initialize Items
     }
 
     public void init(FMLInitializationEvent event) {
-        //RecipeRegistry.registerRecipe();
+        CraftingRegistry.init();
         //SmeltingRegistry.registerSmelting();
     }
 

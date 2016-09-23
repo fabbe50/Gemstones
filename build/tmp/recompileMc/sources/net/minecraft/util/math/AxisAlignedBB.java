@@ -36,9 +36,9 @@ public class AxisAlignedBB
     }
 
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB(Vec3d p_i47144_1_, Vec3d p_i47144_2_)
+    public AxisAlignedBB(Vec3d min, Vec3d max)
     {
-        this(p_i47144_1_.xCoord, p_i47144_1_.yCoord, p_i47144_1_.zCoord, p_i47144_2_.xCoord, p_i47144_2_.yCoord, p_i47144_2_.zCoord);
+        this(min.xCoord, min.yCoord, min.zCoord, max.xCoord, max.yCoord, max.zCoord);
     }
 
     public AxisAlignedBB setMaxY(double y2)
@@ -287,9 +287,9 @@ public class AxisAlignedBB
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean func_189973_a(Vec3d p_189973_1_, Vec3d p_189973_2_)
+    public boolean intersects(Vec3d min, Vec3d max)
     {
-        return this.intersects(Math.min(p_189973_1_.xCoord, p_189973_2_.xCoord), Math.min(p_189973_1_.yCoord, p_189973_2_.yCoord), Math.min(p_189973_1_.zCoord, p_189973_2_.zCoord), Math.max(p_189973_1_.xCoord, p_189973_2_.xCoord), Math.max(p_189973_1_.yCoord, p_189973_2_.yCoord), Math.max(p_189973_1_.zCoord, p_189973_2_.zCoord));
+        return this.intersects(Math.min(min.xCoord, max.xCoord), Math.min(min.yCoord, max.yCoord), Math.min(min.zCoord, max.zCoord), Math.max(min.xCoord, max.xCoord), Math.max(min.yCoord, max.yCoord), Math.max(min.zCoord, max.zCoord));
     }
 
     /**
@@ -424,7 +424,7 @@ public class AxisAlignedBB
     }
 
     @SideOnly(Side.CLIENT)
-    public Vec3d func_189972_c()
+    public Vec3d getCenter()
     {
         return new Vec3d(this.minX + (this.maxX - this.minX) * 0.5D, this.minY + (this.maxY - this.minY) * 0.5D, this.minZ + (this.maxZ - this.minZ) * 0.5D);
     }

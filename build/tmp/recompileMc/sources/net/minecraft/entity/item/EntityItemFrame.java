@@ -234,9 +234,9 @@ public class EntityItemFrame extends EntityHanging
         }
     }
 
-    public static void func_189738_a(DataFixer p_189738_0_)
+    public static void registerFixesItemFrame(DataFixer fixer)
     {
-        p_189738_0_.registerWalker(FixTypes.ENTITY, new ItemStackData("ItemFrame", new String[] {"Item"}));
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackData("ItemFrame", new String[] {"Item"}));
     }
 
     /**

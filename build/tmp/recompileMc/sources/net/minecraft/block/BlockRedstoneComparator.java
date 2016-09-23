@@ -250,12 +250,18 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         this.onStateChange(worldIn, pos, state);
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         super.onBlockAdded(worldIn, pos, state);
         worldIn.setTileEntity(pos, this.createNewTileEntity(worldIn, 0));
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         super.breakBlock(worldIn, pos, state);
@@ -268,9 +274,6 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
      * changes to the world, like pistons replacing the block with an extended base. On the client, the update may
      * involve replacing tile entities, playing sounds, or performing other visual actions to reflect the server side
      * changes.
-     *  
-     * @param state The block state retrieved from the block position prior to this method being invoked
-     * @param pos The position of the block event. Can be used to retrieve tile entities.
      */
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
     {

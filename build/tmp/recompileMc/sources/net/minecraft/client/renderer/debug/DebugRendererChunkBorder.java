@@ -12,16 +12,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class DebugRendererChunkBorder implements DebugRenderer.IDebugRenderer
 {
-    private final Minecraft field_190072_a;
+    private final Minecraft minecraft;
 
-    public DebugRendererChunkBorder(Minecraft p_i47134_1_)
+    public DebugRendererChunkBorder(Minecraft minecraftIn)
     {
-        this.field_190072_a = p_i47134_1_;
+        this.minecraft = minecraftIn;
     }
 
-    public void func_190060_a(float p_190060_1_, long p_190060_2_)
+    public void render(float p_190060_1_, long p_190060_2_)
     {
-        EntityPlayer entityplayer = this.field_190072_a.thePlayer;
+        EntityPlayer entityplayer = this.minecraft.thePlayer;
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer vertexbuffer = tessellator.getBuffer();
         double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)p_190060_1_;

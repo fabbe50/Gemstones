@@ -104,7 +104,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         }
     }
 
-    protected <T extends GuiButton> T func_189646_b(T p_189646_1_)
+    protected <T extends GuiButton> T addButton(T p_189646_1_)
     {
         this.buttonList.add(p_189646_1_);
         return (T)p_189646_1_;

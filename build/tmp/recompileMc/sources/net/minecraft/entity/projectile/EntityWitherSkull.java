@@ -35,9 +35,9 @@ public class EntityWitherSkull extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public static void func_189746_a(DataFixer p_189746_0_)
+    public static void registerFixesWitherSkull(DataFixer fixer)
     {
-        EntityFireball.func_189743_a(p_189746_0_, "WitherSkull");
+        EntityFireball.registerFixesFireball(fixer, "WitherSkull");
     }
 
     /**

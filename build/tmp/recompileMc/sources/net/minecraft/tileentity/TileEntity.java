@@ -106,10 +106,10 @@ public abstract class TileEntity implements net.minecraftforge.common.capabiliti
         }
     }
 
-    public static TileEntity func_190200_a(World p_190200_0_, NBTTagCompound p_190200_1_)
+    public static TileEntity create(World worldIn, NBTTagCompound compound)
     {
         TileEntity tileentity = null;
-        String s = p_190200_1_.getString("id");
+        String s = compound.getString("id");
         Class <? extends TileEntity > oclass = null;
 
         try
@@ -133,8 +133,8 @@ public abstract class TileEntity implements net.minecraftforge.common.capabiliti
         {
             try
             {
-                tileentity.func_190201_b(p_190200_0_);
-                tileentity.readFromNBT(p_190200_1_);
+                tileentity.setWorldCreate(worldIn);
+                tileentity.readFromNBT(compound);
             }
             catch (Throwable throwable)
             {
@@ -153,7 +153,7 @@ public abstract class TileEntity implements net.minecraftforge.common.capabiliti
         return tileentity;
     }
 
-    protected void func_190201_b(World p_190201_1_)
+    protected void setWorldCreate(World worldIn)
     {
     }
 
@@ -340,11 +340,11 @@ public abstract class TileEntity implements net.minecraftforge.common.capabiliti
         return null;
     }
 
-    public void func_189667_a(Rotation p_189667_1_)
+    public void rotate(Rotation p_189667_1_)
     {
     }
 
-    public void func_189668_a(Mirror p_189668_1_)
+    public void mirror(Mirror p_189668_1_)
     {
     }
 

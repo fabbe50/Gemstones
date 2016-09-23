@@ -19,9 +19,9 @@ public class EntityMinecartEmpty extends EntityMinecart
         super(worldIn, x, y, z);
     }
 
-    public static void func_189673_a(DataFixer p_189673_0_)
+    public static void registerFixesMinecartEmpty(DataFixer fixer)
     {
-        EntityMinecart.func_189669_a(p_189673_0_, "MinecartRideable");
+        EntityMinecart.registerFixesMinecart(fixer, "MinecartRideable");
     }
 
     public boolean processInitialInteract(EntityPlayer player, @Nullable ItemStack stack, EnumHand hand)

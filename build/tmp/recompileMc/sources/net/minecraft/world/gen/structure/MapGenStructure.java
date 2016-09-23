@@ -31,7 +31,7 @@ public abstract class MapGenStructure extends MapGenBase
     {
         this.initializeStructureData(worldIn);
 
-        if (!this.structureMap.containsKey(ChunkPos.chunkXZ2Int(chunkX, chunkZ)))
+        if (!this.structureMap.containsKey(ChunkPos.asLong(chunkX, chunkZ)))
         {
             this.rand.nextInt();
 
@@ -40,7 +40,7 @@ public abstract class MapGenStructure extends MapGenBase
                 if (this.canSpawnStructureAtCoords(chunkX, chunkZ))
                 {
                     StructureStart structurestart = this.getStructureStart(chunkX, chunkZ);
-                    this.structureMap.put(ChunkPos.chunkXZ2Int(chunkX, chunkZ), structurestart);
+                    this.structureMap.put(ChunkPos.asLong(chunkX, chunkZ), structurestart);
 
                     if (structurestart.isSizeableStructure())
                     {
@@ -64,7 +64,7 @@ public abstract class MapGenStructure extends MapGenBase
                 {
                     public String call() throws Exception
                     {
-                        return String.valueOf(ChunkPos.chunkXZ2Int(chunkX, chunkZ));
+                        return String.valueOf(ChunkPos.asLong(chunkX, chunkZ));
                     }
                 });
                 crashreportcategory.setDetail("Structure type", new ICrashReportDetail<String>()
@@ -251,7 +251,7 @@ public abstract class MapGenStructure extends MapGenBase
 
                             if (structurestart != null)
                             {
-                                this.structureMap.put(ChunkPos.chunkXZ2Int(i, j), structurestart);
+                                this.structureMap.put(ChunkPos.asLong(i, j), structurestart);
                             }
                         }
                     }

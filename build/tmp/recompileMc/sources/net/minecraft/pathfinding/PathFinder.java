@@ -23,22 +23,22 @@ public class PathFinder
     }
 
     @Nullable
-    public Path findPath(IBlockAccess p_186333_1_, EntityLiving p_186333_2_, Entity p_186333_3_, float p_186333_4_)
+    public Path findPath(IBlockAccess worldIn, EntityLiving p_186333_2_, Entity p_186333_3_, float p_186333_4_)
     {
-        return this.findPath(p_186333_1_, p_186333_2_, p_186333_3_.posX, p_186333_3_.getEntityBoundingBox().minY, p_186333_3_.posZ, p_186333_4_);
+        return this.findPath(worldIn, p_186333_2_, p_186333_3_.posX, p_186333_3_.getEntityBoundingBox().minY, p_186333_3_.posZ, p_186333_4_);
     }
 
     @Nullable
-    public Path findPath(IBlockAccess p_186336_1_, EntityLiving p_186336_2_, BlockPos p_186336_3_, float p_186336_4_)
+    public Path findPath(IBlockAccess worldIn, EntityLiving p_186336_2_, BlockPos p_186336_3_, float p_186336_4_)
     {
-        return this.findPath(p_186336_1_, p_186336_2_, (double)((float)p_186336_3_.getX() + 0.5F), (double)((float)p_186336_3_.getY() + 0.5F), (double)((float)p_186336_3_.getZ() + 0.5F), p_186336_4_);
+        return this.findPath(worldIn, p_186336_2_, (double)((float)p_186336_3_.getX() + 0.5F), (double)((float)p_186336_3_.getY() + 0.5F), (double)((float)p_186336_3_.getZ() + 0.5F), p_186336_4_);
     }
 
     @Nullable
-    private Path findPath(IBlockAccess p_186334_1_, EntityLiving p_186334_2_, double p_186334_3_, double p_186334_5_, double p_186334_7_, float p_186334_9_)
+    private Path findPath(IBlockAccess worldIn, EntityLiving p_186334_2_, double p_186334_3_, double p_186334_5_, double p_186334_7_, float p_186334_9_)
     {
         this.path.clearPath();
-        this.nodeProcessor.initProcessor(p_186334_1_, p_186334_2_);
+        this.nodeProcessor.initProcessor(worldIn, p_186334_2_);
         PathPoint pathpoint = this.nodeProcessor.getStart();
         PathPoint pathpoint1 = this.nodeProcessor.getPathPointToCoords(p_186334_3_, p_186334_5_, p_186334_7_);
         Path path = this.findPath(pathpoint, pathpoint1, p_186334_9_);

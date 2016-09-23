@@ -38,7 +38,7 @@ public class MapGenMineshaft extends MapGenStructure
 
     protected StructureStart getStructureStart(int chunkX, int chunkZ)
     {
-        Biome biome = this.worldObj.getBiomeGenForCoords(new BlockPos((chunkX << 4) + 8, 64, (chunkZ << 4) + 8));
+        Biome biome = this.worldObj.getBiome(new BlockPos((chunkX << 4) + 8, 64, (chunkZ << 4) + 8));
         MapGenMineshaft.Type mapgenmineshaft$type = biome instanceof BiomeMesa ? MapGenMineshaft.Type.MESA : MapGenMineshaft.Type.NORMAL;
         return new StructureMineshaftStart(this.worldObj, this.rand, chunkX, chunkZ, mapgenmineshaft$type);
     }
@@ -48,9 +48,9 @@ public class MapGenMineshaft extends MapGenStructure
         NORMAL,
         MESA;
 
-        public static MapGenMineshaft.Type func_189910_a(int p_189910_0_)
+        public static MapGenMineshaft.Type byId(int id)
         {
-            return p_189910_0_ >= 0 && p_189910_0_ < values().length ? values()[p_189910_0_] : NORMAL;
+            return id >= 0 && id < values().length ? values()[id] : NORMAL;
         }
     }
 }

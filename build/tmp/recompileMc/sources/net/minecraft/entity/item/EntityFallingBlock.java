@@ -127,7 +127,7 @@ public class EntityFallingBlock extends Entity
                 }
             }
 
-            if (!this.func_189652_ae())
+            if (!this.hasNoGravity())
             {
                 this.motionY -= 0.03999999910593033D;
             }
@@ -249,7 +249,7 @@ public class EntityFallingBlock extends Entity
         }
     }
 
-    public static void func_189741_a(DataFixer p_189741_0_)
+    public static void registerFixesFallingBlock(DataFixer fixer)
     {
     }
 

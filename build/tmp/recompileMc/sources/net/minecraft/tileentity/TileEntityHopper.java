@@ -34,9 +34,9 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
     private String customName;
     private int transferCooldown = -1;
 
-    public static void func_189683_a(DataFixer p_189683_0_)
+    public static void registerFixesHopper(DataFixer fixer)
     {
-        p_189683_0_.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Hopper", new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Hopper", new String[] {"Items"}));
     }
 
     public void readFromNBT(NBTTagCompound compound)
@@ -182,7 +182,7 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Don't rename this method to canInteractWith due to conflicts with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
@@ -198,7 +198,8 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
     }
 
     /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
      */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {

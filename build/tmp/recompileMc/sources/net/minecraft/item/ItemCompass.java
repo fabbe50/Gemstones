@@ -64,11 +64,11 @@ public class ItemCompass extends Item
                 }
             }
             @SideOnly(Side.CLIENT)
-            private double wobble(World p_185093_1_, double p_185093_2_)
+            private double wobble(World worldIn, double p_185093_2_)
             {
-                if (p_185093_1_.getTotalWorldTime() != this.lastUpdateTick)
+                if (worldIn.getTotalWorldTime() != this.lastUpdateTick)
                 {
-                    this.lastUpdateTick = p_185093_1_.getTotalWorldTime();
+                    this.lastUpdateTick = worldIn.getTotalWorldTime();
                     double d0 = p_185093_2_ - this.rotation;
                     d0 = d0 % (Math.PI * 2D);
                     d0 = MathHelper.clamp_double(d0, -1.0D, 1.0D);

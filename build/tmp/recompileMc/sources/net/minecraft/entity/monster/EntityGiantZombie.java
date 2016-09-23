@@ -17,9 +17,9 @@ public class EntityGiantZombie extends EntityMob
         this.setSize(this.width * 6.0F, this.height * 6.0F);
     }
 
-    public static void func_189765_b(DataFixer p_189765_0_)
+    public static void registerFixesGiantZombie(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189765_0_, "Giant");
+        EntityLiving.registerFixesMob(fixer, "Giant");
     }
 
     public float getEyeHeight()

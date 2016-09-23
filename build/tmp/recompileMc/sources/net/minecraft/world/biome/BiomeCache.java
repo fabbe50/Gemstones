@@ -43,7 +43,7 @@ public class BiomeCache
 
     public Biome getBiome(int x, int z, Biome defaultValue)
     {
-        Biome biome = this.getBiomeCacheBlock(x, z).getBiomeGenAt(x, z);
+        Biome biome = this.getBiomeCacheBlock(x, z).getBiome(x, z);
         return biome == null ? defaultValue : biome;
     }
 
@@ -97,13 +97,13 @@ public class BiomeCache
         {
             this.xPosition = x;
             this.zPosition = z;
-            BiomeCache.this.chunkManager.getBiomeGenAt(this.biomes, x << 4, z << 4, 16, 16, false);
+            BiomeCache.this.chunkManager.getBiomes(this.biomes, x << 4, z << 4, 16, 16, false);
         }
 
         /**
          * Returns the BiomeGenBase related to the x, z position from the cache block.
          */
-        public Biome getBiomeGenAt(int x, int z)
+        public Biome getBiome(int x, int z)
         {
             return this.biomes[x & 15 | (z & 15) << 4];
         }

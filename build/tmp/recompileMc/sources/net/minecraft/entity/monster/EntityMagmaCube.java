@@ -22,9 +22,9 @@ public class EntityMagmaCube extends EntitySlime
         this.isImmuneToFire = true;
     }
 
-    public static void func_189759_b(DataFixer p_189759_0_)
+    public static void registerFixesMagmaCube(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189759_0_, "LavaSlime");
+        EntityLiving.registerFixesMob(fixer, "LavaSlime");
     }
 
     protected void applyEntityAttributes()

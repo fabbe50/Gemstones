@@ -87,7 +87,7 @@ public class EntityArmorStand extends EntityLivingBase
         this.rightArmRotation = DEFAULT_RIGHTARM_ROTATION;
         this.leftLegRotation = DEFAULT_LEFTLEG_ROTATION;
         this.rightLegRotation = DEFAULT_RIGHTLEG_ROTATION;
-        this.noClip = this.func_189652_ae();
+        this.noClip = this.hasNoGravity();
         this.setSize(0.5F, 1.975F);
     }
 
@@ -102,7 +102,7 @@ public class EntityArmorStand extends EntityLivingBase
      */
     public boolean isServerWorld()
     {
-        return super.isServerWorld() && !this.func_189652_ae();
+        return super.isServerWorld() && !this.hasNoGravity();
     }
 
     protected void entityInit()
@@ -203,9 +203,9 @@ public class EntityArmorStand extends EntityLivingBase
         }
     }
 
-    public static void func_189805_a(DataFixer p_189805_0_)
+    public static void registerFixesArmorStand(DataFixer fixer)
     {
-        p_189805_0_.registerWalker(FixTypes.ENTITY, new ItemStackDataLists("ArmorStand", new String[] {"ArmorItems", "HandItems"}));
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackDataLists("ArmorStand", new String[] {"ArmorItems", "HandItems"}));
     }
 
     /**
@@ -298,7 +298,7 @@ public class EntityArmorStand extends EntityLivingBase
         this.setNoBasePlate(compound.getBoolean("NoBasePlate"));
         this.setMarker(compound.getBoolean("Marker"));
         this.wasMarker = !this.hasMarker();
-        this.noClip = this.func_189652_ae();
+        this.noClip = this.hasNoGravity();
         NBTTagCompound nbttagcompound = compound.getCompoundTag("Pose");
         this.writePoseToNBT(nbttagcompound);
     }
@@ -726,7 +726,7 @@ public class EntityArmorStand extends EntityLivingBase
      */
     public void moveEntityWithHeading(float strafe, float forward)
     {
-        if (!this.func_189652_ae())
+        if (!this.hasNoGravity())
         {
             super.moveEntityWithHeading(strafe, forward);
         }

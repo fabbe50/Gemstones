@@ -244,20 +244,25 @@ public final class NBTUtil
         return nbttagcompound;
     }
 
-    public static IBlockState func_190008_d(NBTTagCompound p_190008_0_)
+    /**
+     * Reads a blockstate from the given tag.
+     *  
+     * @param tag The tag the blockstate is to be read from
+     */
+    public static IBlockState readBlockState(NBTTagCompound tag)
     {
-        if (!p_190008_0_.hasKey("Name", 8))
+        if (!tag.hasKey("Name", 8))
         {
             return Blocks.AIR.getDefaultState();
         }
         else
         {
-            Block block = (Block)Block.REGISTRY.getObject(new ResourceLocation(p_190008_0_.getString("Name")));
+            Block block = (Block)Block.REGISTRY.getObject(new ResourceLocation(tag.getString("Name")));
             IBlockState iblockstate = block.getDefaultState();
 
-            if (p_190008_0_.hasKey("Properties", 10))
+            if (tag.hasKey("Properties", 10))
             {
-                NBTTagCompound nbttagcompound = p_190008_0_.getCompoundTag("Properties");
+                NBTTagCompound nbttagcompound = tag.getCompoundTag("Properties");
                 BlockStateContainer blockstatecontainer = block.getBlockState();
 
                 for (String s : nbttagcompound.getKeySet())
@@ -266,7 +271,7 @@ public final class NBTUtil
 
                     if (iproperty != null)
                     {
-                        iblockstate = func_190007_a(iblockstate, iproperty, nbttagcompound.getString(s));
+                        iblockstate = setValueHelper(iblockstate, iproperty, nbttagcompound.getString(s));
                     }
                 }
             }
@@ -275,33 +280,39 @@ public final class NBTUtil
         }
     }
 
-    private static <T extends Comparable<T>> IBlockState func_190007_a(IBlockState p_190007_0_, IProperty<T> p_190007_1_, String p_190007_2_)
+    private static <T extends Comparable<T>> IBlockState setValueHelper(IBlockState p_190007_0_, IProperty<T> p_190007_1_, String p_190007_2_)
     {
         return p_190007_0_.withProperty(p_190007_1_, p_190007_1_.parseValue(p_190007_2_).get());
     }
 
-    public static NBTTagCompound func_190009_a(NBTTagCompound p_190009_0_, IBlockState p_190009_1_)
+    /**
+     * Writes the given blockstate to the given tag.
+     *  
+     * @param tag The tag to write to
+     * @param state The blockstate to be written
+     */
+    public static NBTTagCompound writeBlockState(NBTTagCompound tag, IBlockState state)
     {
-        p_190009_0_.setString("Name", ((ResourceLocation)Block.REGISTRY.getNameForObject(p_190009_1_.getBlock())).toString());
+        tag.setString("Name", ((ResourceLocation)Block.REGISTRY.getNameForObject(state.getBlock())).toString());
 
-        if (!p_190009_1_.getProperties().isEmpty())
+        if (!state.getProperties().isEmpty())
         {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-            for (Entry < IProperty<?>, Comparable<? >> entry : p_190009_1_.getProperties().entrySet())
+            for (Entry < IProperty<?>, Comparable<? >> entry : state.getProperties().entrySet())
             {
                 IProperty<?> iproperty = (IProperty)entry.getKey();
-                nbttagcompound.setString(iproperty.getName(), func_190010_a(iproperty, (Comparable)entry.getValue()));
+                nbttagcompound.setString(iproperty.getName(), getName(iproperty, (Comparable)entry.getValue()));
             }
 
-            p_190009_0_.setTag("Properties", nbttagcompound);
+            tag.setTag("Properties", nbttagcompound);
         }
 
-        return p_190009_0_;
+        return tag;
     }
 
     @SuppressWarnings("unchecked")
-    private static <T extends Comparable<T>> String func_190010_a(IProperty<T> p_190010_0_, Comparable<?> p_190010_1_)
+    private static <T extends Comparable<T>> String getName(IProperty<T> p_190010_0_, Comparable<?> p_190010_1_)
     {
         return p_190010_0_.getName((T)p_190010_1_);
     }

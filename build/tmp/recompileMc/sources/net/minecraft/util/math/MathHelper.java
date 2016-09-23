@@ -550,13 +550,13 @@ public class MathHelper
     }
 
     @SideOnly(Side.CLIENT)
-    public static int hsvToRGB(float p_181758_0_, float p_181758_1_, float p_181758_2_)
+    public static int hsvToRGB(float hue, float saturation, float value)
     {
-        int i = (int)(p_181758_0_ * 6.0F) % 6;
-        float f = p_181758_0_ * 6.0F - (float)i;
-        float f1 = p_181758_2_ * (1.0F - p_181758_1_);
-        float f2 = p_181758_2_ * (1.0F - f * p_181758_1_);
-        float f3 = p_181758_2_ * (1.0F - (1.0F - f) * p_181758_1_);
+        int i = (int)(hue * 6.0F) % 6;
+        float f = hue * 6.0F - (float)i;
+        float f1 = value * (1.0F - saturation);
+        float f2 = value * (1.0F - f * saturation);
+        float f3 = value * (1.0F - (1.0F - f) * saturation);
         float f4;
         float f5;
         float f6;
@@ -564,37 +564,37 @@ public class MathHelper
         switch (i)
         {
             case 0:
-                f4 = p_181758_2_;
+                f4 = value;
                 f5 = f3;
                 f6 = f1;
                 break;
             case 1:
                 f4 = f2;
-                f5 = p_181758_2_;
+                f5 = value;
                 f6 = f1;
                 break;
             case 2:
                 f4 = f1;
-                f5 = p_181758_2_;
+                f5 = value;
                 f6 = f3;
                 break;
             case 3:
                 f4 = f1;
                 f5 = f2;
-                f6 = p_181758_2_;
+                f6 = value;
                 break;
             case 4:
                 f4 = f3;
                 f5 = f1;
-                f6 = p_181758_2_;
+                f6 = value;
                 break;
             case 5:
-                f4 = p_181758_2_;
+                f4 = value;
                 f5 = f1;
                 f6 = f2;
                 break;
             default:
-                throw new RuntimeException("Something went wrong when converting from HSV to RGB. Input was " + p_181758_0_ + ", " + p_181758_1_ + ", " + p_181758_2_);
+                throw new RuntimeException("Something went wrong when converting from HSV to RGB. Input was " + hue + ", " + saturation + ", " + value);
         }
 
         int j = clamp_int((int)(f4 * 255.0F), 0, 255);

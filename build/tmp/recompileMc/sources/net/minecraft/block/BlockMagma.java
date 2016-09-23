@@ -44,9 +44,9 @@ public class BlockMagma extends Block
      */
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
-        if (!entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && !EnchantmentHelper.func_189869_j((EntityLivingBase)entityIn))
+        if (!entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && !EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase)entityIn))
         {
-            entityIn.attackEntityFrom(DamageSource.field_190095_e, 1.0F);
+            entityIn.attackEntityFrom(DamageSource.hotFloor, 1.0F);
         }
 
         super.onEntityWalk(worldIn, pos, entityIn);
@@ -75,8 +75,8 @@ public class BlockMagma extends Block
         }
     }
 
-    public boolean func_189872_a(IBlockState p_189872_1_, Entity p_189872_2_)
+    public boolean canEntitySpawn(IBlockState state, Entity entityIn)
     {
-        return p_189872_2_.isImmuneToFire();
+        return entityIn.isImmuneToFire();
     }
 }

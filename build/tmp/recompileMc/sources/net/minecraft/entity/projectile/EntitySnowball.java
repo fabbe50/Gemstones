@@ -25,9 +25,9 @@ public class EntitySnowball extends EntityThrowable
         super(worldIn, x, y, z);
     }
 
-    public static void func_189662_a(DataFixer p_189662_0_)
+    public static void registerFixesSnowball(DataFixer fixer)
     {
-        EntityThrowable.func_189661_a(p_189662_0_, "Snowball");
+        EntityThrowable.registerFixesThrowable(fixer, "Snowball");
     }
 
     /**

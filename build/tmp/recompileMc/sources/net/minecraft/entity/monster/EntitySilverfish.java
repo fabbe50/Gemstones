@@ -37,9 +37,9 @@ public class EntitySilverfish extends EntityMob
         this.setSize(0.4F, 0.3F);
     }
 
-    public static void func_189767_b(DataFixer p_189767_0_)
+    public static void registerFixesSilverfish(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189767_0_, "Silverfish");
+        EntityLiving.registerFixesMob(fixer, "Silverfish");
     }
 
     protected void initEntityAI()

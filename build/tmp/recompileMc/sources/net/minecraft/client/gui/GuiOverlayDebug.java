@@ -103,7 +103,7 @@ public class GuiOverlayDebug extends Gui
     {
         BlockPos blockpos = new BlockPos(this.mc.getRenderViewEntity().posX, this.mc.getRenderViewEntity().getEntityBoundingBox().minY, this.mc.getRenderViewEntity().posZ);
 
-        if (this.mc.func_189648_am())
+        if (this.mc.isReducedDebug())
         {
             return Lists.newArrayList(new String[] {"Minecraft 1.10.2 (" + this.mc.getVersion() + "/" + ClientBrandRetriever.getClientModName() + ")", this.mc.debug, this.mc.renderGlobal.getDebugInfoRenders(), this.mc.renderGlobal.getDebugInfoEntities(), "P: " + this.mc.effectRenderer.getStatistics() + ". T: " + this.mc.theWorld.getDebugLoadedEntities(), this.mc.theWorld.getProviderName(), "", String.format("Chunk-relative: %d %d %d", new Object[]{Integer.valueOf(blockpos.getX() & 15), Integer.valueOf(blockpos.getY() & 15), Integer.valueOf(blockpos.getZ() & 15)})});
         }
@@ -191,7 +191,7 @@ public class GuiOverlayDebug extends Gui
         list.add("");
         list.addAll(net.minecraftforge.fml.common.FMLCommonHandler.instance().getBrandings(false));
 
-        if (this.mc.func_189648_am())
+        if (this.mc.isReducedDebug())
         {
             return list;
         }

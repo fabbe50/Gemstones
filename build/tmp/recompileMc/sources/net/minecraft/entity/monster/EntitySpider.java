@@ -45,9 +45,9 @@ public class EntitySpider extends EntityMob
         this.setSize(1.4F, 0.9F);
     }
 
-    public static void func_189774_d(DataFixer p_189774_0_)
+    public static void registerFixesSpider(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189774_0_, "Spider");
+        EntityLiving.registerFixesMob(fixer, "Spider");
     }
 
     protected void initEntityAI()

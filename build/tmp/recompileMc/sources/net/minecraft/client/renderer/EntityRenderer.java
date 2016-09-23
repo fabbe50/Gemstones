@@ -1384,9 +1384,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
             GlStateManager.enableAlpha();
         }
 
-        if (this.mc.debugRenderer.func_190074_a())
+        if (this.mc.debugRenderer.shouldRender())
         {
-            this.mc.debugRenderer.func_190073_a(partialTicks, finishTimeNano);
+            this.mc.debugRenderer.renderDebug(partialTicks, finishTimeNano);
         }
 
         this.mc.mcProfiler.endStartSection("destroyProgress");
@@ -1516,7 +1516,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             for (int l = 0; l < k; ++l)
             {
                 BlockPos blockpos1 = world.getPrecipitationHeight(blockpos.add(this.random.nextInt(10) - this.random.nextInt(10), 0, this.random.nextInt(10) - this.random.nextInt(10)));
-                Biome biome = world.getBiomeGenForCoords(blockpos1);
+                Biome biome = world.getBiome(blockpos1);
                 BlockPos blockpos2 = blockpos1.down();
                 IBlockState iblockstate = world.getBlockState(blockpos2);
 
@@ -1526,7 +1526,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     double d4 = this.random.nextDouble();
                     AxisAlignedBB axisalignedbb = iblockstate.getBoundingBox(world, blockpos2);
 
-                    if (iblockstate.getMaterial() != Material.LAVA && iblockstate.getBlock() != Blocks.field_189877_df)
+                    if (iblockstate.getMaterial() != Material.LAVA && iblockstate.getBlock() != Blocks.MAGMA)
                     {
                         if (iblockstate.getMaterial() != Material.AIR)
                         {
@@ -1619,7 +1619,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     double d3 = (double)this.rainXCoords[i2] * 0.5D;
                     double d4 = (double)this.rainYCoords[i2] * 0.5D;
                     blockpos$mutableblockpos.setPos(l1, 0, k1);
-                    Biome biome = world.getBiomeGenForCoords(blockpos$mutableblockpos);
+                    Biome biome = world.getBiome(blockpos$mutableblockpos);
 
                     if (biome.canRain() || biome.getEnableSnow())
                     {
@@ -2045,44 +2045,44 @@ public class EntityRenderer implements IResourceManagerReloadListener
         return this.theMapItemRenderer;
     }
 
-    public static void func_189692_a(FontRenderer p_189692_0_, String p_189692_1_, float p_189692_2_, float p_189692_3_, float p_189692_4_, int p_189692_5_, float p_189692_6_, float p_189692_7_, boolean p_189692_8_, boolean p_189692_9_)
+    public static void drawNameplate(FontRenderer fontRendererIn, String str, float x, float y, float z, int verticalShift, float viewerYaw, float viewerPitch, boolean isThirdPersonFrontal, boolean isSneaking)
     {
         GlStateManager.pushMatrix();
-        GlStateManager.translate(p_189692_2_, p_189692_3_, p_189692_4_);
+        GlStateManager.translate(x, y, z);
         GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(-p_189692_6_, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate((float)(p_189692_8_ ? -1 : 1) * p_189692_7_, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate(-viewerYaw, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate((float)(isThirdPersonFrontal ? -1 : 1) * viewerPitch, 1.0F, 0.0F, 0.0F);
         GlStateManager.scale(-0.025F, -0.025F, 0.025F);
         GlStateManager.disableLighting();
         GlStateManager.depthMask(false);
 
-        if (!p_189692_9_)
+        if (!isSneaking)
         {
             GlStateManager.disableDepth();
         }
 
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        int i = p_189692_0_.getStringWidth(p_189692_1_) / 2;
+        int i = fontRendererIn.getStringWidth(str) / 2;
         GlStateManager.disableTexture2D();
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer vertexbuffer = tessellator.getBuffer();
         vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        vertexbuffer.pos((double)(-i - 1), (double)(-1 + p_189692_5_), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-        vertexbuffer.pos((double)(-i - 1), (double)(8 + p_189692_5_), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-        vertexbuffer.pos((double)(i + 1), (double)(8 + p_189692_5_), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-        vertexbuffer.pos((double)(i + 1), (double)(-1 + p_189692_5_), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        vertexbuffer.pos((double)(-i - 1), (double)(-1 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        vertexbuffer.pos((double)(-i - 1), (double)(8 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        vertexbuffer.pos((double)(i + 1), (double)(8 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        vertexbuffer.pos((double)(i + 1), (double)(-1 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
 
-        if (!p_189692_9_)
+        if (!isSneaking)
         {
-            p_189692_0_.drawString(p_189692_1_, -p_189692_0_.getStringWidth(p_189692_1_) / 2, p_189692_5_, 553648127);
+            fontRendererIn.drawString(str, -fontRendererIn.getStringWidth(str) / 2, verticalShift, 553648127);
             GlStateManager.enableDepth();
         }
 
         GlStateManager.depthMask(true);
-        p_189692_0_.drawString(p_189692_1_, -p_189692_0_.getStringWidth(p_189692_1_) / 2, p_189692_5_, p_189692_9_ ? 553648127 : -1);
+        fontRendererIn.drawString(str, -fontRendererIn.getStringWidth(str) / 2, verticalShift, isSneaking ? 553648127 : -1);
         GlStateManager.enableLighting();
         GlStateManager.disableBlend();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

@@ -88,7 +88,7 @@ public class ItemBlock extends Item
 
                 if (tileentity != null)
                 {
-                    if (!worldIn.isRemote && tileentity.onlyOpsCanSetNbt() && (player == null || !player.func_189808_dh()))
+                    if (!worldIn.isRemote && tileentity.onlyOpsCanSetNbt() && (player == null || !player.canUseCommandBlock()))
                     {
                         return false;
                     }

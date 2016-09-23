@@ -201,7 +201,7 @@ public class ChunkProviderOverworld implements IChunkGenerator
         this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.setBlocksInChunk(x, z, chunkprimer);
-        this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+        this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
         if (this.settings.useCaves)
@@ -377,7 +377,7 @@ public class ChunkProviderOverworld implements IChunkGenerator
         int i = x * 16;
         int j = z * 16;
         BlockPos blockpos = new BlockPos(i, 0, j);
-        Biome biome = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+        Biome biome = this.worldObj.getBiome(blockpos.add(16, 0, 16));
         this.rand.setSeed(this.worldObj.getSeed());
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;
@@ -495,7 +495,7 @@ public class ChunkProviderOverworld implements IChunkGenerator
 
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
     {
-        Biome biome = this.worldObj.getBiomeGenForCoords(pos);
+        Biome biome = this.worldObj.getBiome(pos);
 
         if (this.mapFeaturesEnabled)
         {

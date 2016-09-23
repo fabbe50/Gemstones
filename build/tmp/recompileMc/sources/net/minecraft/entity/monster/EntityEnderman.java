@@ -151,9 +151,9 @@ public class EntityEnderman extends EntityMob
         super.notifyDataManagerChange(key);
     }
 
-    public static void func_189763_b(DataFixer p_189763_0_)
+    public static void registerFixesEnderman(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189763_0_, "Enderman");
+        EntityLiving.registerFixesMob(fixer, "Enderman");
     }
 
     /**

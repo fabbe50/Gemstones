@@ -76,7 +76,7 @@ public class Teleporter
         int k = MathHelper.floor_double(entityIn.posZ);
         boolean flag = true;
         BlockPos blockpos = BlockPos.ORIGIN;
-        long l = ChunkPos.chunkXZ2Int(j, k);
+        long l = ChunkPos.asLong(j, k);
 
         if (this.destinationCoordinateCache.containsKey(l))
         {

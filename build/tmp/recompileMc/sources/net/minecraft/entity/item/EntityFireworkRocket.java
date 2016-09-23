@@ -167,9 +167,9 @@ public class EntityFireworkRocket extends Entity
         super.handleStatusUpdate(id);
     }
 
-    public static void func_189656_a(DataFixer p_189656_0_)
+    public static void registerFixesFireworkRocket(DataFixer fixer)
     {
-        p_189656_0_.registerWalker(FixTypes.ENTITY, new ItemStackData("FireworksRocketEntity", new String[] {"FireworksItem"}));
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackData("FireworksRocketEntity", new String[] {"FireworksItem"}));
     }
 
     /**

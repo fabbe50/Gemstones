@@ -42,13 +42,13 @@ public class EntityAIHurtByTarget extends EntityAITarget
 
         if (this.entityCallsForHelp)
         {
-            this.func_190105_f();
+            this.alertOthers();
         }
 
         super.startExecuting();
     }
 
-    protected void func_190105_f()
+    protected void alertOthers()
     {
         double d0 = this.getTargetDistance();
 

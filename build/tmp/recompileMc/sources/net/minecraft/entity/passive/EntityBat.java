@@ -235,9 +235,9 @@ public class EntityBat extends EntityAmbientCreature
         }
     }
 
-    public static void func_189754_b(DataFixer p_189754_0_)
+    public static void registerFixesBat(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189754_0_, "Bat");
+        EntityLiving.registerFixesMob(fixer, "Bat");
     }
 
     /**

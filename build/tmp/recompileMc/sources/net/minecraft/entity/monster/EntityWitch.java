@@ -59,9 +59,9 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
         this.setSize(0.6F, 1.95F);
     }
 
-    public static void func_189776_b(DataFixer p_189776_0_)
+    public static void registerFixesWitch(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189776_0_, "Witch");
+        EntityLiving.registerFixesMob(fixer, "Witch");
     }
 
     protected void initEntityAI()
@@ -156,7 +156,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
                 {
                     potiontype = PotionTypes.WATER_BREATHING;
                 }
-                else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.func_189748_bU() != null && this.func_189748_bU().isFireDamage()) && !this.isPotionActive(MobEffects.FIRE_RESISTANCE))
+                else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.getLastDamageSource() != null && this.getLastDamageSource().isFireDamage()) && !this.isPotionActive(MobEffects.FIRE_RESISTANCE))
                 {
                     potiontype = PotionTypes.FIRE_RESISTANCE;
                 }
@@ -234,8 +234,10 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
 
     /**
      * Attack the specified entity using a ranged attack.
+     *  
+     * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float p_82196_2_)
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         if (!this.isDrinkingPotion())
         {

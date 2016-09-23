@@ -55,6 +55,9 @@ public class BlockDispenser extends BlockContainer
         return 4;
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         super.onBlockAdded(worldIn, pos, state);
@@ -220,6 +223,9 @@ public class BlockDispenser extends BlockContainer
         }
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -238,7 +244,7 @@ public class BlockDispenser extends BlockContainer
      */
     public static IPosition getDispensePosition(IBlockSource coords)
     {
-        EnumFacing enumfacing = (EnumFacing)coords.func_189992_e().getValue(FACING);
+        EnumFacing enumfacing = (EnumFacing)coords.getBlockState().getValue(FACING);
         double d0 = coords.getX() + 0.7D * (double)enumfacing.getFrontOffsetX();
         double d1 = coords.getY() + 0.7D * (double)enumfacing.getFrontOffsetY();
         double d2 = coords.getZ() + 0.7D * (double)enumfacing.getFrontOffsetZ();
@@ -256,7 +262,8 @@ public class BlockDispenser extends BlockContainer
     }
 
     /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
+     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      */
     public EnumBlockRenderType getRenderType(IBlockState state)
     {

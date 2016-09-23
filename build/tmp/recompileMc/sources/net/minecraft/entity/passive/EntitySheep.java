@@ -235,9 +235,9 @@ public class EntitySheep extends EntityAnimal implements net.minecraftforge.comm
         }
     }
 
-    public static void func_189802_b(DataFixer p_189802_0_)
+    public static void registerFixesSheep(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189802_0_, "Sheep");
+        EntityLiving.registerFixesMob(fixer, "Sheep");
     }
 
     /**

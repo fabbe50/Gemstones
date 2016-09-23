@@ -22,7 +22,7 @@ public class MovementInput
     {
     }
 
-    public Vec2f func_190020_b()
+    public Vec2f getMoveVector()
     {
         return new Vec2f(this.moveStrafe, this.moveForward);
     }

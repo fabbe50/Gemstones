@@ -59,7 +59,7 @@ public class ItemRenderer
         this.renderItemSide(entityIn, heldStack, transform, false);
     }
 
-    public void renderItemSide(EntityLivingBase entitylivingbaseIn, ItemStack heldStack, ItemCameraTransforms.TransformType transform, boolean p_187462_4_)
+    public void renderItemSide(EntityLivingBase entitylivingbaseIn, ItemStack heldStack, ItemCameraTransforms.TransformType transform, boolean leftHanded)
     {
         if (heldStack != null)
         {
@@ -73,7 +73,7 @@ public class ItemRenderer
                 GlStateManager.depthMask(false);
             }
 
-            this.itemRenderer.renderItem(heldStack, entitylivingbaseIn, transform, p_187462_4_);
+            this.itemRenderer.renderItem(heldStack, entitylivingbaseIn, transform, leftHanded);
 
             if (flag)
             {

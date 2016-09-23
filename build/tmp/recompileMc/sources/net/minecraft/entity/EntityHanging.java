@@ -74,8 +74,8 @@ public abstract class EntityHanging extends Entity
             double d1 = (double)this.hangingPosition.getY() + 0.5D;
             double d2 = (double)this.hangingPosition.getZ() + 0.5D;
             double d3 = 0.46875D;
-            double d4 = this.func_190202_a(this.getWidthPixels());
-            double d5 = this.func_190202_a(this.getHeightPixels());
+            double d4 = this.offs(this.getWidthPixels());
+            double d5 = this.offs(this.getHeightPixels());
             d0 = d0 - (double)this.facingDirection.getFrontOffsetX() * 0.46875D;
             d2 = d2 - (double)this.facingDirection.getFrontOffsetZ() * 0.46875D;
             d1 = d1 + d5;
@@ -105,7 +105,7 @@ public abstract class EntityHanging extends Entity
         }
     }
 
-    private double func_190202_a(int p_190202_1_)
+    private double offs(int p_190202_1_)
     {
         return p_190202_1_ % 32 == 0 ? 0.5D : 0.0D;
     }

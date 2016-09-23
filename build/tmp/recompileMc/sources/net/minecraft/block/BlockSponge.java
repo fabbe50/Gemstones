@@ -50,6 +50,9 @@ public class BlockSponge extends Block
         return ((Boolean)state.getValue(WET)).booleanValue() ? 1 : 0;
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         this.tryAbsorb(worldIn, pos, state);

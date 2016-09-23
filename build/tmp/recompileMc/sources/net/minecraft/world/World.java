@@ -169,7 +169,7 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
         return this;
     }
 
-    public Biome getBiomeGenForCoords(final BlockPos pos)
+    public Biome getBiome(final BlockPos pos)
     {
         return this.provider.getBiomeForCoords(pos);
     }
@@ -200,7 +200,7 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
         }
         else
         {
-            return this.provider.getBiomeProvider().getBiomeGenerator(pos, Biomes.PLAINS);
+            return this.provider.getBiomeProvider().getBiome(pos, Biomes.PLAINS);
         }
     }
 
@@ -254,9 +254,9 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
         return !this.isOutsideBuildHeight(pos) && pos.getX() >= -30000000 && pos.getZ() >= -30000000 && pos.getX() < 30000000 && pos.getZ() < 30000000;
     }
 
-    private boolean isOutsideBuildHeight(BlockPos p_189509_1_)
+    private boolean isOutsideBuildHeight(BlockPos pos)
     {
-        return p_189509_1_.getY() < 0 || p_189509_1_.getY() >= 256;
+        return pos.getY() < 0 || pos.getY() >= 256;
     }
 
     /**
@@ -730,10 +730,10 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
      */
     public BlockPos getHeight(BlockPos pos)
     {
-        return new BlockPos(pos.getX(), this.func_189649_b(pos.getX(), pos.getZ()), pos.getZ());
+        return new BlockPos(pos.getX(), this.getHeightmapHeight(pos.getX(), pos.getZ()), pos.getZ());
     }
 
-    public int func_189649_b(int p_189649_1_, int p_189649_2_)
+    public int getHeightmapHeight(int p_189649_1_, int p_189649_2_)
     {
         int i;
 
@@ -1527,9 +1527,9 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
     /**
      * Returns the amount of skylight subtracted for the current time
      */
-    public int calculateSkylightSubtracted(float p_72967_1_)
+    public int calculateSkylightSubtracted(float partialTicks)
     {
-        float f = provider.getSunBrightnessFactor(p_72967_1_);
+        float f = provider.getSunBrightnessFactor(partialTicks);
         f = 1 - f;
         return (int)(f * 11);
     }
@@ -1541,14 +1541,14 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
      *
      * @return The current brightness factor
      * */
-    public float getSunBrightnessFactor(float p_72967_1_)
+    public float getSunBrightnessFactor(float partialTicks)
     {
-        float f = this.getCelestialAngle(p_72967_1_);
+        float f = this.getCelestialAngle(partialTicks);
         float f1 = 1.0F - (MathHelper.cos(f * ((float)Math.PI * 2F)) * 2.0F + 0.5F);
         f1 = MathHelper.clamp_float(f1, 0.0F, 1.0F);
         f1 = 1.0F - f1;
-        f1 = (float)((double)f1 * (1.0D - (double)(this.getRainStrength(p_72967_1_) * 5.0F) / 16.0D));
-        f1 = (float)((double)f1 * (1.0D - (double)(this.getThunderStrength(p_72967_1_) * 5.0F) / 16.0D));
+        f1 = (float)((double)f1 * (1.0D - (double)(this.getRainStrength(partialTicks) * 5.0F) / 16.0D));
+        f1 = (float)((double)f1 * (1.0D - (double)(this.getThunderStrength(partialTicks) * 5.0F) / 16.0D));
         return f1;
     }
 
@@ -2901,7 +2901,7 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
 
     public boolean canBlockFreezeBody(BlockPos pos, boolean noWaterAdj)
     {
-        Biome biome = this.getBiomeGenForCoords(pos);
+        Biome biome = this.getBiome(pos);
         float f = biome.getFloatTemperature(pos);
 
         if (f > 0.15F)
@@ -2950,7 +2950,7 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
 
     public boolean canSnowAtBody(BlockPos pos, boolean checkLight)
     {
-        Biome biome = this.getBiomeGenForCoords(pos);
+        Biome biome = this.getBiome(pos);
         float f = biome.getFloatTemperature(pos);
 
         if (f > 0.15F)
@@ -3880,7 +3880,7 @@ public abstract class World implements IBlockAccess, net.minecraftforge.common.c
         }
         else
         {
-            Biome biome = this.getBiomeGenForCoords(strikePosition);
+            Biome biome = this.getBiome(strikePosition);
             return biome.getEnableSnow() ? false : (this.canSnowAt(strikePosition, false) ? false : biome.canRain());
         }
     }

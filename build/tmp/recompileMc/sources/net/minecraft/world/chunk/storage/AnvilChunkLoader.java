@@ -286,9 +286,9 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         }
     }
 
-    public static void func_189889_a(DataFixer p_189889_0_)
+    public static void registerFixes(DataFixer fixer)
     {
-        p_189889_0_.registerWalker(FixTypes.CHUNK, new IDataWalker()
+        fixer.registerWalker(FixTypes.CHUNK, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {
@@ -512,7 +512,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             for (int k1 = 0; k1 < nbttaglist2.tagCount(); ++k1)
             {
                 NBTTagCompound nbttagcompound2 = nbttaglist2.getCompoundTagAt(k1);
-                TileEntity tileentity = TileEntity.func_190200_a(worldIn, nbttagcompound2);
+                TileEntity tileentity = TileEntity.create(worldIn, nbttagcompound2);
 
                 if (tileentity != null)
                 {

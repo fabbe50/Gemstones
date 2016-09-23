@@ -14,58 +14,58 @@ public enum ZombieType
     VILLAGER_BUTCHER("Zombie", true),
     HUSK("Husk", false);
 
-    private boolean field_190163_h;
-    private final TextComponentTranslation field_190164_i;
+    private boolean villager;
+    private final TextComponentTranslation name;
 
-    private ZombieType(String p_i47152_3_, boolean p_i47152_4_)
+    private ZombieType(String nameIn, boolean villagerIn)
     {
-        this.field_190163_h = p_i47152_4_;
-        this.field_190164_i = new TextComponentTranslation("entity." + p_i47152_3_ + ".name", new Object[0]);
+        this.villager = villagerIn;
+        this.name = new TextComponentTranslation("entity." + nameIn + ".name", new Object[0]);
     }
 
-    public int func_190150_a()
+    public int getId()
     {
         return this.ordinal();
     }
 
-    public boolean func_190154_b()
+    public boolean isVillager()
     {
-        return this.field_190163_h;
+        return this.villager;
     }
 
-    public int func_190148_c()
+    public int getVillagerId()
     {
-        return this.field_190163_h ? this.func_190150_a() - 1 : 0;
+        return this.villager ? this.getId() - 1 : 0;
     }
 
     @javax.annotation.Nullable
-    public static ZombieType func_190146_a(int p_190146_0_)
+    public static ZombieType getByOrdinal(int ordinal)
     {
-        if (p_190146_0_ < 0 || p_190146_0_ >= values().length) return null;
-        return values()[p_190146_0_];
+        if (ordinal < 0 || ordinal >= values().length) return null;
+        return values()[ordinal];
     }
 
-    public static ZombieType func_190144_b(int p_190144_0_)
+    public static ZombieType getVillagerByOrdinal(int ordinal)
     {
-        return p_190144_0_ >= 0 && p_190144_0_ < 5 ? func_190146_a(p_190144_0_ + 1) : VILLAGER_FARMER;
+        return ordinal >= 0 && ordinal < 5 ? getByOrdinal(ordinal + 1) : VILLAGER_FARMER;
     }
 
-    public TextComponentTranslation func_190145_d()
+    public TextComponentTranslation getName()
     {
-        return this.field_190164_i;
+        return this.name;
     }
 
-    public boolean func_190155_e()
+    public boolean isSunSensitive()
     {
         return this != HUSK;
     }
 
-    public SoundEvent func_190153_f()
+    public SoundEvent getAmbientSound()
     {
         switch (this)
         {
             case HUSK:
-                return SoundEvents.field_190022_cI;
+                return SoundEvents.ENTITY_HUSK_AMBIENT;
             case VILLAGER_FARMER:
             case VILLAGER_LIBRARIAN:
             case VILLAGER_PRIEST:
@@ -77,12 +77,12 @@ public enum ZombieType
         }
     }
 
-    public SoundEvent func_190152_g()
+    public SoundEvent getHurtSound()
     {
         switch (this)
         {
             case HUSK:
-                return SoundEvents.field_190024_cK;
+                return SoundEvents.ENTITY_HUSK_HURT;
             case VILLAGER_FARMER:
             case VILLAGER_LIBRARIAN:
             case VILLAGER_PRIEST:
@@ -94,12 +94,12 @@ public enum ZombieType
         }
     }
 
-    public SoundEvent func_190151_h()
+    public SoundEvent getDeathSound()
     {
         switch (this)
         {
             case HUSK:
-                return SoundEvents.field_190023_cJ;
+                return SoundEvents.ENTITY_HUSK_DEATH;
             case VILLAGER_FARMER:
             case VILLAGER_LIBRARIAN:
             case VILLAGER_PRIEST:
@@ -111,12 +111,12 @@ public enum ZombieType
         }
     }
 
-    public SoundEvent func_190149_i()
+    public SoundEvent getStepSound()
     {
         switch (this)
         {
             case HUSK:
-                return SoundEvents.field_190025_cL;
+                return SoundEvents.ENTITY_HUSK_STEP;
             case VILLAGER_FARMER:
             case VILLAGER_LIBRARIAN:
             case VILLAGER_PRIEST:

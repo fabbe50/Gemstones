@@ -196,7 +196,7 @@ public class TileEntitySkull extends TileEntity implements ITickable
         this.skullRotation = rotation;
     }
 
-    public void func_189668_a(Mirror p_189668_1_)
+    public void mirror(Mirror p_189668_1_)
     {
         if (this.worldObj != null && this.worldObj.getBlockState(this.getPos()).getValue(BlockSkull.FACING) == EnumFacing.UP)
         {
@@ -204,7 +204,7 @@ public class TileEntitySkull extends TileEntity implements ITickable
         }
     }
 
-    public void func_189667_a(Rotation p_189667_1_)
+    public void rotate(Rotation p_189667_1_)
     {
         if (this.worldObj != null && this.worldObj.getBlockState(this.getPos()).getValue(BlockSkull.FACING) == EnumFacing.UP)
         {

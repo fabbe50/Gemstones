@@ -13,8 +13,8 @@ public class RenderMinecartMobSpawner extends RenderMinecart<EntityMinecartMobSp
         super(renderManagerIn);
     }
 
-    protected void renderCartContents(EntityMinecartMobSpawner p_188319_1_, float p_188319_2_, IBlockState p_188319_3_)
+    protected void renderCartContents(EntityMinecartMobSpawner p_188319_1_, float partialTicks, IBlockState p_188319_3_)
     {
-        super.renderCartContents(p_188319_1_, p_188319_2_, p_188319_3_);
+        super.renderCartContents(p_188319_1_, partialTicks, p_188319_3_);
     }
 }

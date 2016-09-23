@@ -24,11 +24,11 @@ public class PlacementSettings
     @Nullable
     private StructureBoundingBox boundingBox;
     private boolean ignoreStructureBlock = true;
-    private float field_189951_h = 1.0F;
+    private float integrity = 1.0F;
     @Nullable
-    private Random field_189952_i;
+    private Random random;
     @Nullable
-    private Long field_189953_j;
+    private Long setSeed;
 
     public PlacementSettings copy()
     {
@@ -40,9 +40,9 @@ public class PlacementSettings
         placementsettings.chunk = this.chunk;
         placementsettings.boundingBox = this.boundingBox;
         placementsettings.ignoreStructureBlock = this.ignoreStructureBlock;
-        placementsettings.field_189951_h = this.field_189951_h;
-        placementsettings.field_189952_i = this.field_189952_i;
-        placementsettings.field_189953_j = this.field_189953_j;
+        placementsettings.integrity = this.integrity;
+        placementsettings.random = this.random;
+        placementsettings.setSeed = this.setSeed;
         return placementsettings;
     }
 
@@ -82,21 +82,21 @@ public class PlacementSettings
         return this;
     }
 
-    public PlacementSettings func_189949_a(@Nullable Long p_189949_1_)
+    public PlacementSettings setSeed(@Nullable Long p_189949_1_)
     {
-        this.field_189953_j = p_189949_1_;
+        this.setSeed = p_189949_1_;
         return this;
     }
 
-    public PlacementSettings func_189950_a(@Nullable Random p_189950_1_)
+    public PlacementSettings setRandom(@Nullable Random p_189950_1_)
     {
-        this.field_189952_i = p_189950_1_;
+        this.random = p_189950_1_;
         return this;
     }
 
-    public PlacementSettings func_189946_a(float p_189946_1_)
+    public PlacementSettings setIntegrity(float p_189946_1_)
     {
-        this.field_189951_h = p_189946_1_;
+        this.integrity = p_189946_1_;
         return this;
     }
 
@@ -116,15 +116,15 @@ public class PlacementSettings
         return this.rotation;
     }
 
-    public Random func_189947_a(@Nullable BlockPos p_189947_1_)
+    public Random getRandom(@Nullable BlockPos p_189947_1_)
     {
-        if (this.field_189952_i != null)
+        if (this.random != null)
         {
-            return this.field_189952_i;
+            return this.random;
         }
-        else if (this.field_189953_j != null)
+        else if (this.setSeed != null)
         {
-            return this.field_189953_j.longValue() == 0L ? new Random(System.currentTimeMillis()) : new Random(this.field_189953_j.longValue());
+            return this.setSeed.longValue() == 0L ? new Random(System.currentTimeMillis()) : new Random(this.setSeed.longValue());
         }
         else if (p_189947_1_ == null)
         {
@@ -138,9 +138,9 @@ public class PlacementSettings
         }
     }
 
-    public float func_189948_f()
+    public float getIntegrity()
     {
-        return this.field_189951_h;
+        return this.integrity;
     }
 
     public boolean getIgnoreEntities()

@@ -64,7 +64,7 @@ public class ServerListEntryLanDetected implements GuiListExtended.IGuiListEntry
     {
     }
 
-    public LanServerInfo func_189995_a()
+    public LanServerInfo getServerData()
     {
         return this.serverData;
     }

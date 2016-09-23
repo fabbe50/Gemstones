@@ -45,9 +45,9 @@ public class EntitySquid extends EntityWaterMob
         this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
     }
 
-    public static void func_189804_b(DataFixer p_189804_0_)
+    public static void registerFixesSquid(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189804_0_, "Squid");
+        EntityLiving.registerFixesMob(fixer, "Squid");
     }
 
     protected void initEntityAI()
@@ -195,7 +195,7 @@ public class EntitySquid extends EntityWaterMob
                 {
                     this.motionY += 0.05D * (double)(this.getActivePotionEffect(MobEffects.LEVITATION).getAmplifier() + 1) - this.motionY;
                 }
-                else if (!this.func_189652_ae())
+                else if (!this.hasNoGravity())
                 {
                     this.motionY -= 0.08D;
                 }

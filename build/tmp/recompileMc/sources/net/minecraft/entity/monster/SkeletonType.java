@@ -10,79 +10,79 @@ public enum SkeletonType
 {
     NORMAL("Skeleton", LootTableList.ENTITIES_SKELETON),
     WITHER("WitherSkeleton", LootTableList.ENTITIES_WITHER_SKELETON),
-    STRAY("Stray", LootTableList.field_189968_an);
+    STRAY("Stray", LootTableList.ENTITIES_STRAY);
 
-    private final TextComponentTranslation field_190140_d;
-    private final ResourceLocation field_190141_e;
+    private final TextComponentTranslation name;
+    private final ResourceLocation lootTable;
 
-    private SkeletonType(String p_i47153_3_, ResourceLocation p_i47153_4_)
+    private SkeletonType(String p_i47153_3_, ResourceLocation lootTableIn)
     {
-        this.field_190140_d = new TextComponentTranslation("entity." + p_i47153_3_ + ".name", new Object[0]);
-        this.field_190141_e = p_i47153_4_;
+        this.name = new TextComponentTranslation("entity." + p_i47153_3_ + ".name", new Object[0]);
+        this.lootTable = lootTableIn;
     }
 
-    public int func_190135_a()
+    public int getId()
     {
         return this.ordinal();
     }
 
-    public static SkeletonType func_190134_a(int p_190134_0_)
+    public static SkeletonType getByOrdinal(int ordinal)
     {
-        return values()[p_190134_0_];
+        return values()[ordinal];
     }
 
-    public ResourceLocation func_190129_c()
+    public ResourceLocation getLootTable()
     {
-        return this.field_190141_e;
+        return this.lootTable;
     }
 
-    public SoundEvent func_190136_d()
+    public SoundEvent getAmbientSound()
     {
         switch (this)
         {
             case WITHER:
-                return SoundEvents.field_190036_ha;
+                return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
             case STRAY:
-                return SoundEvents.field_190032_gu;
+                return SoundEvents.ENTITY_STRAY_AMBIENT;
             default:
                 return SoundEvents.ENTITY_SKELETON_AMBIENT;
         }
     }
 
-    public SoundEvent func_190132_e()
+    public SoundEvent getHurtSound()
     {
         switch (this)
         {
             case WITHER:
-                return SoundEvents.field_190038_hc;
+                return SoundEvents.ENTITY_WITHER_SKELETON_HURT;
             case STRAY:
-                return SoundEvents.field_190034_gw;
+                return SoundEvents.ENTITY_STRAY_HURT;
             default:
                 return SoundEvents.ENTITY_SKELETON_HURT;
         }
     }
 
-    public SoundEvent func_190133_f()
+    public SoundEvent getDeathSound()
     {
         switch (this)
         {
             case WITHER:
-                return SoundEvents.field_190037_hb;
+                return SoundEvents.ENTITY_WITHER_SKELETON_DEATH;
             case STRAY:
-                return SoundEvents.field_190033_gv;
+                return SoundEvents.ENTITY_STRAY_DEATH;
             default:
                 return SoundEvents.ENTITY_SKELETON_DEATH;
         }
     }
 
-    public SoundEvent func_190131_g()
+    public SoundEvent getStepSound()
     {
         switch (this)
         {
             case WITHER:
-                return SoundEvents.field_190039_hd;
+                return SoundEvents.ENTITY_WITHER_SKELETON_STEP;
             case STRAY:
-                return SoundEvents.field_190035_gx;
+                return SoundEvents.ENTITY_STRAY_STEP;
             default:
                 return SoundEvents.ENTITY_SKELETON_STEP;
         }

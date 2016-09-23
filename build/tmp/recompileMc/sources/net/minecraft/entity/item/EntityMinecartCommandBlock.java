@@ -106,10 +106,10 @@ public class EntityMinecartCommandBlock extends EntityMinecart
         super(worldIn, x, y, z);
     }
 
-    public static void func_189670_a(DataFixer p_189670_0_)
+    public static void registerFixesMinecartCommand(DataFixer fixer)
     {
-        EntityMinecart.func_189669_a(p_189670_0_, "MinecartCommandBlock");
-        p_189670_0_.registerWalker(FixTypes.ENTITY, new IDataWalker()
+        EntityMinecart.registerFixesMinecart(fixer, "MinecartCommandBlock");
+        fixer.registerWalker(FixTypes.ENTITY, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {

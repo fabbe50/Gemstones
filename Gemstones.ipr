@@ -72,7 +72,14 @@
       <CLASSES />
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/../TFICore/build/libs/TFICore-1.10.2-1.1.0-alpha21-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../../Resources/TFICore-1.10.2-1.1.0-alpha21-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="TFICore-1.10.2-1.1.0-alpha26-sources">
+      <CLASSES />
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/../../Resources/Gemstones/TFICore-1.10.2-1.1.0-alpha26-sources.jar!/" />
       </SOURCES>
     </library>
   </component>

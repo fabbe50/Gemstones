@@ -323,6 +323,9 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
     public abstract int getMaxRenderHeightMeta();
 
     /* BLOCK FUNCTIONS */
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {

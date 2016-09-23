@@ -52,14 +52,14 @@ public class BiomeProvider
     /**
      * Returns the biome generator
      */
-    public Biome getBiomeGenerator(BlockPos pos)
+    public Biome getBiome(BlockPos pos)
     {
-        return this.getBiomeGenerator(pos, (Biome)null);
+        return this.getBiome(pos, (Biome)null);
     }
 
-    public Biome getBiomeGenerator(BlockPos pos, Biome biomeGenBaseIn)
+    public Biome getBiome(BlockPos pos, Biome defaultBiome)
     {
-        return this.biomeCache.getBiome(pos.getX(), pos.getZ(), biomeGenBaseIn);
+        return this.biomeCache.getBiome(pos.getX(), pos.getZ(), defaultBiome);
     }
 
     /**
@@ -110,15 +110,15 @@ public class BiomeProvider
      * Gets biomes to use for the blocks and loads the other data like temperature and humidity onto the
      * WorldChunkManager.
      */
-    public Biome[] loadBlockGeneratorData(@Nullable Biome[] oldBiomeList, int x, int z, int width, int depth)
+    public Biome[] getBiomes(@Nullable Biome[] oldBiomeList, int x, int z, int width, int depth)
     {
-        return this.getBiomeGenAt(oldBiomeList, x, z, width, depth, true);
+        return this.getBiomes(oldBiomeList, x, z, width, depth, true);
     }
 
     /**
      * Gets a list of biomes for the specified blocks.
      */
-    public Biome[] getBiomeGenAt(@Nullable Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag)
+    public Biome[] getBiomes(@Nullable Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag)
     {
         IntCache.resetIntCache();
 

@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public final class ProjectileHelper
 {
-    public static RayTraceResult forwardsRaycast(Entity p_188802_0_, boolean p_188802_1_, boolean p_188802_2_, Entity p_188802_3_)
+    public static RayTraceResult forwardsRaycast(Entity p_188802_0_, boolean includeEntities, boolean p_188802_2_, Entity excludedEntity)
     {
         double d0 = p_188802_0_.posX;
         double d1 = p_188802_0_.posY;
@@ -23,7 +23,7 @@ public final class ProjectileHelper
         Vec3d vec3d1 = new Vec3d(d0 + d3, d1 + d4, d2 + d5);
         RayTraceResult raytraceresult = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
 
-        if (p_188802_1_)
+        if (includeEntities)
         {
             if (raytraceresult != null)
             {
@@ -38,7 +38,7 @@ public final class ProjectileHelper
             {
                 Entity entity1 = (Entity)list.get(i);
 
-                if (entity1.canBeCollidedWith() && (p_188802_2_ || !entity1.isEntityEqual(p_188802_3_)) && !entity1.noClip)
+                if (entity1.canBeCollidedWith() && (p_188802_2_ || !entity1.isEntityEqual(excludedEntity)) && !entity1.noClip)
                 {
                     AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().expandXyz(0.30000001192092896D);
                     RayTraceResult raytraceresult1 = axisalignedbb.calculateIntercept(vec3d, vec3d1);

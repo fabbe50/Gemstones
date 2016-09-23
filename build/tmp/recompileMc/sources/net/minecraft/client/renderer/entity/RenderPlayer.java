@@ -171,9 +171,9 @@ public class RenderPlayer extends RenderLivingBase<AbstractClientPlayer>
         GlStateManager.scale(0.9375F, 0.9375F, 0.9375F);
     }
 
-    protected void renderEntityName(AbstractClientPlayer entityIn, double x, double y, double z, String name, double p_188296_9_)
+    protected void renderEntityName(AbstractClientPlayer entityIn, double x, double y, double z, String name, double distanceSq)
     {
-        if (p_188296_9_ < 100.0D)
+        if (distanceSq < 100.0D)
         {
             Scoreboard scoreboard = entityIn.getWorldScoreboard();
             ScoreObjective scoreobjective = scoreboard.getObjectiveInDisplaySlot(2);
@@ -186,7 +186,7 @@ public class RenderPlayer extends RenderLivingBase<AbstractClientPlayer>
             }
         }
 
-        super.renderEntityName(entityIn, x, y, z, name, p_188296_9_);
+        super.renderEntityName(entityIn, x, y, z, name, distanceSq);
     }
 
     public void renderRightArm(AbstractClientPlayer clientPlayer)

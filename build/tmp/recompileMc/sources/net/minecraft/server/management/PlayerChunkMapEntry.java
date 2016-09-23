@@ -42,11 +42,11 @@ public class PlayerChunkMapEntry
     };
     private boolean loading = true;
 
-    public PlayerChunkMapEntry(PlayerChunkMap p_i1518_1_, int chunkX, int chunkZ)
+    public PlayerChunkMapEntry(PlayerChunkMap mapIn, int chunkX, int chunkZ)
     {
-        this.playerChunkMap = p_i1518_1_;
+        this.playerChunkMap = mapIn;
         this.pos = new ChunkPos(chunkX, chunkZ);
-        p_i1518_1_.getWorldServer().getChunkProvider().loadChunk(chunkX, chunkZ, this.loadedRunnable);
+        mapIn.getWorldServer().getChunkProvider().loadChunk(chunkX, chunkZ, this.loadedRunnable);
     }
 
     public ChunkPos getPos()

@@ -1270,7 +1270,7 @@ public class Chunk
 
         if (k == 255)
         {
-            Biome biome = provider.getBiomeGenerator(pos, Biomes.PLAINS);
+            Biome biome = provider.getBiome(pos, Biomes.PLAINS);
             k = Biome.getIdForBiome(biome);
             this.blockBiomeArray[j << 4 | i] = (byte)(k & 255);
         }

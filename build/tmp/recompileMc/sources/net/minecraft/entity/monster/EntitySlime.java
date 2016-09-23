@@ -85,9 +85,9 @@ public class EntitySlime extends EntityLiving implements IMob
         return ((Integer)this.dataManager.get(SLIME_SIZE)).intValue();
     }
 
-    public static void func_189758_c(DataFixer p_189758_0_)
+    public static void registerFixesSlime(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189758_0_, "Slime");
+        EntityLiving.registerFixesMob(fixer, "Slime");
     }
 
     /**
@@ -340,7 +340,7 @@ public class EntitySlime extends EntityLiving implements IMob
         {
             if (this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL)
             {
-                Biome biome = this.worldObj.getBiomeGenForCoords(blockpos);
+                Biome biome = this.worldObj.getBiome(blockpos);
 
                 if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() < this.worldObj.getCurrentMoonPhaseFactor() && this.worldObj.getLightFromNeighbors(new BlockPos(this)) <= this.rand.nextInt(8))
                 {

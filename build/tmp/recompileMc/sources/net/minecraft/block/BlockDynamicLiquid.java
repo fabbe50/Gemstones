@@ -255,7 +255,7 @@ public class BlockDynamicLiquid extends BlockLiquid
     private boolean isBlocked(World worldIn, BlockPos pos, IBlockState state)
     {
         Block block = worldIn.getBlockState(pos).getBlock();
-        return !(block instanceof BlockDoor) && block != Blocks.STANDING_SIGN && block != Blocks.LADDER && block != Blocks.REEDS ? (block.blockMaterial != Material.PORTAL && block.blockMaterial != Material.field_189963_J ? block.blockMaterial.blocksMovement() : true) : true;
+        return !(block instanceof BlockDoor) && block != Blocks.STANDING_SIGN && block != Blocks.LADDER && block != Blocks.REEDS ? (block.blockMaterial != Material.PORTAL && block.blockMaterial != Material.STRUCTURE_VOID ? block.blockMaterial.blocksMovement() : true) : true;
     }
 
     protected int checkAdjacentBlock(World worldIn, BlockPos pos, int currentMinLevel)
@@ -288,6 +288,9 @@ public class BlockDynamicLiquid extends BlockLiquid
         return material != this.blockMaterial && material != Material.LAVA && !this.isBlocked(worldIn, pos, state);
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         if (!this.checkForMixing(worldIn, pos, state))

@@ -132,9 +132,9 @@ public class EntityTippedArrow extends EntityArrow
         return ((Integer)this.dataManager.get(COLOR)).intValue();
     }
 
-    public static void func_189660_b(DataFixer p_189660_0_)
+    public static void registerFixesTippedArrow(DataFixer fixer)
     {
-        EntityArrow.func_189657_a(p_189660_0_, "TippedArrow");
+        EntityArrow.registerFixesArrow(fixer, "TippedArrow");
     }
 
     /**

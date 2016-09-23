@@ -46,9 +46,9 @@ public class TileEntitySign extends TileEntity
         return compound;
     }
 
-    protected void func_190201_b(World p_190201_1_)
+    protected void setWorldCreate(World worldIn)
     {
-        this.setWorldObj(p_190201_1_);
+        this.setWorldObj(worldIn);
     }
 
     public void readFromNBT(NBTTagCompound compound)

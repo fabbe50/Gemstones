@@ -433,7 +433,7 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener
      */
     protected void updateBiomesExplored()
     {
-        Biome biome = this.worldObj.getBiomeGenForCoords(new BlockPos(MathHelper.floor_double(this.posX), 0, MathHelper.floor_double(this.posZ)));
+        Biome biome = this.worldObj.getBiome(new BlockPos(MathHelper.floor_double(this.posX), 0, MathHelper.floor_double(this.posZ)));
         String s = biome.getBiomeName();
         JsonSerializableSet jsonserializableset = (JsonSerializableSet)this.getStatFile().getProgress(AchievementList.EXPLORE_ALL_BIOMES);
 
@@ -919,10 +919,10 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener
         }
     }
 
-    public void displayGuiCommandBlock(TileEntityCommandBlock p_184824_1_)
+    public void displayGuiCommandBlock(TileEntityCommandBlock commandBlock)
     {
-        p_184824_1_.setSendToClient(true);
-        this.sendTileEntityUpdate(p_184824_1_);
+        commandBlock.setSendToClient(true);
+        this.sendTileEntityUpdate(commandBlock);
     }
 
     /**

@@ -54,9 +54,9 @@ public class EntitySpectralArrow extends EntityArrow
         living.addPotionEffect(potioneffect);
     }
 
-    public static void func_189659_b(DataFixer p_189659_0_)
+    public static void registerFixesSpectralArrow(DataFixer fixer)
     {
-        EntityArrow.func_189657_a(p_189659_0_, "SpectralArrow");
+        EntityArrow.registerFixesArrow(fixer, "SpectralArrow");
     }
 
     /**

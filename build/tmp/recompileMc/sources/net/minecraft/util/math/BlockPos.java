@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 public class BlockPos extends Vec3i
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    /** The BlockPos with all coordinates 0 */
+    /** An immutable block pos with zero as all coordinates. */
     public static final BlockPos ORIGIN = new BlockPos(0, 0, 0);
     private static final int NUM_X_BITS = 1 + MathHelper.calculateLogBaseTwo(MathHelper.roundUpToPowerOfTwo(30000000));
     private static final int NUM_Z_BITS = NUM_X_BITS;
@@ -404,30 +404,30 @@ public class BlockPos extends Vec3i
                 return this;
             }
 
-            public BlockPos.MutableBlockPos setPos(double p_189532_1_, double p_189532_3_, double p_189532_5_)
+            public BlockPos.MutableBlockPos setPos(double xIn, double yIn, double zIn)
             {
-                return this.setPos(MathHelper.floor_double(p_189532_1_), MathHelper.floor_double(p_189532_3_), MathHelper.floor_double(p_189532_5_));
+                return this.setPos(MathHelper.floor_double(xIn), MathHelper.floor_double(yIn), MathHelper.floor_double(zIn));
             }
 
             @SideOnly(Side.CLIENT)
-            public BlockPos.MutableBlockPos setPos(Entity p_189535_1_)
+            public BlockPos.MutableBlockPos setPos(Entity entityIn)
             {
-                return this.setPos(p_189535_1_.posX, p_189535_1_.posY, p_189535_1_.posZ);
+                return this.setPos(entityIn.posX, entityIn.posY, entityIn.posZ);
             }
 
-            public BlockPos.MutableBlockPos setPos(Vec3i p_189533_1_)
+            public BlockPos.MutableBlockPos setPos(Vec3i vec)
             {
-                return this.setPos(p_189533_1_.getX(), p_189533_1_.getY(), p_189533_1_.getZ());
+                return this.setPos(vec.getX(), vec.getY(), vec.getZ());
             }
 
-            public BlockPos.MutableBlockPos move(EnumFacing p_189536_1_)
+            public BlockPos.MutableBlockPos move(EnumFacing facing)
             {
-                return this.move(p_189536_1_, 1);
+                return this.move(facing, 1);
             }
 
-            public BlockPos.MutableBlockPos move(EnumFacing p_189534_1_, int p_189534_2_)
+            public BlockPos.MutableBlockPos move(EnumFacing facing, int p_189534_2_)
             {
-                return this.setPos(this.x + p_189534_1_.getFrontOffsetX() * p_189534_2_, this.y + p_189534_1_.getFrontOffsetY() * p_189534_2_, this.z + p_189534_1_.getFrontOffsetZ() * p_189534_2_);
+                return this.setPos(this.x + facing.getFrontOffsetX() * p_189534_2_, this.y + facing.getFrontOffsetY() * p_189534_2_, this.z + facing.getFrontOffsetZ() * p_189534_2_);
             }
 
             public void setY(int yIn)
@@ -521,29 +521,29 @@ public class BlockPos extends Vec3i
             }
 
             @SideOnly(Side.CLIENT)
-            public BlockPos.PooledMutableBlockPos setPos(Entity p_189535_1_)
+            public BlockPos.PooledMutableBlockPos setPos(Entity entityIn)
             {
-                return (BlockPos.PooledMutableBlockPos)super.setPos(p_189535_1_);
+                return (BlockPos.PooledMutableBlockPos)super.setPos(entityIn);
             }
 
-            public BlockPos.PooledMutableBlockPos setPos(double p_189532_1_, double p_189532_3_, double p_189532_5_)
+            public BlockPos.PooledMutableBlockPos setPos(double xIn, double yIn, double zIn)
             {
-                return (BlockPos.PooledMutableBlockPos)super.setPos(p_189532_1_, p_189532_3_, p_189532_5_);
+                return (BlockPos.PooledMutableBlockPos)super.setPos(xIn, yIn, zIn);
             }
 
-            public BlockPos.PooledMutableBlockPos setPos(Vec3i p_189533_1_)
+            public BlockPos.PooledMutableBlockPos setPos(Vec3i vec)
             {
-                return (BlockPos.PooledMutableBlockPos)super.setPos(p_189533_1_);
+                return (BlockPos.PooledMutableBlockPos)super.setPos(vec);
             }
 
-            public BlockPos.PooledMutableBlockPos move(EnumFacing p_189536_1_)
+            public BlockPos.PooledMutableBlockPos move(EnumFacing facing)
             {
-                return (BlockPos.PooledMutableBlockPos)super.move(p_189536_1_);
+                return (BlockPos.PooledMutableBlockPos)super.move(facing);
             }
 
-            public BlockPos.PooledMutableBlockPos move(EnumFacing p_189534_1_, int p_189534_2_)
+            public BlockPos.PooledMutableBlockPos move(EnumFacing facing, int p_189534_2_)
             {
-                return (BlockPos.PooledMutableBlockPos)super.move(p_189534_1_, p_189534_2_);
+                return (BlockPos.PooledMutableBlockPos)super.move(facing, p_189534_2_);
             }
         }
 }

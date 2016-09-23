@@ -111,28 +111,28 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(SKELETON_VARIANT, Integer.valueOf(SkeletonType.NORMAL.func_190135_a()));
+        this.dataManager.register(SKELETON_VARIANT, Integer.valueOf(SkeletonType.NORMAL.getId()));
         this.dataManager.register(SWINGING_ARMS, Boolean.valueOf(false));
     }
 
     protected SoundEvent getAmbientSound()
     {
-        return this.func_189771_df().func_190136_d();
+        return this.getSkeletonType().getAmbientSound();
     }
 
     protected SoundEvent getHurtSound()
     {
-        return this.func_189771_df().func_190132_e();
+        return this.getSkeletonType().getHurtSound();
     }
 
     protected SoundEvent getDeathSound()
     {
-        return this.func_189771_df().func_190133_f();
+        return this.getSkeletonType().getDeathSound();
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        SoundEvent soundevent = this.func_189771_df().func_190131_g();
+        SoundEvent soundevent = this.getSkeletonType().getStepSound();
         this.playSound(soundevent, 0.15F, 1.0F);
     }
 
@@ -140,7 +140,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     {
         if (super.attackEntityAsMob(entityIn))
         {
-            if (this.func_189771_df() == SkeletonType.WITHER && entityIn instanceof EntityLivingBase)
+            if (this.getSkeletonType() == SkeletonType.WITHER && entityIn instanceof EntityLivingBase)
             {
                 ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
             }
@@ -202,7 +202,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
 
         if (this.worldObj.isRemote)
         {
-            this.func_189769_b(this.func_189771_df());
+            this.updateSize(this.getSkeletonType());
         }
 
         super.onLivingUpdate();
@@ -243,14 +243,14 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         else if (cause.getEntity() instanceof EntityCreeper && ((EntityCreeper)cause.getEntity()).getPowered() && ((EntityCreeper)cause.getEntity()).isAIEnabled())
         {
             ((EntityCreeper)cause.getEntity()).incrementDroppedSkulls();
-            this.entityDropItem(new ItemStack(Items.SKULL, 1, this.func_189771_df() == SkeletonType.WITHER ? 1 : 0), 0.0F);
+            this.entityDropItem(new ItemStack(Items.SKULL, 1, this.getSkeletonType() == SkeletonType.WITHER ? 1 : 0), 0.0F);
         }
     }
 
     @Nullable
     protected ResourceLocation getLootTable()
     {
-        return this.func_189771_df().func_190129_c();
+        return this.getSkeletonType().getLootTable();
     }
 
     /**
@@ -274,17 +274,17 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         if (this.worldObj.provider instanceof WorldProviderHell && this.getRNG().nextInt(5) > 0)
         {
             this.tasks.addTask(4, this.aiAttackOnCollide);
-            this.func_189768_a(SkeletonType.WITHER);
+            this.setSkeletonType(SkeletonType.WITHER);
             this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
             this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         }
         else
         {
-            Biome biome = this.worldObj.getBiomeGenForCoords(new BlockPos(this));
+            Biome biome = this.worldObj.getBiome(new BlockPos(this));
 
             if (biome instanceof BiomeSnow && this.worldObj.canSeeSky(new BlockPos(this)) && this.rand.nextInt(5) != 0)
             {
-                this.func_189768_a(SkeletonType.STRAY);
+                this.setSkeletonType(SkeletonType.STRAY);
             }
 
             this.tasks.addTask(4, this.aiArrowAttack);
@@ -340,8 +340,10 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
 
     /**
      * Attack the specified entity using a ranged attack.
+     *  
+     * @param distanceFactor How far the target is, normalized and clamped between 0.1 and 1.0
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float p_82196_2_)
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
     {
         EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.worldObj, this);
         double d0 = target.posX - this.posX;
@@ -352,7 +354,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, this);
         int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, this);
         DifficultyInstance difficultyinstance = this.worldObj.getDifficultyForLocation(new BlockPos(this));
-        entitytippedarrow.setDamage((double)(p_82196_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.getDifficulty().getDifficultyId() * 0.11F));
+        entitytippedarrow.setDamage((double)(distanceFactor * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.getDifficulty().getDifficultyId() * 0.11F));
 
         if (i > 0)
         {
@@ -364,7 +366,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
             entitytippedarrow.setKnockbackStrength(j);
         }
 
-        boolean flag = this.isBurning() && difficultyinstance.func_190083_c() && this.rand.nextBoolean() || this.func_189771_df() == SkeletonType.WITHER;
+        boolean flag = this.isBurning() && difficultyinstance.isHard() && this.rand.nextBoolean() || this.getSkeletonType() == SkeletonType.WITHER;
         flag = flag || EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, this) > 0;
 
         if (flag)
@@ -378,7 +380,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         {
             entitytippedarrow.setPotionEffect(itemstack);
         }
-        else if (this.func_189771_df() == SkeletonType.STRAY)
+        else if (this.getSkeletonType() == SkeletonType.STRAY)
         {
             entitytippedarrow.addEffect(new PotionEffect(MobEffects.SLOWNESS, 600));
         }
@@ -387,19 +389,19 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         this.worldObj.spawnEntityInWorld(entitytippedarrow);
     }
 
-    public SkeletonType func_189771_df()
+    public SkeletonType getSkeletonType()
     {
-        return SkeletonType.func_190134_a(((Integer)this.dataManager.get(SKELETON_VARIANT)).intValue());
+        return SkeletonType.getByOrdinal(((Integer)this.dataManager.get(SKELETON_VARIANT)).intValue());
     }
 
-    public void func_189768_a(SkeletonType p_189768_1_)
+    public void setSkeletonType(SkeletonType type)
     {
-        this.dataManager.set(SKELETON_VARIANT, Integer.valueOf(p_189768_1_.func_190135_a()));
-        this.isImmuneToFire = p_189768_1_ == SkeletonType.WITHER;
-        this.func_189769_b(p_189768_1_);
+        this.dataManager.set(SKELETON_VARIANT, Integer.valueOf(type.getId()));
+        this.isImmuneToFire = type == SkeletonType.WITHER;
+        this.updateSize(type);
     }
 
-    private void func_189769_b(SkeletonType p_189769_1_)
+    private void updateSize(SkeletonType p_189769_1_)
     {
         if (p_189769_1_ == SkeletonType.WITHER)
         {
@@ -411,9 +413,9 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         }
     }
 
-    public static void func_189772_b(DataFixer p_189772_0_)
+    public static void registerFixesSkeleton(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189772_0_, "Skeleton");
+        EntityLiving.registerFixesMob(fixer, "Skeleton");
     }
 
     /**
@@ -426,7 +428,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         if (compound.hasKey("SkeletonType", 99))
         {
             int i = compound.getByte("SkeletonType");
-            this.func_189768_a(SkeletonType.func_190134_a(i));
+            this.setSkeletonType(SkeletonType.getByOrdinal(i));
         }
 
         this.setCombatTask();
@@ -438,7 +440,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setByte("SkeletonType", (byte)this.func_189771_df().func_190135_a());
+        compound.setByte("SkeletonType", (byte)this.getSkeletonType().getId());
     }
 
     public void setItemStackToSlot(EntityEquipmentSlot slotIn, @Nullable ItemStack stack)
@@ -453,7 +455,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
 
     public float getEyeHeight()
     {
-        return this.func_189771_df() == SkeletonType.WITHER ? 2.1F : 1.74F;
+        return this.getSkeletonType() == SkeletonType.WITHER ? 2.1F : 1.74F;
     }
 
     /**

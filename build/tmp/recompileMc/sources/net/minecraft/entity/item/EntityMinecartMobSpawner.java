@@ -42,10 +42,10 @@ public class EntityMinecartMobSpawner extends EntityMinecart
         super(worldIn, x, y, z);
     }
 
-    public static void func_189672_a(DataFixer p_189672_0_)
+    public static void registerFixesMinecartMobSpawner(DataFixer fixer)
     {
-        func_189669_a(p_189672_0_, "MinecartSpawner");
-        p_189672_0_.registerWalker(FixTypes.ENTITY, new IDataWalker()
+        registerFixesMinecart(fixer, "MinecartSpawner");
+        fixer.registerWalker(FixTypes.ENTITY, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {

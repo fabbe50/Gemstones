@@ -60,7 +60,7 @@ public class InventoryEnderChest extends InventoryBasic
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Don't rename this method to canInteractWith due to conflicts with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {

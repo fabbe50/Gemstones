@@ -118,10 +118,10 @@ public final class ItemStack implements net.minecraftforge.common.capabilities.I
     {
     }
 
-    public static void func_189868_a(DataFixer p_189868_0_)
+    public static void registerFixes(DataFixer fixer)
     {
-        p_189868_0_.registerWalker(FixTypes.ITEM_INSTANCE, new BlockEntityTag());
-        p_189868_0_.registerWalker(FixTypes.ITEM_INSTANCE, new EntityTag());
+        fixer.registerWalker(FixTypes.ITEM_INSTANCE, new BlockEntityTag());
+        fixer.registerWalker(FixTypes.ITEM_INSTANCE, new EntityTag());
     }
 
     /**

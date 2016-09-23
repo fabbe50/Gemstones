@@ -73,7 +73,7 @@ public class MapGenScatteredFeature extends MapGenStructure
 
         if (i == k && j == l)
         {
-            Biome biome = this.worldObj.getBiomeProvider().getBiomeGenerator(new BlockPos(i * 16 + 8, 0, j * 16 + 8));
+            Biome biome = this.worldObj.getBiomeProvider().getBiome(new BlockPos(i * 16 + 8, 0, j * 16 + 8));
 
             if (biome == null)
             {
@@ -125,7 +125,7 @@ public class MapGenScatteredFeature extends MapGenStructure
 
             public Start(World worldIn, Random random, int chunkX, int chunkZ)
             {
-                this(worldIn, random, chunkX, chunkZ, worldIn.getBiomeGenForCoords(new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8)));
+                this(worldIn, random, chunkX, chunkZ, worldIn.getBiome(new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8)));
             }
 
             public Start(World worldIn, Random random, int chunkX, int chunkZ, Biome biomeIn)

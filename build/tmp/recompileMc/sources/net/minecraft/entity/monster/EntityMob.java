@@ -29,9 +29,9 @@ public abstract class EntityMob extends EntityCreature implements IMob
         this.experienceValue = 5;
     }
 
-    public static void func_189760_c(DataFixer p_189760_0_)
+    public static void registerFixesMonster(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189760_0_, "Monster");
+        EntityLiving.registerFixesMob(fixer, "Monster");
     }
 
     public SoundCategory getSoundCategory()

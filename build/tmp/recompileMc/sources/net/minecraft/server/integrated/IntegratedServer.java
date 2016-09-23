@@ -233,9 +233,9 @@ public class IntegratedServer extends MinecraftServer
     /**
      * par1 indicates if a log message should be output.
      */
-    public void saveAllWorlds(boolean dontLog)
+    public void saveAllWorlds(boolean isSilent)
     {
-        super.saveAllWorlds(dontLog);
+        super.saveAllWorlds(isSilent);
     }
 
     public File getDataDirectory()

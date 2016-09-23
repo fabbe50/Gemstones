@@ -205,9 +205,9 @@ public class EntityZombie extends EntityMob
 
     @Deprecated //Do not use, Replacement TBD
     @Nullable
-    public ZombieType func_189777_di()
+    public ZombieType getZombieType()
     {
-        return ZombieType.func_190146_a(((Integer)this.getDataManager().get(VILLAGER_TYPE)).intValue());
+        return ZombieType.getByOrdinal(((Integer)this.getDataManager().get(VILLAGER_TYPE)).intValue());
     }
 
     /**
@@ -226,10 +226,10 @@ public class EntityZombie extends EntityMob
     }
 
     @Deprecated //Use Forge version below
-    public void func_189778_a(ZombieType p_189778_1_)
+    public void setZombieType(ZombieType type)
     {
-        this.getDataManager().set(VILLAGER_TYPE, Integer.valueOf(p_189778_1_.func_190150_a()));
-        net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, p_189778_1_, p_189778_1_.func_190150_a());
+        this.getDataManager().set(VILLAGER_TYPE, Integer.valueOf(type.getId()));
+        net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, type, type.getId());
     }
 
     public void setVillagerType(@Nullable net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession type)
@@ -247,7 +247,7 @@ public class EntityZombie extends EntityMob
         }
         else if (VILLAGER_TYPE.equals(key))
         {
-            net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, ZombieType.func_190146_a(this.getDataManager().get(VILLAGER_TYPE)), this.getDataManager().get(VILLAGER_TYPE));
+            net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, ZombieType.getByOrdinal(this.getDataManager().get(VILLAGER_TYPE)), this.getDataManager().get(VILLAGER_TYPE));
         }
         else if (VILLAGER_TYPE_STR.equals(key))
         {
@@ -266,7 +266,7 @@ public class EntityZombie extends EntityMob
      */
     public void onLivingUpdate()
     {
-        if (this.worldObj.isDaytime() && !this.worldObj.isRemote && !this.isChild() && (this.func_189777_di() == null || this.func_189777_di().func_190155_e()))
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote && !this.isChild() && (this.getZombieType() == null || this.getZombieType().isSunSensitive()))
         {
             float f = this.getBrightness(1.0F);
             BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ);
@@ -400,7 +400,7 @@ public class EntityZombie extends EntityMob
                     entityIn.setFire(2 * (int)f);
                 }
 
-                if (this.func_189777_di() == ZombieType.HUSK && entityIn instanceof EntityLivingBase)
+                if (this.getZombieType() == ZombieType.HUSK && entityIn instanceof EntityLivingBase)
                 {
                     ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(MobEffects.HUNGER, 140 * (int)f));
                 }
@@ -412,25 +412,25 @@ public class EntityZombie extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        if (this.func_189777_di() == null) return SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT;
-        return this.func_189777_di().func_190153_f();
+        if (this.getZombieType() == null) return SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT;
+        return this.getZombieType().getAmbientSound();
     }
 
     protected SoundEvent getHurtSound()
     {
-        if (this.func_189777_di() == null) return SoundEvents.ENTITY_ZOMBIE_VILLAGER_HURT;
-        return this.func_189777_di().func_190152_g();
+        if (this.getZombieType() == null) return SoundEvents.ENTITY_ZOMBIE_VILLAGER_HURT;
+        return this.getZombieType().getHurtSound();
     }
 
     protected SoundEvent getDeathSound()
     {
-        if (this.func_189777_di() == null) return SoundEvents.ENTITY_ZOMBIE_VILLAGER_DEATH;
-        return this.func_189777_di().func_190151_h();
+        if (this.getZombieType() == null) return SoundEvents.ENTITY_ZOMBIE_VILLAGER_DEATH;
+        return this.getZombieType().getDeathSound();
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        SoundEvent soundevent = this.func_189777_di() == null ? SoundEvents.ENTITY_ZOMBIE_VILLAGER_STEP : this.func_189777_di().func_190149_i();
+        SoundEvent soundevent = this.getZombieType() == null ? SoundEvents.ENTITY_ZOMBIE_VILLAGER_STEP : this.getZombieType().getStepSound();
         this.playSound(soundevent, 0.15F, 1.0F);
     }
 
@@ -470,9 +470,9 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    public static void func_189779_d(DataFixer p_189779_0_)
+    public static void registerFixesZombie(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189779_0_, "Zombie");
+        EntityLiving.registerFixesMob(fixer, "Zombie");
     }
 
     /**
@@ -511,7 +511,7 @@ public class EntityZombie extends EntityMob
             {
                 int id = compound.getInteger("VillagerProfession") + 1;
                 this.getDataManager().set(VILLAGER_TYPE, id);
-                net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, ZombieType.func_190146_a(id), id);
+                net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, ZombieType.getByOrdinal(id), id);
             }
             else
             {
@@ -523,7 +523,7 @@ public class EntityZombie extends EntityMob
         {
             int id = compound.getInteger("ZombieType");
             this.getDataManager().set(VILLAGER_TYPE, id);
-            net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, ZombieType.func_190146_a(id), id);
+            net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, ZombieType.getByOrdinal(id), id);
         }
 
         String name = compound.getString("VillagerProfessionName");
@@ -615,11 +615,11 @@ public class EntityZombie extends EntityMob
         {
             EntityZombie.GroupData entityzombie$groupdata = (EntityZombie.GroupData)livingdata;
             boolean flag = false;
-            Biome biome = this.worldObj.getBiomeGenForCoords(new BlockPos(this));
+            Biome biome = this.worldObj.getBiome(new BlockPos(this));
 
             if (biome instanceof BiomeDesert && this.worldObj.canSeeSky(new BlockPos(this)) && this.rand.nextInt(5) != 0)
             {
-                this.func_189778_a(ZombieType.HUSK);
+                this.setZombieType(ZombieType.HUSK);
                 flag = true;
             }
 
@@ -885,7 +885,7 @@ public class EntityZombie extends EntityMob
     {
         if (this.hasCustomName()) return this.getCustomNameTag();
         if (this.getVillagerTypeForge() != null) return "entity.Zombie.name";
-        return this.func_189777_di().func_190145_d().getUnformattedText();
+        return this.getZombieType().getName().getUnformattedText();
     }
 
     class GroupData implements IEntityLivingData

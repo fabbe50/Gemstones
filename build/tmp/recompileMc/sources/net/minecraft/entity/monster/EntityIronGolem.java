@@ -168,9 +168,9 @@ public class EntityIronGolem extends EntityGolem
         return this.isPlayerCreated() && EntityPlayer.class.isAssignableFrom(cls) ? false : (cls == EntityCreeper.class ? false : super.canAttackClass(cls));
     }
 
-    public static void func_189784_b(DataFixer p_189784_0_)
+    public static void registerFixesIronGolem(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189784_0_, "VillagerGolem");
+        EntityLiving.registerFixesMob(fixer, "VillagerGolem");
     }
 
     /**

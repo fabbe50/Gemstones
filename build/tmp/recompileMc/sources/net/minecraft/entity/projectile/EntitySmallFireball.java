@@ -29,9 +29,9 @@ public class EntitySmallFireball extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public static void func_189745_a(DataFixer p_189745_0_)
+    public static void registerFixesSmallFireball(DataFixer fixer)
     {
-        EntityFireball.func_189743_a(p_189745_0_, "SmallFireball");
+        EntityFireball.registerFixesFireball(fixer, "SmallFireball");
     }
 
     /**

@@ -201,20 +201,20 @@ public class ScoreboardSaveData extends WorldSavedData
         }
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound p_189551_1_)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         if (this.theScoreboard == null)
         {
             LOGGER.warn("Tried to save scoreboard without having a scoreboard...");
-            return p_189551_1_;
+            return compound;
         }
         else
         {
-            p_189551_1_.setTag("Objectives", this.objectivesToNbt());
-            p_189551_1_.setTag("PlayerScores", this.scoresToNbt());
-            p_189551_1_.setTag("Teams", this.teamsToNbt());
-            this.fillInDisplaySlots(p_189551_1_);
-            return p_189551_1_;
+            compound.setTag("Objectives", this.objectivesToNbt());
+            compound.setTag("PlayerScores", this.scoresToNbt());
+            compound.setTag("Teams", this.teamsToNbt());
+            this.fillInDisplaySlots(compound);
+            return compound;
         }
     }
 

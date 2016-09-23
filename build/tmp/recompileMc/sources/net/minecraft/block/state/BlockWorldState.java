@@ -22,6 +22,11 @@ public class BlockWorldState
         this.forceLoad = forceLoadIn;
     }
 
+    /**
+     * Gets the block state as currently held, or (if it has not gotten it from the world) loads it from the world.
+     * This will only look up the state from the world if {@link #field_181628_c} is true or the block position is
+     * loaded.
+     */
     public IBlockState getBlockState()
     {
         if (this.state == null && (this.forceLoad || this.world.isBlockLoaded(this.pos)))
@@ -32,6 +37,9 @@ public class BlockWorldState
         return this.state;
     }
 
+    /**
+     * Gets the tile entity as currently held, or (if it has not gotten it from the world) loads it from the world.
+     */
     @Nullable
     public TileEntity getTileEntity()
     {

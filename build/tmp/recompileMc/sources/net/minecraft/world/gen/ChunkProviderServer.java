@@ -56,7 +56,7 @@ public class ChunkProviderServer implements IChunkProvider
     {
         if (this.worldObj.provider.canDropChunk(chunkIn.xPosition, chunkIn.zPosition))
         {
-            this.droppedChunksSet.add(Long.valueOf(ChunkPos.chunkXZ2Int(chunkIn.xPosition, chunkIn.zPosition)));
+            this.droppedChunksSet.add(Long.valueOf(ChunkPos.asLong(chunkIn.xPosition, chunkIn.zPosition)));
             chunkIn.unloaded = true;
         }
     }
@@ -75,7 +75,7 @@ public class ChunkProviderServer implements IChunkProvider
     @Nullable
     public Chunk getLoadedChunk(int x, int z)
     {
-        long i = ChunkPos.chunkXZ2Int(x, z);
+        long i = ChunkPos.asLong(x, z);
         Chunk chunk = (Chunk)this.id2ChunkMap.get(i);
 
         if (chunk != null)
@@ -98,7 +98,7 @@ public class ChunkProviderServer implements IChunkProvider
         Chunk chunk = this.getLoadedChunk(x, z);
         if (chunk == null)
         {
-            long pos = ChunkPos.chunkXZ2Int(x, z);
+            long pos = ChunkPos.asLong(x, z);
             chunk = net.minecraftforge.common.ForgeChunkManager.fetchDormantChunk(pos, this.worldObj);
             if (chunk != null || !(this.chunkLoader instanceof net.minecraft.world.chunk.storage.AnvilChunkLoader))
             {
@@ -107,7 +107,7 @@ public class ChunkProviderServer implements IChunkProvider
 
                 if (chunk != null)
                 {
-                this.id2ChunkMap.put(ChunkPos.chunkXZ2Int(x, z), chunk);
+                this.id2ChunkMap.put(ChunkPos.asLong(x, z), chunk);
                 chunk.onChunkLoad();
                 chunk.populateChunk(this, this.chunkGenerator);
                 }
@@ -139,7 +139,7 @@ public class ChunkProviderServer implements IChunkProvider
 
         if (chunk == null)
         {
-            long i = ChunkPos.chunkXZ2Int(x, z);
+            long i = ChunkPos.asLong(x, z);
 
             try
             {
@@ -264,7 +264,7 @@ public class ChunkProviderServer implements IChunkProvider
             {
                 for (ChunkPos forced : this.worldObj.getPersistentChunks().keySet())
                 {
-                    this.droppedChunksSet.remove(ChunkPos.chunkXZ2Int(forced.chunkXPos, forced.chunkZPos));
+                    this.droppedChunksSet.remove(ChunkPos.asLong(forced.chunkXPos, forced.chunkZPos));
                 }
 
                 Iterator<Long> iterator = this.droppedChunksSet.iterator();
@@ -281,7 +281,7 @@ public class ChunkProviderServer implements IChunkProvider
                         this.saveChunkExtraData(chunk);
                         this.id2ChunkMap.remove(olong);
                         ++i;
-                        net.minecraftforge.common.ForgeChunkManager.putDormantChunk(ChunkPos.chunkXZ2Int(chunk.xPosition, chunk.zPosition), chunk);
+                        net.minecraftforge.common.ForgeChunkManager.putDormantChunk(ChunkPos.asLong(chunk.xPosition, chunk.zPosition), chunk);
                         if (id2ChunkMap.size() == 0 && net.minecraftforge.common.ForgeChunkManager.getPersistentChunksFor(this.worldObj).size() == 0 && !this.worldObj.provider.getDimensionType().shouldLoadSpawn()){
                             net.minecraftforge.common.DimensionManager.unloadWorld(this.worldObj.provider.getDimension());
                             break;
@@ -333,6 +333,6 @@ public class ChunkProviderServer implements IChunkProvider
      */
     public boolean chunkExists(int x, int z)
     {
-        return this.id2ChunkMap.containsKey(ChunkPos.chunkXZ2Int(x, z));
+        return this.id2ChunkMap.containsKey(ChunkPos.asLong(x, z));
     }
 }

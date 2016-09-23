@@ -397,14 +397,14 @@ public abstract class EntityLiving extends EntityLivingBase
         }
     }
 
-    public static void func_189752_a(DataFixer p_189752_0_, String p_189752_1_)
+    public static void registerFixesMob(DataFixer fixer, String name)
     {
-        p_189752_0_.registerWalker(FixTypes.ENTITY, new ItemStackDataLists(p_189752_1_, new String[] {"ArmorItems", "HandItems"}));
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackDataLists(name, new String[] {"ArmorItems", "HandItems"}));
     }
 
-    public static void func_189753_a(DataFixer p_189753_0_)
+    public static void registerFixesMob(DataFixer fixer)
     {
-        func_189752_a(p_189753_0_, "Mob");
+        registerFixesMob(fixer, "Mob");
     }
 
     /**
@@ -943,7 +943,7 @@ public abstract class EntityLiving extends EntityLivingBase
     public boolean getCanSpawnHere()
     {
         IBlockState iblockstate = this.worldObj.getBlockState((new BlockPos(this)).down());
-        return iblockstate.func_189884_a(this);
+        return iblockstate.canEntitySpawn(this);
     }
 
     /**

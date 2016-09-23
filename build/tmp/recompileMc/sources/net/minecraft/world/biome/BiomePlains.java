@@ -18,7 +18,7 @@ public class BiomePlains extends Biome
         this.sunflowers = p_i46699_1_;
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityHorse.class, 5, 2, 6));
         this.theBiomeDecorator.treesPerChunk = 0;
-        this.theBiomeDecorator.field_189870_A = 0.05F;
+        this.theBiomeDecorator.extraTreeChance = 0.05F;
         this.theBiomeDecorator.flowersPerChunk = 4;
         this.theBiomeDecorator.grassPerChunk = 10;
     }

@@ -265,7 +265,7 @@ public abstract class CommandBlockBaseLogic implements ICommandSender
 
     public boolean tryOpenEditCommandBlock(EntityPlayer playerIn)
     {
-        if (!playerIn.func_189808_dh())
+        if (!playerIn.canUseCommandBlock())
         {
             return false;
         }

@@ -27,6 +27,9 @@ public class BlockFalling extends Block
         super(materialIn);
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
@@ -125,7 +128,7 @@ public class BlockFalling extends Block
     }
 
     @SideOnly(Side.CLIENT)
-    public int func_189876_x(IBlockState p_189876_1_)
+    public int getDustColor(IBlockState p_189876_1_)
     {
         return -16777216;
     }

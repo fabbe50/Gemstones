@@ -66,11 +66,11 @@ public class ChunkCache implements IBlockAccess
     @Nullable
     public TileEntity getTileEntity(BlockPos pos)
     {
-        return this.func_190300_a(pos, Chunk.EnumCreateEntityType.IMMEDIATE);
+        return this.getTileEntity(pos, Chunk.EnumCreateEntityType.IMMEDIATE);
     }
 
     @Nullable
-    public TileEntity func_190300_a(BlockPos p_190300_1_, Chunk.EnumCreateEntityType p_190300_2_)
+    public TileEntity getTileEntity(BlockPos p_190300_1_, Chunk.EnumCreateEntityType p_190300_2_)
     {
         int i = (p_190300_1_.getX() >> 4) - this.chunkX;
         int j = (p_190300_1_.getZ() >> 4) - this.chunkZ;
@@ -115,7 +115,7 @@ public class ChunkCache implements IBlockAccess
     }
 
     @SideOnly(Side.CLIENT)
-    public Biome getBiomeGenForCoords(BlockPos pos)
+    public Biome getBiome(BlockPos pos)
     {
         int i = (pos.getX() >> 4) - this.chunkX;
         int j = (pos.getZ() >> 4) - this.chunkZ;

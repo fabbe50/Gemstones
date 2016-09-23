@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "normal": [{
+      "textures": {
+        "all": "levingemstones:blocks/crumbleBlock_modif"
+      },
+      "model": "levingemstones:crumbleCobble"
+    }]
+  }
+}
+

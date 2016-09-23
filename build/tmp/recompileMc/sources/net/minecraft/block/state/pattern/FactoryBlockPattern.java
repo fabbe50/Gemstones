@@ -26,6 +26,10 @@ public class FactoryBlockPattern
         this.symbolMap.put(' ', Predicates.<BlockWorldState>alwaysTrue());
     }
 
+    /**
+     * Adds a single aisle to this pattern, going in the z axis. (so multiple calls to this will increase the z-size by
+     * 1)
+     */
     public FactoryBlockPattern aisle(String... aisle)
     {
         if (!ArrayUtils.isEmpty((Object[])aisle) && !StringUtils.isEmpty(aisle[0]))

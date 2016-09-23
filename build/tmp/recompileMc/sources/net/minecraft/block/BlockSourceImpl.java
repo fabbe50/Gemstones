@@ -42,7 +42,11 @@ public class BlockSourceImpl implements IBlockSource
         return this.pos;
     }
 
-    public IBlockState func_189992_e()
+    /**
+     * Gets the block state of this position and returns it. 
+     *  @return Block state in this position
+     */
+    public IBlockState getBlockState()
     {
         return this.worldObj.getBlockState(this.pos);
     }

@@ -6,7 +6,7 @@ import net.minecraft.util.datafix.IFixableData;
 
 public class CookedFishIDTypo implements IFixableData
 {
-    private static final ResourceLocation field_190050_a = new ResourceLocation("cooked_fished");
+    private static final ResourceLocation WRONG = new ResourceLocation("cooked_fished");
 
     public int getFixVersion()
     {
@@ -15,7 +15,7 @@ public class CookedFishIDTypo implements IFixableData
 
     public NBTTagCompound fixTagCompound(NBTTagCompound compound)
     {
-        if (compound.hasKey("id", 8) && field_190050_a.equals(new ResourceLocation(compound.getString("id"))))
+        if (compound.hasKey("id", 8) && WRONG.equals(new ResourceLocation(compound.getString("id"))))
         {
             compound.setString("id", "minecraft:cooked_fish");
         }

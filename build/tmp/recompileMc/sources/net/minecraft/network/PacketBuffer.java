@@ -66,13 +66,13 @@ public class PacketBuffer extends ByteBuf
         return this.readByteArray(this.readableBytes());
     }
 
-    public byte[] readByteArray(int p_189425_1_)
+    public byte[] readByteArray(int maxLength)
     {
         int i = this.readVarIntFromBuffer();
 
-        if (i > p_189425_1_)
+        if (i > maxLength)
         {
-            throw new DecoderException("ByteArray with size " + i + " is bigger than allowed " + p_189425_1_);
+            throw new DecoderException("ByteArray with size " + i + " is bigger than allowed " + maxLength);
         }
         else
         {
@@ -102,13 +102,13 @@ public class PacketBuffer extends ByteBuf
         return this.readVarIntArray(this.readableBytes());
     }
 
-    public int[] readVarIntArray(int p_189424_1_)
+    public int[] readVarIntArray(int maxLength)
     {
         int i = this.readVarIntFromBuffer();
 
-        if (i > p_189424_1_)
+        if (i > maxLength)
         {
-            throw new DecoderException("VarIntArray with size " + i + " is bigger than allowed " + p_189424_1_);
+            throw new DecoderException("VarIntArray with size " + i + " is bigger than allowed " + maxLength);
         }
         else
         {

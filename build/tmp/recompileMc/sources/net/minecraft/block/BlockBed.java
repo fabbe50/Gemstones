@@ -60,7 +60,7 @@ public class BlockBed extends BlockHorizontal
                 }
             }
 
-            if (worldIn.provider.canRespawnHere() && worldIn.getBiomeGenForCoords(pos) != Biomes.HELL)
+            if (worldIn.provider.canRespawnHere() && worldIn.getBiome(pos) != Biomes.HELL)
             {
                 if (((Boolean)state.getValue(OCCUPIED)).booleanValue())
                 {
@@ -119,7 +119,7 @@ public class BlockBed extends BlockHorizontal
     {
         for (EntityPlayer entityplayer : worldIn.playerEntities)
         {
-            if (entityplayer.isPlayerSleeping() && entityplayer.playerLocation.equals(pos))
+            if (entityplayer.isPlayerSleeping() && entityplayer.bedLocation.equals(pos))
             {
                 return entityplayer;
             }

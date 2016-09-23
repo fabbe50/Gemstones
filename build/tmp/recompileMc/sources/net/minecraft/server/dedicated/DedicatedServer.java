@@ -48,7 +48,7 @@ import org.apache.logging.log4j.Logger;
 public class DedicatedServer extends MinecraftServer implements IServer
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Pattern field_189647_l = Pattern.compile("^[a-fA-F0-9]{40}$");
+    private static final Pattern RESOURCE_PACK_SHA1_PATTERN = Pattern.compile("^[a-fA-F0-9]{40}$");
     public final List<PendingCommand> pendingCommandList = Collections.<PendingCommand>synchronizedList(Lists.<PendingCommand>newArrayList());
     private RConThreadQuery theRConThreadQuery;
     private final RConConsoleSource rconConsoleSource = new RConConsoleSource(this);
@@ -316,7 +316,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
 
         String s = this.settings.getStringProperty("resource-pack-sha1", "");
 
-        if (!s.isEmpty() && !field_189647_l.matcher(s).matches())
+        if (!s.isEmpty() && !RESOURCE_PACK_SHA1_PATTERN.matcher(s).matches())
         {
             LOGGER.warn("Invalid sha1 for ressource-pack-sha1");
         }

@@ -14,7 +14,11 @@ public interface IBlockSource extends ILocatableSource
 
     BlockPos getBlockPos();
 
-    IBlockState func_189992_e();
+    /**
+     * Gets the block state of this position and returns it. 
+     *  @return Block state in this position
+     */
+    IBlockState getBlockState();
 
     <T extends TileEntity> T getBlockTileEntity();
 }

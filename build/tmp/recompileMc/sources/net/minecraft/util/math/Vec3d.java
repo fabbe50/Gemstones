@@ -114,11 +114,11 @@ public class Vec3d
         return d0 * d0 + d1 * d1 + d2 * d2;
     }
 
-    public double squareDistanceTo(double p_186679_1_, double p_186679_3_, double p_186679_5_)
+    public double squareDistanceTo(double xIn, double yIn, double zIn)
     {
-        double d0 = p_186679_1_ - this.xCoord;
-        double d1 = p_186679_3_ - this.yCoord;
-        double d2 = p_186679_5_ - this.zCoord;
+        double d0 = xIn - this.xCoord;
+        double d1 = yIn - this.yCoord;
+        double d2 = zIn - this.zCoord;
         return d0 * d0 + d1 * d1 + d2 * d2;
     }
 
@@ -135,7 +135,7 @@ public class Vec3d
         return (double)MathHelper.sqrt_double(this.xCoord * this.xCoord + this.yCoord * this.yCoord + this.zCoord * this.zCoord);
     }
 
-    public double func_189985_c()
+    public double lengthSquared()
     {
         return this.xCoord * this.xCoord + this.yCoord * this.yCoord + this.zCoord * this.zCoord;
     }
@@ -259,12 +259,21 @@ public class Vec3d
         return new Vec3d(d0, d1, d2);
     }
 
-    public static Vec3d func_189984_a(Vec2f p_189984_0_)
+    /**
+     * returns a Vec3d from given pitch and yaw degrees as Vec2f
+     */
+    public static Vec3d fromPitchYawVector(Vec2f p_189984_0_)
     {
-        return func_189986_a(p_189984_0_.field_189982_i, p_189984_0_.field_189983_j);
+        /**
+         * returns a Vec3d from given pitch and yaw degrees
+         */
+        return fromPitchYaw(p_189984_0_.x, p_189984_0_.y);
     }
 
-    public static Vec3d func_189986_a(float p_189986_0_, float p_189986_1_)
+    /**
+     * returns a Vec3d from given pitch and yaw degrees
+     */
+    public static Vec3d fromPitchYaw(float p_189986_0_, float p_189986_1_)
     {
         float f = MathHelper.cos(-p_189986_1_ * 0.017453292F - (float)Math.PI);
         float f1 = MathHelper.sin(-p_189986_1_ * 0.017453292F - (float)Math.PI);

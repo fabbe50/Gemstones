@@ -19,7 +19,7 @@ public abstract class WorldSavedData implements net.minecraftforge.common.util.I
      */
     public abstract void readFromNBT(NBTTagCompound nbt);
 
-    public abstract NBTTagCompound writeToNBT(NBTTagCompound p_189551_1_);
+    public abstract NBTTagCompound writeToNBT(NBTTagCompound compound);
 
     /**
      * Marks this MapDataBase dirty, to be saved to disk when the level next saves.

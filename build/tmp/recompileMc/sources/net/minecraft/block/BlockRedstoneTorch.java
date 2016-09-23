@@ -76,6 +76,9 @@ public class BlockRedstoneTorch extends BlockTorch
         return 2;
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         if (this.isOn)
@@ -87,6 +90,9 @@ public class BlockRedstoneTorch extends BlockTorch
         }
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         if (this.isOn)

@@ -125,6 +125,9 @@ public class BlockPistonBase extends BlockDirectional
         }
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         if (!worldIn.isRemote && worldIn.getTileEntity(pos) == null)
@@ -195,9 +198,6 @@ public class BlockPistonBase extends BlockDirectional
      * changes to the world, like pistons replacing the block with an extended base. On the client, the update may
      * involve replacing tile entities, playing sounds, or performing other visual actions to reflect the server side
      * changes.
-     *  
-     * @param state The block state retrieved from the block position prior to this method being invoked
-     * @param pos The position of the block event. Can be used to retrieve tile entities.
      */
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
     {

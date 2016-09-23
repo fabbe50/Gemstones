@@ -107,17 +107,17 @@ public class CommandSpreadPlayers extends CommandBase
         }
     }
 
-    private void spread(ICommandSender sender, List<Entity> p_110669_2_, CommandSpreadPlayers.Position p_110669_3_, double spreadDistance, double maxRange, World worldIn, boolean respectTeams) throws CommandException
+    private void spread(ICommandSender sender, List<Entity> p_110669_2_, CommandSpreadPlayers.Position pos, double spreadDistance, double maxRange, World worldIn, boolean respectTeams) throws CommandException
     {
         Random random = new Random();
-        double d0 = p_110669_3_.x - maxRange;
-        double d1 = p_110669_3_.z - maxRange;
-        double d2 = p_110669_3_.x + maxRange;
-        double d3 = p_110669_3_.z + maxRange;
+        double d0 = pos.x - maxRange;
+        double d1 = pos.z - maxRange;
+        double d2 = pos.x + maxRange;
+        double d3 = pos.z + maxRange;
         CommandSpreadPlayers.Position[] acommandspreadplayers$position = this.createInitialPositions(random, respectTeams ? this.getNumberOfTeams(p_110669_2_) : p_110669_2_.size(), d0, d1, d2, d3);
-        int i = this.spreadPositions(p_110669_3_, spreadDistance, worldIn, random, d0, d1, d2, d3, acommandspreadplayers$position, respectTeams);
+        int i = this.spreadPositions(pos, spreadDistance, worldIn, random, d0, d1, d2, d3, acommandspreadplayers$position, respectTeams);
         double d4 = this.setPlayerPositions(p_110669_2_, worldIn, acommandspreadplayers$position, respectTeams);
-        notifyCommandListener(sender, this, "commands.spreadplayers.success." + (respectTeams ? "teams" : "players"), new Object[] {Integer.valueOf(acommandspreadplayers$position.length), Double.valueOf(p_110669_3_.x), Double.valueOf(p_110669_3_.z)});
+        notifyCommandListener(sender, this, "commands.spreadplayers.success." + (respectTeams ? "teams" : "players"), new Object[] {Integer.valueOf(acommandspreadplayers$position.length), Double.valueOf(pos.x), Double.valueOf(pos.z)});
 
         if (acommandspreadplayers$position.length > 1)
         {
@@ -144,7 +144,7 @@ public class CommandSpreadPlayers extends CommandBase
         return set.size();
     }
 
-    private int spreadPositions(CommandSpreadPlayers.Position p_110668_1_, double p_110668_2_, World worldIn, Random p_110668_5_, double p_110668_6_, double p_110668_8_, double p_110668_10_, double p_110668_12_, CommandSpreadPlayers.Position[] p_110668_14_, boolean p_110668_15_) throws CommandException
+    private int spreadPositions(CommandSpreadPlayers.Position p_110668_1_, double p_110668_2_, World worldIn, Random random, double minX, double minZ, double maxX, double maxZ, CommandSpreadPlayers.Position[] p_110668_14_, boolean respectTeams) throws CommandException
     {
         boolean flag = true;
         double d0 = 3.4028234663852886E38D;
@@ -191,13 +191,13 @@ public class CommandSpreadPlayers extends CommandBase
                     }
                     else
                     {
-                        commandspreadplayers$position.randomize(p_110668_5_, p_110668_6_, p_110668_8_, p_110668_10_, p_110668_12_);
+                        commandspreadplayers$position.randomize(random, minX, minZ, maxX, maxZ);
                     }
 
                     flag = true;
                 }
 
-                if (commandspreadplayers$position.clamp(p_110668_6_, p_110668_8_, p_110668_10_, p_110668_12_))
+                if (commandspreadplayers$position.clamp(minX, minZ, maxX, maxZ))
                 {
                     flag = true;
                 }
@@ -209,7 +209,7 @@ public class CommandSpreadPlayers extends CommandBase
                 {
                     if (!commandspreadplayers$position3.isSafe(worldIn))
                     {
-                        commandspreadplayers$position3.randomize(p_110668_5_, p_110668_6_, p_110668_8_, p_110668_10_, p_110668_12_);
+                        commandspreadplayers$position3.randomize(random, minX, minZ, maxX, maxZ);
                         flag = true;
                     }
                 }
@@ -218,7 +218,7 @@ public class CommandSpreadPlayers extends CommandBase
 
         if (i >= 10000)
         {
-            throw new CommandException("commands.spreadplayers.failure." + (p_110668_15_ ? "teams" : "players"), new Object[] {Integer.valueOf(p_110668_14_.length), Double.valueOf(p_110668_1_.x), Double.valueOf(p_110668_1_.z), String.format("%.2f", new Object[]{Double.valueOf(d0)})});
+            throw new CommandException("commands.spreadplayers.failure." + (respectTeams ? "teams" : "players"), new Object[] {Integer.valueOf(p_110668_14_.length), Double.valueOf(p_110668_1_.x), Double.valueOf(p_110668_1_.z), String.format("%.2f", new Object[]{Double.valueOf(d0)})});
         }
         else
         {
@@ -306,10 +306,10 @@ public class CommandSpreadPlayers extends CommandBase
                 this.z = zIn;
             }
 
-            double dist(CommandSpreadPlayers.Position p_111099_1_)
+            double dist(CommandSpreadPlayers.Position pos)
             {
-                double d0 = this.x - p_111099_1_.x;
-                double d1 = this.z - p_111099_1_.z;
+                double d0 = this.x - pos.x;
+                double d1 = this.z - pos.z;
                 return Math.sqrt(d0 * d0 + d1 * d1);
             }
 
@@ -325,10 +325,10 @@ public class CommandSpreadPlayers extends CommandBase
                 return MathHelper.sqrt_double(this.x * this.x + this.z * this.z);
             }
 
-            public void moveAway(CommandSpreadPlayers.Position p_111094_1_)
+            public void moveAway(CommandSpreadPlayers.Position pos)
             {
-                this.x -= p_111094_1_.x;
-                this.z -= p_111094_1_.z;
+                this.x -= pos.x;
+                this.z -= pos.z;
             }
 
             public boolean clamp(double p_111093_1_, double p_111093_3_, double p_111093_5_, double p_111093_7_)

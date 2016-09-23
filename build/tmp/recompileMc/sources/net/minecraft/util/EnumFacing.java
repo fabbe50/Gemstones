@@ -256,9 +256,9 @@ public enum EnumFacing implements IStringSerializable
     /**
      * Get a Facing by it's horizontal index (0-3). The order is S-W-N-E.
      */
-    public static EnumFacing getHorizontal(int p_176731_0_)
+    public static EnumFacing getHorizontal(int horizontalIndexIn)
     {
-        return HORIZONTALS[MathHelper.abs_int(p_176731_0_ % HORIZONTALS.length)];
+        return HORIZONTALS[MathHelper.abs_int(horizontalIndexIn % HORIZONTALS.length)];
     }
 
     /**

@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 
 public class StructureMineshaftStart extends StructureStart
 {
-    private MapGenMineshaft.Type field_189908_c;
+    private MapGenMineshaft.Type mineShaftType;
 
     public StructureMineshaftStart()
     {
@@ -14,8 +14,8 @@ public class StructureMineshaftStart extends StructureStart
     public StructureMineshaftStart(World p_i47149_1_, Random p_i47149_2_, int p_i47149_3_, int p_i47149_4_, MapGenMineshaft.Type p_i47149_5_)
     {
         super(p_i47149_3_, p_i47149_4_);
-        this.field_189908_c = p_i47149_5_;
-        StructureMineshaftPieces.Room structuremineshaftpieces$room = new StructureMineshaftPieces.Room(0, p_i47149_2_, (p_i47149_3_ << 4) + 2, (p_i47149_4_ << 4) + 2, this.field_189908_c);
+        this.mineShaftType = p_i47149_5_;
+        StructureMineshaftPieces.Room structuremineshaftpieces$room = new StructureMineshaftPieces.Room(0, p_i47149_2_, (p_i47149_3_ << 4) + 2, (p_i47149_4_ << 4) + 2, this.mineShaftType);
         this.components.add(structuremineshaftpieces$room);
         structuremineshaftpieces$room.buildComponent(structuremineshaftpieces$room, this.components, p_i47149_2_);
         this.updateBoundingBox();

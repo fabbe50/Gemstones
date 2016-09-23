@@ -65,7 +65,7 @@ public class BiomeDecorator
     public int waterlilyPerChunk;
     /** The number of trees to attempt to generate per chunk. Up to 10 in forests, none in deserts. */
     public int treesPerChunk;
-    public float field_189870_A = 0.1F;
+    public float extraTreeChance = 0.1F;
     /**
      * The number of yellow flower patches to generate per chunk. The game generates much less than this number, since
      * it attempts to generate them at a random altitude.
@@ -124,7 +124,7 @@ public class BiomeDecorator
         }
     }
 
-    protected void genDecorations(Biome biomeGenBaseIn, World worldIn, Random random)
+    protected void genDecorations(Biome biomeIn, World worldIn, Random random)
     {
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, chunkPos));
         this.generateOres(worldIn, random);
@@ -155,7 +155,7 @@ public class BiomeDecorator
 
         int k1 = this.treesPerChunk;
 
-        if (random.nextFloat() < this.field_189870_A)
+        if (random.nextFloat() < this.extraTreeChance)
         {
             ++k1;
         }
@@ -165,7 +165,7 @@ public class BiomeDecorator
         {
             int k6 = random.nextInt(16) + 8;
             int l = random.nextInt(16) + 8;
-            WorldGenAbstractTree worldgenabstracttree = biomeGenBaseIn.genBigTreeChance(random);
+            WorldGenAbstractTree worldgenabstracttree = biomeIn.genBigTreeChance(random);
             worldgenabstracttree.setDecorationDefaults();
             BlockPos blockpos = worldIn.getHeight(this.chunkPos.add(k6, 0, l));
 
@@ -194,7 +194,7 @@ public class BiomeDecorator
             {
                 int k17 = random.nextInt(j14);
                 BlockPos blockpos1 = this.chunkPos.add(i7, k17, l10);
-                BlockFlower.EnumFlowerType blockflower$enumflowertype = biomeGenBaseIn.pickRandomFlower(random, blockpos1);
+                BlockFlower.EnumFlowerType blockflower$enumflowertype = biomeIn.pickRandomFlower(random, blockpos1);
                 BlockFlower blockflower = blockflower$enumflowertype.getBlockType().getBlock();
 
                 if (blockflower.getDefaultState().getMaterial() != Material.AIR)
@@ -215,7 +215,7 @@ public class BiomeDecorator
             if (k14 > 0)
             {
                 int l17 = random.nextInt(k14);
-                biomeGenBaseIn.getRandomWorldGenForGrass(random).generate(worldIn, random, this.chunkPos.add(j7, l17, i11));
+                biomeIn.getRandomWorldGenForGrass(random).generate(worldIn, random, this.chunkPos.add(j7, l17, i11));
             }
         }
 
@@ -431,7 +431,9 @@ public class BiomeDecorator
     }
 
     /**
-     * Standard ore generation helper. Generates most ores.
+     * Standard ore generation helper. Vanilla uses this to generate most ores.
+     * The main difference between this and {@link #genStandardOre2} is that this takes min and max heights, while
+     * genStandardOre2 takes center and spread.
      */
     protected void genStandardOre1(World worldIn, Random random, int blockCount, WorldGenerator generator, int minHeight, int maxHeight)
     {
@@ -461,7 +463,9 @@ public class BiomeDecorator
     }
 
     /**
-     * Standard ore generation helper. Generates Lapis Lazuli.
+     * Standard ore generation helper. Vanilla uses this to generate Lapis Lazuli.
+     * The main difference between this and {@link #genStandardOre1} is that this takes takes center and spread, while
+     * genStandardOre1 takes min and max heights.
      */
     protected void genStandardOre2(World worldIn, Random random, int blockCount, WorldGenerator generator, int centerHeight, int spread)
     {

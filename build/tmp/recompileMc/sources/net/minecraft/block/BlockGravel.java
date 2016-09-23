@@ -34,7 +34,7 @@ public class BlockGravel extends BlockFalling
     }
 
     @SideOnly(Side.CLIENT)
-    public int func_189876_x(IBlockState p_189876_1_)
+    public int getDustColor(IBlockState p_189876_1_)
     {
         return -8356741;
     }

@@ -142,9 +142,9 @@ public class EntityPlayerSP extends AbstractClientPlayer
     private boolean handActive;
     private EnumHand activeHand;
     private boolean rowingBoat;
-    private boolean field_189811_cr = true;
-    private int field_189812_cs;
-    private boolean field_189813_ct;
+    private boolean autoJumpEnabled = true;
+    private int autoJumpTime;
+    private boolean wasFallFlying;
 
     public EntityPlayerSP(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatisticsManager statFile)
     {
@@ -313,7 +313,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
             }
 
             this.prevOnGround = this.onGround;
-            this.field_189811_cr = this.mc.gameSettings.field_189989_R;
+            this.autoJumpEnabled = this.mc.gameSettings.autoJump;
         }
     }
 
@@ -707,7 +707,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
             }
         }
 
-        if (FLAGS.equals(key) && this.isElytraFlying() && !this.field_189813_ct)
+        if (FLAGS.equals(key) && this.isElytraFlying() && !this.wasFallFlying)
         {
             this.mc.getSoundHandler().playSound(new ElytraSound(this));
         }
@@ -729,19 +729,19 @@ public class EntityPlayerSP extends AbstractClientPlayer
         this.mc.displayGuiScreen(new GuiEditSign(signTile));
     }
 
-    public void displayGuiEditCommandCart(CommandBlockBaseLogic p_184809_1_)
+    public void displayGuiEditCommandCart(CommandBlockBaseLogic commandBlock)
     {
-        this.mc.displayGuiScreen(new GuiEditCommandBlockMinecart(p_184809_1_));
+        this.mc.displayGuiScreen(new GuiEditCommandBlockMinecart(commandBlock));
     }
 
-    public void displayGuiCommandBlock(TileEntityCommandBlock p_184824_1_)
+    public void displayGuiCommandBlock(TileEntityCommandBlock commandBlock)
     {
-        this.mc.displayGuiScreen(new GuiCommandBlock(p_184824_1_));
+        this.mc.displayGuiScreen(new GuiCommandBlock(commandBlock));
     }
 
-    public void func_189807_a(TileEntityStructure p_189807_1_)
+    public void openEditStructure(TileEntityStructure structure)
     {
-        this.mc.displayGuiScreen(new GuiEditStructure(p_189807_1_));
+        this.mc.displayGuiScreen(new GuiEditStructure(structure));
     }
 
     public void openBook(ItemStack stack, EnumHand hand)
@@ -940,9 +940,9 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         boolean flag3 = false;
 
-        if (this.field_189812_cs > 0)
+        if (this.autoJumpTime > 0)
         {
-            --this.field_189812_cs;
+            --this.autoJumpTime;
             flag3 = true;
             this.movementInput.jump = true;
         }
@@ -1011,7 +1011,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
             }
         }
 
-        this.field_189813_ct = this.isElytraFlying();
+        this.wasFallFlying = this.isElytraFlying();
 
         if (this.capabilities.isFlying && this.isCurrentViewEntity())
         {
@@ -1126,23 +1126,23 @@ public class EntityPlayerSP extends AbstractClientPlayer
         double d0 = this.posX;
         double d1 = this.posZ;
         super.moveEntity(x, y, z);
-        this.func_189810_i((float)(this.posX - d0), (float)(this.posZ - d1));
+        this.updateAutoJump((float)(this.posX - d0), (float)(this.posZ - d1));
     }
 
-    public boolean func_189809_N()
+    public boolean isAutoJumpEnabled()
     {
-        return this.field_189811_cr;
+        return this.autoJumpEnabled;
     }
 
-    protected void func_189810_i(float p_189810_1_, float p_189810_2_)
+    protected void updateAutoJump(float p_189810_1_, float p_189810_2_)
     {
-        if (this.func_189809_N())
+        if (this.isAutoJumpEnabled())
         {
-            if (this.field_189812_cs <= 0 && this.onGround && !this.isSneaking() && !this.isRiding())
+            if (this.autoJumpTime <= 0 && this.onGround && !this.isSneaking() && !this.isRiding())
             {
-                Vec2f vec2f = this.movementInput.func_190020_b();
+                Vec2f vec2f = this.movementInput.getMoveVector();
 
-                if (vec2f.field_189982_i != 0.0F || vec2f.field_189983_j != 0.0F)
+                if (vec2f.x != 0.0F || vec2f.y != 0.0F)
                 {
                     Vec3d vec3d = new Vec3d(this.posX, this.getEntityBoundingBox().minY, this.posZ);
                     double d0 = this.posX + (double)p_189810_1_;
@@ -1150,16 +1150,16 @@ public class EntityPlayerSP extends AbstractClientPlayer
                     Vec3d vec3d1 = new Vec3d(d0, this.getEntityBoundingBox().minY, d1);
                     Vec3d vec3d2 = new Vec3d((double)p_189810_1_, 0.0D, (double)p_189810_2_);
                     float f = this.getAIMoveSpeed();
-                    float f1 = (float)vec3d2.func_189985_c();
+                    float f1 = (float)vec3d2.lengthSquared();
 
                     if (f1 <= 0.001F)
                     {
-                        float f2 = f * vec2f.field_189982_i;
-                        float f3 = f * vec2f.field_189983_j;
+                        float f2 = f * vec2f.x;
+                        float f3 = f * vec2f.y;
                         float f4 = MathHelper.sin(this.rotationYaw * 0.017453292F);
                         float f5 = MathHelper.cos(this.rotationYaw * 0.017453292F);
                         vec3d2 = new Vec3d((double)(f2 * f5 - f3 * f4), vec3d2.yCoord, (double)(f3 * f5 + f2 * f4));
-                        f1 = (float)vec3d2.func_189985_c();
+                        f1 = (float)vec3d2.lengthSquared();
 
                         if (f1 <= 0.001F)
                         {
@@ -1169,7 +1169,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
                     float f12 = (float)MathHelper.fastInvSqrt((double)f1);
                     Vec3d vec3d12 = vec3d2.scale((double)f12);
-                    Vec3d vec3d13 = this.func_189651_aD();
+                    Vec3d vec3d13 = this.getForward();
                     float f13 = (float)(vec3d13.xCoord * vec3d12.xCoord + vec3d13.zCoord * vec3d12.zCoord);
 
                     if (f13 >= -0.15F)
@@ -1217,10 +1217,10 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
                                 for (AxisAlignedBB axisalignedbb2 : list)
                                 {
-                                    if (axisalignedbb2.func_189973_a(vec3d7, vec3d8) || axisalignedbb2.func_189973_a(vec3d9, vec3d10))
+                                    if (axisalignedbb2.intersects(vec3d7, vec3d8) || axisalignedbb2.intersects(vec3d9, vec3d10))
                                     {
                                         f11 = (float)axisalignedbb2.maxY;
-                                        Vec3d vec3d11 = axisalignedbb2.func_189972_c();
+                                        Vec3d vec3d11 = axisalignedbb2.getCenter();
                                         BlockPos blockpos1 = new BlockPos(vec3d11);
                                         int i = 1;
 
@@ -1267,7 +1267,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
                                     if (f14 > 0.5F && f14 <= f7)
                                     {
-                                        this.field_189812_cs = 1;
+                                        this.autoJumpTime = 1;
                                     }
                                 }
                             }

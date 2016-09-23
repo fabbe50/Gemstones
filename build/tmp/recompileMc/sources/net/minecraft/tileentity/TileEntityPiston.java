@@ -254,7 +254,7 @@ public class TileEntityPiston extends TileEntity implements ITickable
         }
     }
 
-    public static void func_189685_a(DataFixer p_189685_0_)
+    public static void registerFixesPiston(DataFixer fixer)
     {
     }
 

@@ -344,7 +344,7 @@ public abstract class EntityArrow extends Entity implements IProjectile
             this.motionY *= (double)f1;
             this.motionZ *= (double)f1;
 
-            if (!this.func_189652_ae())
+            if (!this.hasNoGravity())
             {
                 this.motionY -= 0.05000000074505806D;
             }
@@ -513,13 +513,13 @@ public abstract class EntityArrow extends Entity implements IProjectile
         return entity;
     }
 
-    public static void func_189657_a(DataFixer p_189657_0_, String p_189657_1_)
+    public static void registerFixesArrow(DataFixer fixer, String name)
     {
     }
 
-    public static void func_189658_a(DataFixer p_189658_0_)
+    public static void registerFixesArrow(DataFixer fixer)
     {
-        func_189657_a(p_189658_0_, "Arrow");
+        registerFixesArrow(fixer, "Arrow");
     }
 
     /**

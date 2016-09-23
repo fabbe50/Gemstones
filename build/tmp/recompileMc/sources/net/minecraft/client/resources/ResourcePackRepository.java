@@ -56,7 +56,7 @@ public class ResourcePackRepository
             return flag || flag1;
         }
     };
-    private static final Pattern field_190117_e = Pattern.compile("^[a-fA-F0-9]{40}$");
+    private static final Pattern SHA1 = Pattern.compile("^[a-fA-F0-9]{40}$");
     private final File dirResourcepacks;
     public final IResourcePack rprDefaultResourcePack;
     private final File dirServerResourcepacks;
@@ -98,7 +98,7 @@ public class ResourcePackRepository
         }
     }
 
-    public static Map<String, String> func_190115_a()
+    public static Map<String, String> getDownloadHeaders()
     {
         Map<String, String> map = Maps.<String, String>newHashMap();
         map.put("X-Minecraft-Username", Minecraft.getMinecraft().getSession().getUsername());
@@ -213,7 +213,7 @@ public class ResourcePackRepository
     public ListenableFuture<Object> downloadResourcePack(String url, String hash)
     {
         String s = DigestUtils.sha1Hex(url);
-        final String s1 = field_190117_e.matcher(hash).matches() ? hash : "";
+        final String s1 = SHA1.matcher(hash).matches() ? hash : "";
         final File file1 = new File(this.dirServerResourcepacks, s);
         this.lock.lock();
 
@@ -223,7 +223,7 @@ public class ResourcePackRepository
 
             if (file1.exists())
             {
-                if (this.func_190113_a(s1, file1))
+                if (this.checkHash(s1, file1))
                 {
                     ListenableFuture listenablefuture1 = this.setResourcePackInstance(file1);
                     return listenablefuture1;
@@ -235,7 +235,7 @@ public class ResourcePackRepository
 
             this.deleteOldServerResourcesPacks();
             final GuiScreenWorking guiscreenworking = new GuiScreenWorking();
-            Map<String, String> map = func_190115_a();
+            Map<String, String> map = getDownloadHeaders();
             final Minecraft minecraft = Minecraft.getMinecraft();
             Futures.getUnchecked(minecraft.addScheduledTask(new Runnable()
             {
@@ -250,7 +250,7 @@ public class ResourcePackRepository
             {
                 public void onSuccess(@Nullable Object p_onSuccess_1_)
                 {
-                    if (ResourcePackRepository.this.func_190113_a(s1, file1))
+                    if (ResourcePackRepository.this.checkHash(s1, file1))
                     {
                         ResourcePackRepository.this.setResourcePackInstance(file1);
                         settablefuture.set((Object)null);
@@ -276,7 +276,7 @@ public class ResourcePackRepository
         }
     }
 
-    private boolean func_190113_a(String p_190113_1_, File p_190113_2_)
+    private boolean checkHash(String p_190113_1_, File p_190113_2_)
     {
         try
         {
@@ -304,7 +304,7 @@ public class ResourcePackRepository
         return false;
     }
 
-    private boolean func_190112_b(File p_190112_1_)
+    private boolean validatePack(File p_190112_1_)
     {
         ResourcePackRepository.Entry resourcepackrepository$entry = new ResourcePackRepository.Entry(new FileResourcePack(p_190112_1_));
 
@@ -348,7 +348,7 @@ public class ResourcePackRepository
 
     public ListenableFuture<Object> setResourcePackInstance(File resourceFile)
     {
-        if (!this.func_190112_b(resourceFile))
+        if (!this.validatePack(resourceFile))
         {
             return Futures.<Object>immediateFailedFuture(new RuntimeException("Invalid resourcepack"));
         }

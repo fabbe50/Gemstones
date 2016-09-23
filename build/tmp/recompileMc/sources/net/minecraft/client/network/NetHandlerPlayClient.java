@@ -1713,7 +1713,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         final String s = packetIn.getURL();
         final String s1 = packetIn.getHash();
 
-        if (this.func_189688_b(s))
+        if (this.validateResourcePackUrl(s))
         {
             if (s.startsWith("level://"))
             {
@@ -1724,7 +1724,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
                 if (file2.isFile())
                 {
                     this.netManager.sendPacket(new CPacketResourcePackStatus(CPacketResourcePackStatus.Action.ACCEPTED));
-                    Futures.addCallback(this.gameController.getResourcePackRepository().setResourcePackInstance(file2), this.func_189686_f());
+                    Futures.addCallback(this.gameController.getResourcePackRepository().setResourcePackInstance(file2), this.createDownloadCallback());
                 }
                 else
                 {
@@ -1738,7 +1738,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
                 if (serverdata != null && serverdata.getResourceMode() == ServerData.ServerResourceMode.ENABLED)
                 {
                     this.netManager.sendPacket(new CPacketResourcePackStatus(CPacketResourcePackStatus.Action.ACCEPTED));
-                    Futures.addCallback(this.gameController.getResourcePackRepository().downloadResourcePack(s, s1), this.func_189686_f());
+                    Futures.addCallback(this.gameController.getResourcePackRepository().downloadResourcePack(s, s1), this.createDownloadCallback());
                 }
                 else if (serverdata != null && serverdata.getResourceMode() != ServerData.ServerResourceMode.PROMPT)
                 {
@@ -1765,7 +1765,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
                                         }
 
                                         NetHandlerPlayClient.this.netManager.sendPacket(new CPacketResourcePackStatus(CPacketResourcePackStatus.Action.ACCEPTED));
-                                        Futures.addCallback(NetHandlerPlayClient.this.gameController.getResourcePackRepository().downloadResourcePack(s, s1), NetHandlerPlayClient.this.func_189686_f());
+                                        Futures.addCallback(NetHandlerPlayClient.this.gameController.getResourcePackRepository().downloadResourcePack(s, s1), NetHandlerPlayClient.this.createDownloadCallback());
                                     }
                                     else
                                     {
@@ -1788,7 +1788,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         }
     }
 
-    private boolean func_189688_b(String p_189688_1_)
+    private boolean validateResourcePackUrl(String p_189688_1_)
     {
         try
         {
@@ -1816,7 +1816,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         }
     }
 
-    private FutureCallback<Object> func_189686_f()
+    private FutureCallback<Object> createDownloadCallback()
     {
         return new FutureCallback<Object>()
         {

@@ -23,7 +23,7 @@ public class TileEntityFlowerPot extends TileEntity
         this.flowerPotData = potData;
     }
 
-    public static void func_189699_a(DataFixer p_189699_0_)
+    public static void registerFixesFlowerPot(DataFixer fixer)
     {
     }
 

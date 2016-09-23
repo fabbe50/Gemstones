@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityFishHook extends Entity
 {
     private static final DataParameter<Integer> DATA_HOOKED_ENTITY = EntityDataManager.<Integer>createKey(EntityFishHook.class, DataSerializers.VARINT);
-    private BlockPos field_189740_d;
+    private BlockPos pos;
     private Block inTile;
     private boolean inGround;
     public EntityPlayer angler;
@@ -60,7 +60,7 @@ public class EntityFishHook extends Entity
     public EntityFishHook(World worldIn)
     {
         super(worldIn);
-        this.field_189740_d = new BlockPos(-1, -1, -1);
+        this.pos = new BlockPos(-1, -1, -1);
         this.setSize(0.25F, 0.25F);
         this.ignoreFrustumCheck = true;
     }
@@ -78,7 +78,7 @@ public class EntityFishHook extends Entity
     public EntityFishHook(World worldIn, EntityPlayer fishingPlayer)
     {
         super(worldIn);
-        this.field_189740_d = new BlockPos(-1, -1, -1);
+        this.pos = new BlockPos(-1, -1, -1);
         this.ignoreFrustumCheck = true;
         this.angler = fishingPlayer;
         this.angler.fishEntity = this;
@@ -244,7 +244,7 @@ public class EntityFishHook extends Entity
         {
             if (this.inGround)
             {
-                if (this.worldObj.getBlockState(this.field_189740_d).getBlock() == this.inTile)
+                if (this.worldObj.getBlockState(this.pos).getBlock() == this.inTile)
                 {
                     ++this.ticksInGround;
 
@@ -289,7 +289,7 @@ public class EntityFishHook extends Entity
                 {
                     Entity entity1 = (Entity)list.get(j);
 
-                    if (this.func_189739_a(entity1) && (entity1 != this.angler || this.ticksInAir >= 5))
+                    if (this.canBeHooked(entity1) && (entity1 != this.angler || this.ticksInAir >= 5))
                     {
                         AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expandXyz(0.30000001192092896D);
                         RayTraceResult raytraceresult1 = axisalignedbb1.calculateIntercept(vec3d1, vec3d);
@@ -510,7 +510,7 @@ public class EntityFishHook extends Entity
         }
     }
 
-    protected boolean func_189739_a(Entity p_189739_1_)
+    protected boolean canBeHooked(Entity p_189739_1_)
     {
         return p_189739_1_.canBeCollidedWith() || p_189739_1_ instanceof EntityItem;
     }
@@ -520,9 +520,9 @@ public class EntityFishHook extends Entity
      */
     public void writeEntityToNBT(NBTTagCompound compound)
     {
-        compound.setInteger("xTile", this.field_189740_d.getX());
-        compound.setInteger("yTile", this.field_189740_d.getY());
-        compound.setInteger("zTile", this.field_189740_d.getZ());
+        compound.setInteger("xTile", this.pos.getX());
+        compound.setInteger("yTile", this.pos.getY());
+        compound.setInteger("zTile", this.pos.getZ());
         ResourceLocation resourcelocation = (ResourceLocation)Block.REGISTRY.getNameForObject(this.inTile);
         compound.setString("inTile", resourcelocation == null ? "" : resourcelocation.toString());
         compound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
@@ -533,7 +533,7 @@ public class EntityFishHook extends Entity
      */
     public void readEntityFromNBT(NBTTagCompound compound)
     {
-        this.field_189740_d = new BlockPos(compound.getInteger("xTile"), compound.getInteger("yTile"), compound.getInteger("zTile"));
+        this.pos = new BlockPos(compound.getInteger("xTile"), compound.getInteger("yTile"), compound.getInteger("zTile"));
 
         if (compound.hasKey("inTile", 8))
         {

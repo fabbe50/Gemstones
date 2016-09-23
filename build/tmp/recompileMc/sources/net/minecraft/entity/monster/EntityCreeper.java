@@ -103,9 +103,9 @@ public class EntityCreeper extends EntityMob
         this.dataManager.register(IGNITED, Boolean.valueOf(false));
     }
 
-    public static void func_189762_b(DataFixer p_189762_0_)
+    public static void registerFixesCreeper(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189762_0_, "Creeper");
+        EntityLiving.registerFixesMob(fixer, "Creeper");
     }
 
     /**

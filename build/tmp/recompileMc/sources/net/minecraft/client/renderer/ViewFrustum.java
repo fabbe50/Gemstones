@@ -41,7 +41,7 @@ public class ViewFrustum
                 {
                     int j1 = (i1 * this.countChunksY + l) * this.countChunksX + k;
                     this.renderChunks[j1] = renderChunkFactory.create(this.world, this.renderGlobal, j++);
-                    this.renderChunks[j1].setOrigin(k * 16, l * 16, i1 * 16);
+                    this.renderChunks[j1].setPosition(k * 16, l * 16, i1 * 16);
                 }
             }
         }
@@ -81,7 +81,7 @@ public class ViewFrustum
                 {
                     int i2 = l1 * 16;
                     RenderChunk renderchunk = this.renderChunks[(j1 * this.countChunksY + l1) * this.countChunksX + l];
-                    renderchunk.setOrigin(i1, i2, k1);
+                    renderchunk.setPosition(i1, i2, k1);
                 }
             }
         }

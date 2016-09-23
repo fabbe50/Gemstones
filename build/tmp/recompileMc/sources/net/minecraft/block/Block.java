@@ -159,7 +159,7 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
     }
 
     @Deprecated
-    public boolean func_189872_a(IBlockState p_189872_1_, Entity p_189872_2_)
+    public boolean canEntitySpawn(IBlockState state, Entity entityIn)
     {
         return true;
     }
@@ -359,7 +359,8 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
     }
 
     /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
+     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      */
     @Deprecated
     public EnumBlockRenderType getRenderType(IBlockState state)
@@ -615,10 +616,16 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
         return 10;
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         if (hasTileEntity(state) && !(this instanceof BlockContainer))
@@ -952,9 +959,6 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
      * changes to the world, like pistons replacing the block with an extended base. On the client, the update may
      * involve replacing tile entities, playing sounds, or performing other visual actions to reflect the server side
      * changes.
-     *  
-     * @param state The block state retrieved from the block position prior to this method being invoked
-     * @param pos The position of the block event. Can be used to retrieve tile entities.
      */
     @Deprecated
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)

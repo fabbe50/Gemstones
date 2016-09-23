@@ -191,7 +191,7 @@ public abstract class EntityFireball extends Entity
      */
     protected abstract void onImpact(RayTraceResult result);
 
-    public static void func_189743_a(DataFixer p_189743_0_, String p_189743_1_)
+    public static void registerFixesFireball(DataFixer fixer, String name)
     {
     }
 

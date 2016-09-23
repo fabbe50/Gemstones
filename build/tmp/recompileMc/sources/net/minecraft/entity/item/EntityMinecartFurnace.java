@@ -37,9 +37,9 @@ public class EntityMinecartFurnace extends EntityMinecart
         super(worldIn, x, y, z);
     }
 
-    public static void func_189671_a(DataFixer p_189671_0_)
+    public static void registerFixesMinecartFurnace(DataFixer fixer)
     {
-        EntityMinecart.func_189669_a(p_189671_0_, "MinecartFurnace");
+        EntityMinecart.registerFixesMinecart(fixer, "MinecartFurnace");
     }
 
     public EntityMinecart.Type getType()
@@ -97,9 +97,9 @@ public class EntityMinecartFurnace extends EntityMinecart
         }
     }
 
-    protected void moveAlongTrack(BlockPos p_180460_1_, IBlockState p_180460_2_)
+    protected void moveAlongTrack(BlockPos pos, IBlockState state)
     {
-        super.moveAlongTrack(p_180460_1_, p_180460_2_);
+        super.moveAlongTrack(pos, state);
         double d0 = this.pushX * this.pushX + this.pushZ * this.pushZ;
 
         if (d0 > 1.0E-4D && this.motionX * this.motionX + this.motionZ * this.motionZ > 0.001D)

@@ -282,9 +282,9 @@ public class VillageCollection extends WorldSavedData
         }
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound p_189551_1_)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        p_189551_1_.setInteger("Tick", this.tickCounter);
+        compound.setInteger("Tick", this.tickCounter);
         NBTTagList nbttaglist = new NBTTagList();
 
         for (Village village : this.villageList)
@@ -294,8 +294,8 @@ public class VillageCollection extends WorldSavedData
             nbttaglist.appendTag(nbttagcompound);
         }
 
-        p_189551_1_.setTag("Villages", nbttaglist);
-        return p_189551_1_;
+        compound.setTag("Villages", nbttaglist);
+        return compound;
     }
 
     public static String fileNameForProvider(WorldProvider provider)

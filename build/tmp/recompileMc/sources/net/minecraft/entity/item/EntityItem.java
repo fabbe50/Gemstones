@@ -116,7 +116,7 @@ public class EntityItem extends Entity
             this.prevPosY = this.posY;
             this.prevPosZ = this.posZ;
 
-            if (!this.func_189652_ae())
+            if (!this.hasNoGravity())
             {
                 this.motionY -= 0.03999999910593033D;
             }
@@ -333,9 +333,9 @@ public class EntityItem extends Entity
         }
     }
 
-    public static void func_189742_a(DataFixer p_189742_0_)
+    public static void registerFixesItem(DataFixer fixer)
     {
-        p_189742_0_.registerWalker(FixTypes.ENTITY, new ItemStackData("Item", new String[] {"Item"}));
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackData("Item", new String[] {"Item"}));
     }
 
     /**

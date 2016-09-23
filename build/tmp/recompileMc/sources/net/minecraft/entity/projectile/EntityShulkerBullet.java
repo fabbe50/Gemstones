@@ -302,7 +302,7 @@ public class EntityShulkerBullet extends Entity
 
                 if (this.target == null || !this.target.isEntityAlive() || this.target instanceof EntityPlayer && ((EntityPlayer)this.target).isSpectator())
                 {
-                    if (!this.func_189652_ae())
+                    if (!this.hasNoGravity())
                     {
                         this.motionY -= 0.04D;
                     }

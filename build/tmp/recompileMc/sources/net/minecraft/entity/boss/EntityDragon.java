@@ -75,7 +75,9 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
     public int deathTicks;
     /** The current endercrystal that is healing this dragon */
     public EntityEnderCrystal healingEnderCrystal;
+    /** The dragon fight manager */
     private final DragonFightManager fightManager;
+    /** The dragon phase manager */
     private final PhaseManager phaseManager;
     private int growlTime = 200;
     private int sittingDamageReceived;
@@ -949,9 +951,9 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         return new Path(apathpoint);
     }
 
-    public static void func_189755_b(DataFixer p_189755_0_)
+    public static void registerFixesDragon(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189755_0_, "EnderDragon");
+        EntityLiving.registerFixesMob(fixer, "EnderDragon");
     }
 
     /**

@@ -149,7 +149,7 @@ public class ChunkProviderFlat implements IChunkGenerator
         }
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
-        Biome[] abiome = this.worldObj.getBiomeProvider().loadBlockGeneratorData((Biome[])null, x * 16, z * 16, 16, 16);
+        Biome[] abiome = this.worldObj.getBiomeProvider().getBiomes((Biome[])null, x * 16, z * 16, 16, 16);
         byte[] abyte = chunk.getBiomeArray();
 
         for (int l = 0; l < abyte.length; ++l)
@@ -167,7 +167,7 @@ public class ChunkProviderFlat implements IChunkGenerator
         int i = x * 16;
         int j = z * 16;
         BlockPos blockpos = new BlockPos(i, 0, j);
-        Biome biome = this.worldObj.getBiomeGenForCoords(new BlockPos(i + 16, 0, j + 16));
+        Biome biome = this.worldObj.getBiome(new BlockPos(i + 16, 0, j + 16));
         boolean flag = false;
         this.random.setSeed(this.worldObj.getSeed());
         long k = this.random.nextLong() / 2L * 2L + 1L;
@@ -226,7 +226,7 @@ public class ChunkProviderFlat implements IChunkGenerator
 
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
     {
-        Biome biome = this.worldObj.getBiomeGenForCoords(pos);
+        Biome biome = this.worldObj.getBiome(pos);
         return biome.getSpawnableList(creatureType);
     }
 

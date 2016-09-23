@@ -7,7 +7,7 @@ import net.minecraft.util.datafix.IFixableData;
 
 public class ZombieProfToType implements IFixableData
 {
-    private static final Random field_190049_a = new Random();
+    private static final Random RANDOM = new Random();
 
     public int getFixVersion()
     {
@@ -26,7 +26,7 @@ public class ZombieProfToType implements IFixableData
                 {
                     try
                     {
-                        zombietype = ZombieType.func_190146_a(compound.getInteger("VillagerProfession") + 1);
+                        zombietype = ZombieType.getByOrdinal(compound.getInteger("VillagerProfession") + 1);
                     }
                     catch (RuntimeException var4)
                     {
@@ -36,10 +36,10 @@ public class ZombieProfToType implements IFixableData
 
                 if (zombietype == null)
                 {
-                    zombietype = ZombieType.func_190146_a(field_190049_a.nextInt(5) + 1);
+                    zombietype = ZombieType.getByOrdinal(RANDOM.nextInt(5) + 1);
                 }
 
-                compound.setInteger("ZombieType", zombietype.func_190150_a());
+                compound.setInteger("ZombieType", zombietype.getId());
             }
 
             compound.removeTag("IsVillager");

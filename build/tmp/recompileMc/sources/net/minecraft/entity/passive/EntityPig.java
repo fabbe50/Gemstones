@@ -117,9 +117,9 @@ public class EntityPig extends EntityAnimal
         this.dataManager.register(SADDLED, Boolean.valueOf(false));
     }
 
-    public static void func_189792_b(DataFixer p_189792_0_)
+    public static void registerFixesPig(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189792_0_, "Pig");
+        EntityLiving.registerFixesMob(fixer, "Pig");
     }
 
     /**

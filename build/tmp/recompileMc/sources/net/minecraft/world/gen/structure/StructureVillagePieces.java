@@ -1631,25 +1631,25 @@ public class StructureVillagePieces
                 this.worldChunkMngr = chunkManagerIn;
                 this.structureVillageWeightedPieceList = p_i2104_6_;
                 this.terrainType = p_i2104_7_;
-                Biome biome = chunkManagerIn.getBiomeGenerator(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.DEFAULT);
+                Biome biome = chunkManagerIn.getBiome(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.DEFAULT);
                 this.biome = biome;
                 this.startPiece = this;
 
                 if (biome instanceof BiomeDesert)
                 {
-                    this.field_189928_h = 1;
+                    this.structureType = 1;
                 }
                 else if (biome instanceof BiomeSavanna)
                 {
-                    this.field_189928_h = 2;
+                    this.structureType = 2;
                 }
                 else if (biome instanceof BiomeTaiga)
                 {
-                    this.field_189928_h = 3;
+                    this.structureType = 3;
                 }
 
-                this.func_189924_a(this.field_189928_h);
-                this.field_189929_i = rand.nextInt(50) == 0;
+                this.func_189924_a(this.structureType);
+                this.isZombieInfested = rand.nextInt(50) == 0;
             }
         }
 
@@ -1709,8 +1709,8 @@ public class StructureVillagePieces
             protected int averageGroundLvl = -1;
             /** The number of villagers that have been spawned in this component. */
             private int villagersSpawned;
-            protected int field_189928_h;
-            protected boolean field_189929_i;
+            protected int structureType;
+            protected boolean isZombieInfested;
             protected StructureVillagePieces.Start startPiece;
 
             public Village()
@@ -1723,8 +1723,8 @@ public class StructureVillagePieces
 
                 if (start != null)
                 {
-                    this.field_189928_h = start.field_189928_h;
-                    this.field_189929_i = start.field_189929_i;
+                    this.structureType = start.structureType;
+                    this.isZombieInfested = start.isZombieInfested;
                     startPiece = start;
                 }
             }
@@ -1736,8 +1736,8 @@ public class StructureVillagePieces
             {
                 tagCompound.setInteger("HPos", this.averageGroundLvl);
                 tagCompound.setInteger("VCount", this.villagersSpawned);
-                tagCompound.setByte("Type", (byte)this.field_189928_h);
-                tagCompound.setBoolean("Zombie", this.field_189929_i);
+                tagCompound.setByte("Type", (byte)this.structureType);
+                tagCompound.setBoolean("Zombie", this.isZombieInfested);
             }
 
             /**
@@ -1747,14 +1747,14 @@ public class StructureVillagePieces
             {
                 this.averageGroundLvl = tagCompound.getInteger("HPos");
                 this.villagersSpawned = tagCompound.getInteger("VCount");
-                this.field_189928_h = tagCompound.getByte("Type");
+                this.structureType = tagCompound.getByte("Type");
 
                 if (tagCompound.getBoolean("Desert"))
                 {
-                    this.field_189928_h = 1;
+                    this.structureType = 1;
                 }
 
-                this.field_189929_i = tagCompound.getBoolean("Zombie");
+                this.isZombieInfested = tagCompound.getBoolean("Zombie");
             }
 
             /**
@@ -1873,7 +1873,7 @@ public class StructureVillagePieces
 
                         ++this.villagersSpawned;
 
-                        if (this.field_189929_i)
+                        if (this.isZombieInfested)
                         {
                             EntityZombie entityzombie = new EntityZombie(worldIn);
                             entityzombie.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
@@ -1909,7 +1909,7 @@ public class StructureVillagePieces
                 net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID event = new net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID(startPiece == null ? null : startPiece.biome, blockstateIn);
                 net.minecraftforge.common.MinecraftForge.TERRAIN_GEN_BUS.post(event);
                 if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return event.getReplacement();
-                if (this.field_189928_h == 1)
+                if (this.structureType == 1)
                 {
                     if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2)
                     {
@@ -1941,7 +1941,7 @@ public class StructureVillagePieces
                         return Blocks.SANDSTONE.getDefaultState();
                     }
                 }
-                else if (this.field_189928_h == 3)
+                else if (this.structureType == 3)
                 {
                     if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2)
                     {
@@ -1963,7 +1963,7 @@ public class StructureVillagePieces
                         return Blocks.SPRUCE_FENCE.getDefaultState();
                     }
                 }
-                else if (this.field_189928_h == 2)
+                else if (this.structureType == 2)
                 {
                     if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2)
                     {
@@ -1996,7 +1996,7 @@ public class StructureVillagePieces
 
             protected BlockDoor func_189925_i()
             {
-                switch (this.field_189928_h)
+                switch (this.structureType)
                 {
                     case 2:
                         return Blocks.ACACIA_DOOR;
@@ -2009,7 +2009,7 @@ public class StructureVillagePieces
 
             protected void func_189927_a(World p_189927_1_, StructureBoundingBox p_189927_2_, Random p_189927_3_, int p_189927_4_, int p_189927_5_, int p_189927_6_, EnumFacing p_189927_7_)
             {
-                if (!this.field_189929_i)
+                if (!this.isZombieInfested)
                 {
                     this.func_189915_a(p_189927_1_, p_189927_2_, p_189927_3_, p_189927_4_, p_189927_5_, p_189927_6_, EnumFacing.NORTH, this.func_189925_i());
                 }
@@ -2017,7 +2017,7 @@ public class StructureVillagePieces
 
             protected void func_189926_a(World p_189926_1_, EnumFacing p_189926_2_, int p_189926_3_, int p_189926_4_, int p_189926_5_, StructureBoundingBox p_189926_6_)
             {
-                if (!this.field_189929_i)
+                if (!this.isZombieInfested)
                 {
                     this.setBlockState(p_189926_1_, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, p_189926_2_), p_189926_3_, p_189926_4_, p_189926_5_, p_189926_6_);
                 }
@@ -2035,7 +2035,7 @@ public class StructureVillagePieces
 
             protected void func_189924_a(int p_189924_1_)
             {
-                this.field_189928_h = p_189924_1_;
+                this.structureType = p_189924_1_;
             }
         }
 

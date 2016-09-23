@@ -398,13 +398,13 @@ public abstract class MinecraftServer implements Runnable, ICommandSender, IThre
     /**
      * par1 indicates if a log message should be output.
      */
-    public void saveAllWorlds(boolean dontLog)
+    public void saveAllWorlds(boolean isSilent)
     {
         for (WorldServer worldserver : this.worldServers)
         {
             if (worldserver != null)
             {
-                if (!dontLog)
+                if (!isSilent)
                 {
                     LOG.info("Saving chunks for level \'{}\'/{}", new Object[] {worldserver.getWorldInfo().getWorldName(), worldserver.provider.getDimensionType().getName()});
                 }

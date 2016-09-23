@@ -35,9 +35,9 @@ public class EntityDragonFireball extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public static void func_189747_a(DataFixer p_189747_0_)
+    public static void registerFixesDragonFireball(DataFixer fixer)
     {
-        EntityFireball.func_189743_a(p_189747_0_, "DragonFireball");
+        EntityFireball.registerFixesFireball(fixer, "DragonFireball");
     }
 
     /**

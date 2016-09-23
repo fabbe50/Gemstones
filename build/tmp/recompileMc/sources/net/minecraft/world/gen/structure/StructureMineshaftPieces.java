@@ -75,7 +75,7 @@ public class StructureMineshaftPieces
         }
         else if (Math.abs(p_189938_3_ - p_189938_0_.getBoundingBox().minX) <= 80 && Math.abs(p_189938_5_ - p_189938_0_.getBoundingBox().minZ) <= 80)
         {
-            MapGenMineshaft.Type mapgenmineshaft$type = ((StructureMineshaftPieces.Peice)p_189938_0_).field_189920_a;
+            MapGenMineshaft.Type mapgenmineshaft$type = ((StructureMineshaftPieces.Peice)p_189938_0_).mineShaftType;
             StructureMineshaftPieces.Peice structuremineshaftpieces$peice = func_189940_a(p_189938_1_, p_189938_2_, p_189938_3_, p_189938_4_, p_189938_5_, p_189938_6_, p_189938_7_ + 1, mapgenmineshaft$type);
 
             if (structuremineshaftpieces$peice != null)
@@ -648,7 +648,7 @@ public class StructureMineshaftPieces
 
     abstract static class Peice extends StructureComponent
         {
-            protected MapGenMineshaft.Type field_189920_a;
+            protected MapGenMineshaft.Type mineShaftType;
 
             public Peice()
             {
@@ -657,7 +657,7 @@ public class StructureMineshaftPieces
             public Peice(int p_i47138_1_, MapGenMineshaft.Type p_i47138_2_)
             {
                 super(p_i47138_1_);
-                this.field_189920_a = p_i47138_2_;
+                this.mineShaftType = p_i47138_2_;
             }
 
             /**
@@ -665,7 +665,7 @@ public class StructureMineshaftPieces
              */
             protected void writeStructureToNBT(NBTTagCompound tagCompound)
             {
-                tagCompound.setInteger("MST", this.field_189920_a.ordinal());
+                tagCompound.setInteger("MST", this.mineShaftType.ordinal());
             }
 
             /**
@@ -673,12 +673,12 @@ public class StructureMineshaftPieces
              */
             protected void readStructureFromNBT(NBTTagCompound tagCompound)
             {
-                this.field_189920_a = MapGenMineshaft.Type.func_189910_a(tagCompound.getInteger("MST"));
+                this.mineShaftType = MapGenMineshaft.Type.byId(tagCompound.getInteger("MST"));
             }
 
             protected IBlockState func_189917_F_()
             {
-                switch (this.field_189920_a)
+                switch (this.mineShaftType)
                 {
                     case NORMAL:
                     default:
@@ -690,7 +690,7 @@ public class StructureMineshaftPieces
 
             protected IBlockState func_189919_b()
             {
-                switch (this.field_189920_a)
+                switch (this.mineShaftType)
                 {
                     case NORMAL:
                     default:
@@ -725,7 +725,7 @@ public class StructureMineshaftPieces
             public Room(int p_i47137_1_, Random p_i47137_2_, int p_i47137_3_, int p_i47137_4_, MapGenMineshaft.Type p_i47137_5_)
             {
                 super(p_i47137_1_, p_i47137_5_);
-                this.field_189920_a = p_i47137_5_;
+                this.mineShaftType = p_i47137_5_;
                 this.boundingBox = new StructureBoundingBox(p_i47137_3_, 50, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 54 + p_i47137_2_.nextInt(6), p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));
             }
 

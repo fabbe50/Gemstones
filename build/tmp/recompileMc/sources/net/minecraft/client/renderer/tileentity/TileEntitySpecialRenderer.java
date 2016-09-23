@@ -23,19 +23,23 @@ public abstract class TileEntitySpecialRenderer<T extends TileEntity>
     {
         ITextComponent itextcomponent = te.getDisplayName();
 
-        if (itextcomponent != null && this.rendererDispatcher.field_190057_j != null && te.getPos().equals(this.rendererDispatcher.field_190057_j.getBlockPos()))
+        if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos()))
         {
-            this.func_190053_a(true);
-            this.func_190052_a(te, itextcomponent.getFormattedText(), x, y, z, 12);
-            this.func_190053_a(false);
+            this.setLightmapDisabled(true);
+            this.drawNameplate(te, itextcomponent.getFormattedText(), x, y, z, 12);
+            this.setLightmapDisabled(false);
         }
     }
 
-    protected void func_190053_a(boolean p_190053_1_)
+    /**
+     * Sets whether to use the light map when rendering. Disabling this allows rendering ignoring lighting, which can be
+     * useful for floating text, e.g.
+     */
+    protected void setLightmapDisabled(boolean disabled)
     {
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 
-        if (p_190053_1_)
+        if (disabled)
         {
             GlStateManager.disableTexture2D();
         }
@@ -79,17 +83,17 @@ public abstract class TileEntitySpecialRenderer<T extends TileEntity>
 
     public void renderTileEntityFast(T te, double x, double y, double z, float partialTicks, int destroyStage, net.minecraft.client.renderer.VertexBuffer buffer) {}
 
-    protected void func_190052_a(T p_190052_1_, String p_190052_2_, double p_190052_3_, double p_190052_5_, double p_190052_7_, int p_190052_9_)
+    protected void drawNameplate(T te, String str, double x, double y, double z, int maxDistance)
     {
         Entity entity = this.rendererDispatcher.entity;
-        double d0 = p_190052_1_.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+        double d0 = te.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
-        if (d0 <= (double)(p_190052_9_ * p_190052_9_))
+        if (d0 <= (double)(maxDistance * maxDistance))
         {
             float f = this.rendererDispatcher.entityYaw;
             float f1 = this.rendererDispatcher.entityPitch;
             boolean flag = false;
-            EntityRenderer.func_189692_a(this.getFontRenderer(), p_190052_2_, (float)p_190052_3_ + 0.5F, (float)p_190052_5_ + 1.5F, (float)p_190052_7_ + 0.5F, 0, f, f1, false, false);
+            EntityRenderer.drawNameplate(this.getFontRenderer(), str, (float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F, 0, f, f1, false, false);
         }
     }
 }

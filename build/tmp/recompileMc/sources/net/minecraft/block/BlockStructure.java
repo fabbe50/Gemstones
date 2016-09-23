@@ -40,7 +40,7 @@ public class BlockStructure extends BlockContainer
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        return tileentity instanceof TileEntityStructure ? ((TileEntityStructure)tileentity).func_189701_a(playerIn) : false;
+        return tileentity instanceof TileEntityStructure ? ((TileEntityStructure)tileentity).usedBy(playerIn) : false;
     }
 
     /**
@@ -55,7 +55,7 @@ public class BlockStructure extends BlockContainer
             if (tileentity instanceof TileEntityStructure)
             {
                 TileEntityStructure tileentitystructure = (TileEntityStructure)tileentity;
-                tileentitystructure.func_189720_a(placer);
+                tileentitystructure.createdBy(placer);
             }
         }
     }
@@ -75,7 +75,8 @@ public class BlockStructure extends BlockContainer
     }
 
     /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
+     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      */
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
@@ -127,33 +128,33 @@ public class BlockStructure extends BlockContainer
             {
                 TileEntityStructure tileentitystructure = (TileEntityStructure)tileentity;
                 boolean flag = worldIn.isBlockPowered(pos);
-                boolean flag1 = tileentitystructure.func_189722_G();
+                boolean flag1 = tileentitystructure.isPowered();
 
                 if (flag && !flag1)
                 {
-                    tileentitystructure.func_189723_d(true);
-                    this.func_189874_a(tileentitystructure);
+                    tileentitystructure.setPowered(true);
+                    this.trigger(tileentitystructure);
                 }
                 else if (!flag && flag1)
                 {
-                    tileentitystructure.func_189723_d(false);
+                    tileentitystructure.setPowered(false);
                 }
             }
         }
     }
 
-    private void func_189874_a(TileEntityStructure p_189874_1_)
+    private void trigger(TileEntityStructure p_189874_1_)
     {
-        switch (p_189874_1_.func_189700_k())
+        switch (p_189874_1_.getMode())
         {
             case SAVE:
-                p_189874_1_.func_189712_b(false);
+                p_189874_1_.save(false);
                 break;
             case LOAD:
-                p_189874_1_.func_189714_c(false);
+                p_189874_1_.load(false);
                 break;
             case CORNER:
-                p_189874_1_.func_189706_E();
+                p_189874_1_.unloadStructure();
             case DATA:
         }
     }

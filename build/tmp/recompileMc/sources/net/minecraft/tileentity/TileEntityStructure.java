@@ -45,11 +45,11 @@ public class TileEntityStructure extends TileEntity
     private Rotation rotation = Rotation.NONE;
     private TileEntityStructure.Mode mode = TileEntityStructure.Mode.DATA;
     private boolean ignoreEntities = true;
-    private boolean field_189727_n;
-    private boolean field_189728_o;
-    private boolean field_189729_p = true;
-    private float field_189730_q = 1.0F;
-    private long field_189731_r = 0L;
+    private boolean powered;
+    private boolean showAir;
+    private boolean showBoundingBox = true;
+    private float integrity = 1.0F;
+    private long seed = 0L;
 
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -67,11 +67,11 @@ public class TileEntityStructure extends TileEntity
         compound.setString("mirror", this.mirror.toString());
         compound.setString("mode", this.mode.toString());
         compound.setBoolean("ignoreEntities", this.ignoreEntities);
-        compound.setBoolean("powered", this.field_189727_n);
-        compound.setBoolean("showair", this.field_189728_o);
-        compound.setBoolean("showboundingbox", this.field_189729_p);
-        compound.setFloat("integrity", this.field_189730_q);
-        compound.setLong("seed", this.field_189731_r);
+        compound.setBoolean("powered", this.powered);
+        compound.setBoolean("showair", this.showAir);
+        compound.setBoolean("showboundingbox", this.showBoundingBox);
+        compound.setFloat("integrity", this.integrity);
+        compound.setLong("seed", this.seed);
         return compound;
     }
 
@@ -118,24 +118,24 @@ public class TileEntityStructure extends TileEntity
         }
 
         this.ignoreEntities = compound.getBoolean("ignoreEntities");
-        this.field_189727_n = compound.getBoolean("powered");
-        this.field_189728_o = compound.getBoolean("showair");
-        this.field_189729_p = compound.getBoolean("showboundingbox");
+        this.powered = compound.getBoolean("powered");
+        this.showAir = compound.getBoolean("showair");
+        this.showBoundingBox = compound.getBoolean("showboundingbox");
 
         if (compound.hasKey("integrity"))
         {
-            this.field_189730_q = compound.getFloat("integrity");
+            this.integrity = compound.getFloat("integrity");
         }
         else
         {
-            this.field_189730_q = 1.0F;
+            this.integrity = 1.0F;
         }
 
-        this.field_189731_r = compound.getLong("seed");
-        this.func_189704_J();
+        this.seed = compound.getLong("seed");
+        this.updateBlockState();
     }
 
-    private void func_189704_J()
+    private void updateBlockState()
     {
         if (this.worldObj != null)
         {
@@ -160,24 +160,24 @@ public class TileEntityStructure extends TileEntity
         return this.writeToNBT(new NBTTagCompound());
     }
 
-    public boolean func_189701_a(EntityPlayer p_189701_1_)
+    public boolean usedBy(EntityPlayer player)
     {
-        if (!p_189701_1_.func_189808_dh())
+        if (!player.canUseCommandBlock())
         {
             return false;
         }
         else
         {
-            if (p_189701_1_.getEntityWorld().isRemote)
+            if (player.getEntityWorld().isRemote)
             {
-                p_189701_1_.func_189807_a(this);
+                player.openEditStructure(this);
             }
 
             return true;
         }
     }
 
-    public String func_189715_d()
+    public String getName()
     {
         return this.name;
     }
@@ -186,7 +186,7 @@ public class TileEntityStructure extends TileEntity
     {
         String s = nameIn;
 
-        for (char c0 : ChatAllowedCharacters.field_189861_b)
+        for (char c0 : ChatAllowedCharacters.ILLEGAL_STRUCTURE_CHARACTERS)
         {
             s = s.replace(c0, '_');
         }
@@ -194,7 +194,7 @@ public class TileEntityStructure extends TileEntity
         this.name = s;
     }
 
-    public void func_189720_a(EntityLivingBase p_189720_1_)
+    public void createdBy(EntityLivingBase p_189720_1_)
     {
         if (!StringUtils.isNullOrEmpty(p_189720_1_.getName()))
         {
@@ -203,7 +203,7 @@ public class TileEntityStructure extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockPos func_189711_e()
+    public BlockPos getPosition()
     {
         return this.position;
     }
@@ -214,7 +214,7 @@ public class TileEntityStructure extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockPos func_189717_g()
+    public BlockPos getStructureSize()
     {
         return this.size;
     }
@@ -225,7 +225,7 @@ public class TileEntityStructure extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public Mirror func_189716_h()
+    public Mirror getMirror()
     {
         return this.mirror;
     }
@@ -246,18 +246,18 @@ public class TileEntityStructure extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public Rotation func_189726_i()
+    public Rotation getRotation()
     {
         return this.rotation;
     }
 
     @SideOnly(Side.CLIENT)
-    public String func_189708_j()
+    public String getMetadata()
     {
         return this.metadata;
     }
 
-    public TileEntityStructure.Mode func_189700_k()
+    public TileEntityStructure.Mode getMode()
     {
         return this.mode;
     }
@@ -278,20 +278,20 @@ public class TileEntityStructure extends TileEntity
         this.ignoreEntities = ignoreEntitiesIn;
     }
 
-    public void func_189718_a(float p_189718_1_)
+    public void setIntegrity(float integrityIn)
     {
-        this.field_189730_q = p_189718_1_;
+        this.integrity = integrityIn;
     }
 
-    public void func_189725_a(long p_189725_1_)
+    public void setSeed(long seedIn)
     {
-        this.field_189731_r = p_189725_1_;
+        this.seed = seedIn;
     }
 
     @SideOnly(Side.CLIENT)
-    public void func_189724_l()
+    public void nextMode()
     {
-        switch (this.func_189700_k())
+        switch (this.getMode())
         {
             case SAVE:
                 this.setMode(TileEntityStructure.Mode.LOAD);
@@ -308,21 +308,21 @@ public class TileEntityStructure extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean func_189713_m()
+    public boolean ignoresEntities()
     {
         return this.ignoreEntities;
     }
 
     @SideOnly(Side.CLIENT)
-    public float func_189702_n()
+    public float getIntegrity()
     {
-        return this.field_189730_q;
+        return this.integrity;
     }
 
     @SideOnly(Side.CLIENT)
-    public long func_189719_o()
+    public long getSeed()
     {
-        return this.field_189731_r;
+        return this.seed;
     }
 
     public boolean detectSize()
@@ -449,19 +449,19 @@ public class TileEntityStructure extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public void func_189705_a(ByteBuf p_189705_1_)
+    public void writeCoordinates(ByteBuf buf)
     {
-        p_189705_1_.writeInt(this.pos.getX());
-        p_189705_1_.writeInt(this.pos.getY());
-        p_189705_1_.writeInt(this.pos.getZ());
+        buf.writeInt(this.pos.getX());
+        buf.writeInt(this.pos.getY());
+        buf.writeInt(this.pos.getZ());
     }
 
     public boolean save()
     {
-        return this.func_189712_b(true);
+        return this.save(true);
     }
 
-    public boolean func_189712_b(boolean p_189712_1_)
+    public boolean save(boolean p_189712_1_)
     {
         if (this.mode == TileEntityStructure.Mode.SAVE && !this.worldObj.isRemote && !StringUtils.isNullOrEmpty(this.name))
         {
@@ -470,7 +470,7 @@ public class TileEntityStructure extends TileEntity
             MinecraftServer minecraftserver = this.worldObj.getMinecraftServer();
             TemplateManager templatemanager = worldserver.getStructureTemplateManager();
             Template template = templatemanager.getTemplate(minecraftserver, new ResourceLocation(this.name));
-            template.takeBlocksFromWorld(this.worldObj, blockpos, this.size, !this.ignoreEntities, Blocks.field_189881_dj);
+            template.takeBlocksFromWorld(this.worldObj, blockpos, this.size, !this.ignoreEntities, Blocks.STRUCTURE_VOID);
             template.setAuthor(this.author);
             return !p_189712_1_ || templatemanager.writeTemplate(minecraftserver, new ResourceLocation(this.name));
         }
@@ -482,10 +482,10 @@ public class TileEntityStructure extends TileEntity
 
     public boolean load()
     {
-        return this.func_189714_c(true);
+        return this.load(true);
     }
 
-    public boolean func_189714_c(boolean p_189714_1_)
+    public boolean load(boolean p_189714_1_)
     {
         if (this.mode == TileEntityStructure.Mode.LOAD && !this.worldObj.isRemote && !StringUtils.isNullOrEmpty(this.name))
         {
@@ -494,7 +494,7 @@ public class TileEntityStructure extends TileEntity
             WorldServer worldserver = (WorldServer)this.worldObj;
             MinecraftServer minecraftserver = this.worldObj.getMinecraftServer();
             TemplateManager templatemanager = worldserver.getStructureTemplateManager();
-            Template template = templatemanager.func_189942_b(minecraftserver, new ResourceLocation(this.name));
+            Template template = templatemanager.get(minecraftserver, new ResourceLocation(this.name));
 
             if (template == null)
             {
@@ -526,9 +526,9 @@ public class TileEntityStructure extends TileEntity
                 {
                     PlacementSettings placementsettings = (new PlacementSettings()).setMirror(this.mirror).setRotation(this.rotation).setIgnoreEntities(this.ignoreEntities).setChunk((ChunkPos)null).setReplacedBlock((Block)null).setIgnoreStructureBlock(false);
 
-                    if (this.field_189730_q < 1.0F)
+                    if (this.integrity < 1.0F)
                     {
-                        placementsettings.func_189946_a(MathHelper.clamp_float(this.field_189730_q, 0.0F, 1.0F)).func_189949_a(Long.valueOf(this.field_189731_r));
+                        placementsettings.setIntegrity(MathHelper.clamp_float(this.integrity, 0.0F, 1.0F)).setSeed(Long.valueOf(this.seed));
                     }
 
                     template.addBlocksToWorldChunk(this.worldObj, blockpos1, placementsettings);
@@ -542,21 +542,21 @@ public class TileEntityStructure extends TileEntity
         }
     }
 
-    public void func_189706_E()
+    public void unloadStructure()
     {
         WorldServer worldserver = (WorldServer)this.worldObj;
         TemplateManager templatemanager = worldserver.getStructureTemplateManager();
-        templatemanager.func_189941_a(new ResourceLocation(this.name));
+        templatemanager.remove(new ResourceLocation(this.name));
     }
 
-    public boolean func_189709_F()
+    public boolean isStructureLoadable()
     {
         if (this.mode == TileEntityStructure.Mode.LOAD && !this.worldObj.isRemote)
         {
             WorldServer worldserver = (WorldServer)this.worldObj;
             MinecraftServer minecraftserver = this.worldObj.getMinecraftServer();
             TemplateManager templatemanager = worldserver.getStructureTemplateManager();
-            return templatemanager.func_189942_b(minecraftserver, new ResourceLocation(this.name)) != null;
+            return templatemanager.get(minecraftserver, new ResourceLocation(this.name)) != null;
         }
         else
         {
@@ -564,36 +564,36 @@ public class TileEntityStructure extends TileEntity
         }
     }
 
-    public boolean func_189722_G()
+    public boolean isPowered()
     {
-        return this.field_189727_n;
+        return this.powered;
     }
 
-    public void func_189723_d(boolean p_189723_1_)
+    public void setPowered(boolean poweredIn)
     {
-        this.field_189727_n = p_189723_1_;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean func_189707_H()
-    {
-        return this.field_189728_o;
-    }
-
-    public void func_189703_e(boolean p_189703_1_)
-    {
-        this.field_189728_o = p_189703_1_;
+        this.powered = poweredIn;
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean func_189721_I()
+    public boolean showsAir()
     {
-        return this.field_189729_p;
+        return this.showAir;
     }
 
-    public void func_189710_f(boolean p_189710_1_)
+    public void setShowAir(boolean showAirIn)
     {
-        this.field_189729_p = p_189710_1_;
+        this.showAir = showAirIn;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean showsBoundingBox()
+    {
+        return this.showBoundingBox;
+    }
+
+    public void setShowBoundingBox(boolean showBoundingBoxIn)
+    {
+        this.showBoundingBox = showBoundingBoxIn;
     }
 
     /**

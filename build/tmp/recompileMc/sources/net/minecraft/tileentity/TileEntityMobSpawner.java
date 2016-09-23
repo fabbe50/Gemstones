@@ -43,9 +43,9 @@ public class TileEntityMobSpawner extends TileEntity implements ITickable
         }
     };
 
-    public static void func_189684_a(DataFixer p_189684_0_)
+    public static void registerFixesMobSpawner(DataFixer fixer)
     {
-        p_189684_0_.registerWalker(FixTypes.BLOCK_ENTITY, new IDataWalker()
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {

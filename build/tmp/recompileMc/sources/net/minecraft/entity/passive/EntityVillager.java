@@ -264,11 +264,11 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc
         this.dataManager.register(PROFESSION_STR, "minecraft:farmer");
     }
 
-    public static void func_189785_b(DataFixer p_189785_0_)
+    public static void registerFixesVillager(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189785_0_, "Villager");
-        p_189785_0_.registerWalker(FixTypes.ENTITY, new ItemStackDataLists("Villager", new String[] {"Inventory"}));
-        p_189785_0_.registerWalker(FixTypes.ENTITY, new IDataWalker()
+        EntityLiving.registerFixesMob(fixer, "Villager");
+        fixer.registerWalker(FixTypes.ENTITY, new ItemStackDataLists("Villager", new String[] {"Inventory"}));
+        fixer.registerWalker(FixTypes.ENTITY, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {

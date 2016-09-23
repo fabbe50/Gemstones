@@ -654,7 +654,7 @@ public class EntityBoat extends Entity
     private void updateMotion()
     {
         double d0 = -0.03999999910593033D;
-        double d1 = this.func_189652_ae() ? 0.0D : -0.03999999910593033D;
+        double d1 = this.hasNoGravity() ? 0.0D : -0.03999999910593033D;
         double d2 = 0.0D;
         this.momentum = 0.05F;
 

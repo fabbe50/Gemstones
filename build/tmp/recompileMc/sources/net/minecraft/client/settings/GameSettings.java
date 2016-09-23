@@ -61,7 +61,7 @@ public class GameSettings
             return null;
         }
     };
-    public static final Splitter field_189990_a = Splitter.on(':');
+    public static final Splitter COLON_SPLITTER = Splitter.on(':');
     /** GUI scale values */
     private static final String[] GUISCALES = new String[] {"options.guiScale.auto", "options.guiScale.small", "options.guiScale.normal", "options.guiScale.large"};
     private static final String[] PARTICLES = new String[] {"options.particles.all", "options.particles.decreased", "options.particles.minimal"};
@@ -116,7 +116,7 @@ public class GameSettings
     public boolean enableWeakAttacks;
     public boolean showSubtitles;
     public boolean realmsNotifications = true;
-    public boolean field_189989_R = true;
+    public boolean autoJump = true;
     public KeyBinding keyBindForward = new KeyBinding("key.forward", 17, "key.categories.movement");
     public KeyBinding keyBindLeft = new KeyBinding("key.left", 30, "key.categories.movement");
     public KeyBinding keyBindBack = new KeyBinding("key.back", 31, "key.categories.movement");
@@ -449,7 +449,7 @@ public class GameSettings
 
         if (settingsOption == GameSettings.Options.AUTO_JUMP)
         {
-            this.field_189989_R = !this.field_189989_R;
+            this.autoJump = !this.autoJump;
         }
 
         this.saveOptions();
@@ -501,7 +501,7 @@ public class GameSettings
             case ENABLE_WEAK_ATTACKS:
                 return this.enableWeakAttacks;
             case AUTO_JUMP:
-                return this.field_189989_R;
+                return this.autoJump;
             default:
                 return false;
         }
@@ -601,7 +601,7 @@ public class GameSettings
             {
                 try
                 {
-                    Iterator<String> iterator = field_189990_a.omitEmptyStrings().limit(2).split(s).iterator();
+                    Iterator<String> iterator = COLON_SPLITTER.omitEmptyStrings().limit(2).split(s).iterator();
                     nbttagcompound.setString((String)iterator.next(), (String)iterator.next());
                 }
                 catch (Exception var10)
@@ -610,7 +610,7 @@ public class GameSettings
                 }
             }
 
-            nbttagcompound = this.func_189988_a(nbttagcompound);
+            nbttagcompound = this.dataFix(nbttagcompound);
 
             for (String s1 : nbttagcompound.getKeySet())
             {
@@ -918,7 +918,7 @@ public class GameSettings
 
                     if ("autoJump".equals(s1))
                     {
-                        this.field_189989_R = "true".equals(s2);
+                        this.autoJump = "true".equals(s2);
                     }
 
                     for (KeyBinding keybinding : this.keyBindings)
@@ -964,7 +964,7 @@ public class GameSettings
         }
     }
 
-    private NBTTagCompound func_189988_a(NBTTagCompound p_189988_1_)
+    private NBTTagCompound dataFix(NBTTagCompound p_189988_1_)
     {
         int i = 0;
 
@@ -1063,7 +1063,7 @@ public class GameSettings
             printwriter.println("showSubtitles:" + this.showSubtitles);
             printwriter.println("realmsNotifications:" + this.realmsNotifications);
             printwriter.println("enableWeakAttacks:" + this.enableWeakAttacks);
-            printwriter.println("autoJump:" + this.field_189989_R);
+            printwriter.println("autoJump:" + this.autoJump);
 
             for (KeyBinding keybinding : this.keyBindings)
             {

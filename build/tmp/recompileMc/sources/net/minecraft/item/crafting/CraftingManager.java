@@ -195,7 +195,7 @@ public class CraftingManager
         this.addRecipe(new ItemStack(Blocks.HOPPER), new Object[] {"I I", "ICI", " I ", 'I', Items.IRON_INGOT, 'C', Blocks.CHEST});
         this.addRecipe(new ItemStack(Items.ARMOR_STAND, 1), new Object[] {"///", " / ", "/_/", '/', Items.STICK, '_', new ItemStack(Blocks.STONE_SLAB, 1, BlockStoneSlab.EnumType.STONE.getMetadata())});
         this.addRecipe(new ItemStack(Blocks.END_ROD, 4), new Object[] {"/", "#", '/', Items.BLAZE_ROD, '#', Items.CHORUS_FRUIT_POPPED});
-        this.addRecipe(new ItemStack(Blocks.field_189880_di, 1), new Object[] {"XXX", "XXX", "XXX", 'X', new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())});
+        this.addRecipe(new ItemStack(Blocks.BONE_BLOCK, 1), new Object[] {"XXX", "XXX", "XXX", 'X', new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())});
         Collections.sort(this.recipes, new Comparator<IRecipe>()
         {
             public int compare(IRecipe p_compare_1_, IRecipe p_compare_2_)

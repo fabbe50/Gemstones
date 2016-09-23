@@ -48,7 +48,7 @@ public class TileEntityRendererDispatcher
     public Entity entity;
     public float entityYaw;
     public float entityPitch;
-    public RayTraceResult field_190057_j;
+    public RayTraceResult cameraHitResult;
     public double entityX;
     public double entityY;
     public double entityZ;
@@ -93,7 +93,7 @@ public class TileEntityRendererDispatcher
         return (TileEntitySpecialRenderer<T>)(tileEntityIn == null ? null : this.getSpecialRendererByClass(tileEntityIn.getClass()));
     }
 
-    public void func_190056_a(World p_190056_1_, TextureManager p_190056_2_, FontRenderer p_190056_3_, Entity p_190056_4_, RayTraceResult p_190056_5_, float p_190056_6_)
+    public void prepare(World p_190056_1_, TextureManager p_190056_2_, FontRenderer p_190056_3_, Entity p_190056_4_, RayTraceResult p_190056_5_, float p_190056_6_)
     {
         if (this.worldObj != p_190056_1_)
         {
@@ -103,7 +103,7 @@ public class TileEntityRendererDispatcher
         this.renderEngine = p_190056_2_;
         this.entity = p_190056_4_;
         this.fontRenderer = p_190056_3_;
-        this.field_190057_j = p_190056_5_;
+        this.cameraHitResult = p_190056_5_;
         this.entityYaw = p_190056_4_.prevRotationYaw + (p_190056_4_.rotationYaw - p_190056_4_.prevRotationYaw) * p_190056_6_;
         this.entityPitch = p_190056_4_.prevRotationPitch + (p_190056_4_.rotationPitch - p_190056_4_.prevRotationPitch) * p_190056_6_;
         this.entityX = p_190056_4_.lastTickPosX + (p_190056_4_.posX - p_190056_4_.lastTickPosX) * (double)p_190056_6_;

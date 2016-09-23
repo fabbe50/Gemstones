@@ -6,7 +6,7 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public class Vec3i implements Comparable<Vec3i>
 {
-    /** The Null vector constant (0, 0, 0) */
+    /** An immutable vector with zero as all coordinates. */
     public static final Vec3i NULL_VECTOR = new Vec3i(0, 0, 0);
     /** X coordinate */
     private final int x;
@@ -86,11 +86,11 @@ public class Vec3i implements Comparable<Vec3i>
         return new Vec3i(this.getY() * vec.getZ() - this.getZ() * vec.getY(), this.getZ() * vec.getX() - this.getX() * vec.getZ(), this.getX() * vec.getY() - this.getY() * vec.getX());
     }
 
-    public double getDistance(int p_185332_1_, int p_185332_2_, int p_185332_3_)
+    public double getDistance(int xIn, int yIn, int zIn)
     {
-        double d0 = (double)(this.getX() - p_185332_1_);
-        double d1 = (double)(this.getY() - p_185332_2_);
-        double d2 = (double)(this.getZ() - p_185332_3_);
+        double d0 = (double)(this.getX() - xIn);
+        double d1 = (double)(this.getY() - yIn);
+        double d2 = (double)(this.getZ() - zIn);
         return Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
     }
 

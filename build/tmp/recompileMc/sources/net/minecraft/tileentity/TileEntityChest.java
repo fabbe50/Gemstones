@@ -138,9 +138,9 @@ public class TileEntityChest extends TileEntityLockableLoot implements ITickable
         this.customName = name;
     }
 
-    public static void func_189677_a(DataFixer p_189677_0_)
+    public static void registerFixesChest(DataFixer fixer)
     {
-        p_189677_0_.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Chest", new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Chest", new String[] {"Items"}));
     }
 
     public void readFromNBT(NBTTagCompound compound)
@@ -209,7 +209,7 @@ public class TileEntityChest extends TileEntityLockableLoot implements ITickable
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Don't rename this method to canInteractWith due to conflicts with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
@@ -453,7 +453,8 @@ public class TileEntityChest extends TileEntityLockableLoot implements ITickable
     }
 
     /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
      */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {

@@ -254,11 +254,11 @@ public class Blocks
     public static final Block REPEATING_COMMAND_BLOCK;
     public static final Block CHAIN_COMMAND_BLOCK;
     public static final Block FROSTED_ICE;
-    public static final Block field_189877_df;
-    public static final Block field_189878_dg;
-    public static final Block field_189879_dh;
-    public static final Block field_189880_di;
-    public static final Block field_189881_dj;
+    public static final Block MAGMA;
+    public static final Block NETHER_WART_BLOCK;
+    public static final Block RED_NETHER_BRICK;
+    public static final Block BONE_BLOCK;
+    public static final Block STRUCTURE_VOID;
     public static final Block STRUCTURE_BLOCK;
 
     /**
@@ -501,11 +501,11 @@ public class Blocks
             REPEATING_COMMAND_BLOCK = getRegisteredBlock("repeating_command_block");
             CHAIN_COMMAND_BLOCK = getRegisteredBlock("chain_command_block");
             FROSTED_ICE = getRegisteredBlock("frosted_ice");
-            field_189877_df = getRegisteredBlock("magma");
-            field_189878_dg = getRegisteredBlock("nether_wart_block");
-            field_189879_dh = getRegisteredBlock("red_nether_brick");
-            field_189880_di = getRegisteredBlock("bone_block");
-            field_189881_dj = getRegisteredBlock("structure_void");
+            MAGMA = getRegisteredBlock("magma");
+            NETHER_WART_BLOCK = getRegisteredBlock("nether_wart_block");
+            RED_NETHER_BRICK = getRegisteredBlock("red_nether_brick");
+            BONE_BLOCK = getRegisteredBlock("bone_block");
+            STRUCTURE_VOID = getRegisteredBlock("structure_void");
             STRUCTURE_BLOCK = getRegisteredBlock("structure_block");
             CACHE.clear();
         }

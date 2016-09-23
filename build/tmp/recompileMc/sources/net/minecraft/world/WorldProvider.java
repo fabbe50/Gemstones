@@ -82,7 +82,7 @@ public abstract class WorldProvider
     public boolean canCoordinateBeSpawn(int x, int z)
     {
         BlockPos blockpos = new BlockPos(x, 0, z);
-        return this.worldObj.getBiomeGenForCoords(blockpos).ignorePlayerSpawnSuitability() ? true : this.worldObj.getGroundAboveSeaLevel(blockpos).getBlock() == Blocks.GRASS;
+        return this.worldObj.getBiome(blockpos).ignorePlayerSpawnSuitability() ? true : this.worldObj.getGroundAboveSeaLevel(blockpos).getBlock() == Blocks.GRASS;
     }
 
     /**
@@ -541,7 +541,7 @@ public abstract class WorldProvider
 
     public boolean isBlockHighHumidity(BlockPos pos)
     {
-        return worldObj.getBiomeGenForCoords(pos).isHighHumidity();
+        return worldObj.getBiome(pos).isHighHumidity();
     }
 
     public int getHeight()

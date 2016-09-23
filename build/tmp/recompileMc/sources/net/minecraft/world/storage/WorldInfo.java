@@ -89,9 +89,9 @@ public class WorldInfo
     {
     }
 
-    public static void func_189967_a(DataFixer p_189967_0_)
+    public static void registerFixes(DataFixer fixer)
     {
-        p_189967_0_.registerWalker(FixTypes.LEVEL, new IDataWalker()
+        fixer.registerWalker(FixTypes.LEVEL, new IDataWalker()
         {
             public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn)
             {

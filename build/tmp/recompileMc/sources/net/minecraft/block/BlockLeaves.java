@@ -35,6 +35,9 @@ public abstract class BlockLeaves extends Block implements net.minecraftforge.co
         this.setSoundType(SoundType.PLANT);
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         int i = 1;

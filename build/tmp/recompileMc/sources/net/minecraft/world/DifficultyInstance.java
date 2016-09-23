@@ -20,7 +20,7 @@ public class DifficultyInstance
         return this.additionalDifficulty;
     }
 
-    public boolean func_190083_c()
+    public boolean isHard()
     {
         return this.additionalDifficulty >= (float)EnumDifficulty.HARD.ordinal();
     }

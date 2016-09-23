@@ -327,12 +327,18 @@ public class BlockStairs extends Block
         return this.modelBlock.canPlaceBlockAt(worldIn, pos);
     }
 
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         this.modelState.neighborChanged(worldIn, pos, Blocks.AIR);
         this.modelBlock.onBlockAdded(worldIn, pos, this.modelState);
     }
 
+    /**
+     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+     */
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         this.modelBlock.breakBlock(worldIn, pos, this.modelState);

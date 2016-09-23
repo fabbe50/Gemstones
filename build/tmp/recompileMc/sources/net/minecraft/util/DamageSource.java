@@ -18,7 +18,7 @@ public class DamageSource
     public static DamageSource lightningBolt = new DamageSource("lightningBolt");
     public static DamageSource onFire = (new DamageSource("onFire")).setDamageBypassesArmor().setFireDamage();
     public static DamageSource lava = (new DamageSource("lava")).setFireDamage();
-    public static DamageSource field_190095_e = (new DamageSource("hotFloor")).setFireDamage();
+    public static DamageSource hotFloor = (new DamageSource("hotFloor")).setFireDamage();
     public static DamageSource inWall = (new DamageSource("inWall")).setDamageBypassesArmor();
     public static DamageSource drown = (new DamageSource("drown")).setDamageBypassesArmor();
     public static DamageSource starve = (new DamageSource("starve")).setDamageBypassesArmor().setDamageIsAbsolute();

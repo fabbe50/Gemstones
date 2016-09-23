@@ -27,9 +27,9 @@ public class EntityEgg extends EntityThrowable
         super(worldIn, x, y, z);
     }
 
-    public static void func_189664_a(DataFixer p_189664_0_)
+    public static void registerFixesEgg(DataFixer fixer)
     {
-        EntityThrowable.func_189661_a(p_189664_0_, "ThrownEgg");
+        EntityThrowable.registerFixesThrowable(fixer, "ThrownEgg");
     }
 
     /**

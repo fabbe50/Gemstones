@@ -781,11 +781,11 @@ public class RenderItem implements IResourceManagerReloadListener
         this.registerBlock(Blocks.PURPUR_SLAB, "purpur_slab");
         this.registerBlock(Blocks.PURPUR_DOUBLE_SLAB, "purpur_double_slab");
         this.registerBlock(Blocks.END_BRICKS, "end_bricks");
-        this.registerBlock(Blocks.field_189877_df, "magma");
-        this.registerBlock(Blocks.field_189878_dg, "nether_wart_block");
-        this.registerBlock(Blocks.field_189879_dh, "red_nether_brick");
-        this.registerBlock(Blocks.field_189880_di, "bone_block");
-        this.registerBlock(Blocks.field_189881_dj, "structure_void");
+        this.registerBlock(Blocks.MAGMA, "magma");
+        this.registerBlock(Blocks.NETHER_WART_BLOCK, "nether_wart_block");
+        this.registerBlock(Blocks.RED_NETHER_BRICK, "red_nether_brick");
+        this.registerBlock(Blocks.BONE_BLOCK, "bone_block");
+        this.registerBlock(Blocks.STRUCTURE_VOID, "structure_void");
         this.registerBlock(Blocks.CHEST, "chest");
         this.registerBlock(Blocks.TRAPPED_CHEST, "trapped_chest");
         this.registerBlock(Blocks.ENDER_CHEST, "ender_chest");

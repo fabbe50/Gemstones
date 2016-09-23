@@ -13,15 +13,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockStructureVoid extends Block
 {
-    private static final AxisAlignedBB field_189875_a = new AxisAlignedBB(0.3D, 0.3D, 0.3D, 0.7D, 0.7D, 0.7D);
+    private static final AxisAlignedBB STRUCTURE_VOID_AABB = new AxisAlignedBB(0.3D, 0.3D, 0.3D, 0.7D, 0.7D, 0.7D);
 
     protected BlockStructureVoid()
     {
-        super(Material.field_189963_J);
+        super(Material.STRUCTURE_VOID);
     }
 
     /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
+     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      */
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
@@ -36,7 +37,7 @@ public class BlockStructureVoid extends Block
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return field_189875_a;
+        return STRUCTURE_VOID_AABB;
     }
 
     /**

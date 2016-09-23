@@ -49,9 +49,9 @@ public class EntityLargeFireball extends EntityFireball
         }
     }
 
-    public static void func_189744_a(DataFixer p_189744_0_)
+    public static void registerFixesLargeFireball(DataFixer fixer)
     {
-        EntityFireball.func_189743_a(p_189744_0_, "Fireball");
+        EntityFireball.registerFixesFireball(fixer, "Fireball");
     }
 
     /**

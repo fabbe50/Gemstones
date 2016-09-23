@@ -25,9 +25,9 @@ public class EntityMooshroom extends EntityCow implements net.minecraftforge.com
         this.spawnableBlock = Blocks.MYCELIUM;
     }
 
-    public static void func_189791_c(DataFixer p_189791_0_)
+    public static void registerFixesMooshroom(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189791_0_, "MushroomCow");
+        EntityLiving.registerFixesMob(fixer, "MushroomCow");
     }
 
     @SuppressWarnings("unused")

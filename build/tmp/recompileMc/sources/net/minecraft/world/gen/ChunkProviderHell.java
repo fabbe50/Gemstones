@@ -55,7 +55,7 @@ public class ChunkProviderHell implements IChunkGenerator
     private final WorldGenGlowStone1 lightGemGen = new WorldGenGlowStone1();
     private final WorldGenGlowStone2 hellPortalGen = new WorldGenGlowStone2();
     private final WorldGenerator quartzGen = new WorldGenMinable(Blocks.QUARTZ_ORE.getDefaultState(), 14, BlockMatcher.forBlock(Blocks.NETHERRACK));
-    private final WorldGenerator field_189888_D = new WorldGenMinable(Blocks.field_189877_df.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.NETHERRACK));
+    private final WorldGenerator magmaGen = new WorldGenMinable(Blocks.MAGMA.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.NETHERRACK));
     private final WorldGenHellLava lavaTrapGen = new WorldGenHellLava(Blocks.FLOWING_LAVA, true);
     private final WorldGenHellLava hellSpringGen = new WorldGenHellLava(Blocks.FLOWING_LAVA, false);
     private final WorldGenBush brownMushroomFeature = new WorldGenBush(Blocks.BROWN_MUSHROOM);
@@ -276,7 +276,7 @@ public class ChunkProviderHell implements IChunkGenerator
         }
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
-        Biome[] abiome = this.world.getBiomeProvider().loadBlockGeneratorData((Biome[])null, x * 16, z * 16, 16, 16);
+        Biome[] abiome = this.world.getBiomeProvider().getBiomes((Biome[])null, x * 16, z * 16, 16, 16);
         byte[] abyte = chunk.getBiomeArray();
 
         for (int i = 0; i < abyte.length; ++i)
@@ -384,7 +384,7 @@ public class ChunkProviderHell implements IChunkGenerator
         int i = x * 16;
         int j = z * 16;
         BlockPos blockpos = new BlockPos(i, 0, j);
-        Biome biome = this.world.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+        Biome biome = this.world.getBiome(blockpos.add(16, 0, 16));
         ChunkPos chunkpos = new ChunkPos(x, z);
         this.genNetherBridge.generateStructure(this.world, this.rand, chunkpos);
 
@@ -440,7 +440,7 @@ public class ChunkProviderHell implements IChunkGenerator
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_MAGMA))
         for (int l = 0; l < 4; ++l)
         {
-            this.field_189888_D.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), i2 - 5 + this.rand.nextInt(10), this.rand.nextInt(16)));
+            this.magmaGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), i2 - 5 + this.rand.nextInt(10), this.rand.nextInt(16)));
         }
 
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA2))
@@ -476,7 +476,7 @@ public class ChunkProviderHell implements IChunkGenerator
             }
         }
 
-        Biome biome = this.world.getBiomeGenForCoords(pos);
+        Biome biome = this.world.getBiome(pos);
         return biome.getSpawnableList(creatureType);
     }
 

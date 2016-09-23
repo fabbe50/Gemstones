@@ -321,7 +321,7 @@ public class PlayerInteractionManager
             TileEntity tileentity = this.theWorld.getTileEntity(pos);
             Block block = iblockstate.getBlock();
 
-            if ((block instanceof BlockCommandBlock || block instanceof BlockStructure) && !this.thisPlayerMP.func_189808_dh())
+            if ((block instanceof BlockCommandBlock || block instanceof BlockStructure) && !this.thisPlayerMP.canUseCommandBlock())
             {
                 this.theWorld.notifyBlockUpdate(pos, iblockstate, iblockstate, 3);
                 return false;
@@ -490,7 +490,7 @@ public class PlayerInteractionManager
             }
             else
             {
-                if (stack.getItem() instanceof ItemBlock && !player.func_189808_dh())
+                if (stack.getItem() instanceof ItemBlock && !player.canUseCommandBlock())
                 {
                     Block block = ((ItemBlock)stack.getItem()).getBlock();
 

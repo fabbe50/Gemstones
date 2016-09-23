@@ -194,9 +194,9 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements IHo
         }
     }
 
-    public static void func_189682_a(DataFixer p_189682_0_)
+    public static void registerFixesMinecartHopper(DataFixer fixer)
     {
-        EntityMinecartContainer.func_189680_b(p_189682_0_, "MinecartHopper");
+        EntityMinecartContainer.registerFixesMinecartContainer(fixer, "MinecartHopper");
     }
 
     /**

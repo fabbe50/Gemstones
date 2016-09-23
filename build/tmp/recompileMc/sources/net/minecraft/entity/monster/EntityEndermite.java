@@ -94,9 +94,9 @@ public class EntityEndermite extends EntityMob
         return LootTableList.ENTITIES_ENDERMITE;
     }
 
-    public static void func_189764_b(DataFixer p_189764_0_)
+    public static void registerFixesEndermite(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189764_0_, "Endermite");
+        EntityLiving.registerFixesMob(fixer, "Endermite");
     }
 
     /**

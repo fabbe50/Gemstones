@@ -152,9 +152,9 @@ public class EntityWolf extends EntityTameable
         this.playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
     }
 
-    public static void func_189788_b(DataFixer p_189788_0_)
+    public static void registerFixesWolf(DataFixer fixer)
     {
-        EntityLiving.func_189752_a(p_189788_0_, "Wolf");
+        EntityLiving.registerFixesMob(fixer, "Wolf");
     }
 
     /**

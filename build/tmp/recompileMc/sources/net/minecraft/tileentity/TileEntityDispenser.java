@@ -138,9 +138,9 @@ public class TileEntityDispenser extends TileEntityLockableLoot implements IInve
         return this.customName != null;
     }
 
-    public static void func_189678_a(DataFixer p_189678_0_)
+    public static void registerFixes(DataFixer fixer)
     {
-        p_189678_0_.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Trap", new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists("Trap", new String[] {"Items"}));
     }
 
     public void readFromNBT(NBTTagCompound compound)
@@ -209,7 +209,7 @@ public class TileEntityDispenser extends TileEntityLockableLoot implements IInve
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Don't rename this method to canInteractWith due to conflicts with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
@@ -225,7 +225,8 @@ public class TileEntityDispenser extends TileEntityLockableLoot implements IInve
     }
 
     /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
      */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {

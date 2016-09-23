@@ -27,46 +27,46 @@ import org.lwjgl.input.Keyboard;
 @SideOnly(Side.CLIENT)
 public class GuiEditStructure extends GuiScreen
 {
-    private static final Logger field_189845_a = LogManager.getLogger();
-    public static final int[] field_190302_a = new int[] {203, 205, 14, 211, 199, 207};
-    private final TileEntityStructure field_189846_f;
-    private Mirror field_189847_g = Mirror.NONE;
-    private Rotation field_189848_h = Rotation.NONE;
-    private TileEntityStructure.Mode field_189849_i = TileEntityStructure.Mode.DATA;
-    private boolean field_189850_r;
-    private boolean field_189851_s;
-    private boolean field_189852_t;
-    private GuiTextField field_189853_u;
-    private GuiTextField field_189854_v;
-    private GuiTextField field_189855_w;
-    private GuiTextField field_189856_x;
-    private GuiTextField field_189857_y;
-    private GuiTextField field_189858_z;
-    private GuiTextField field_189825_A;
-    private GuiTextField field_189826_B;
-    private GuiTextField field_189827_C;
-    private GuiTextField field_189828_D;
-    private GuiButton field_189829_E;
-    private GuiButton field_189830_F;
-    private GuiButton field_189831_G;
-    private GuiButton field_189832_H;
-    private GuiButton field_189833_I;
-    private GuiButton field_189834_J;
-    private GuiButton field_189835_K;
-    private GuiButton field_189836_L;
-    private GuiButton field_189837_M;
-    private GuiButton field_189838_N;
-    private GuiButton field_189839_O;
-    private GuiButton field_189840_P;
-    private GuiButton field_189841_Q;
-    private GuiButton field_189842_R;
-    private final List<GuiTextField> field_189843_S = Lists.<GuiTextField>newArrayList();
-    private final DecimalFormat field_189844_T = new DecimalFormat("0.0###");
+    private static final Logger LOGGER = LogManager.getLogger();
+    public static final int[] LEGAL_KEY_CODES = new int[] {203, 205, 14, 211, 199, 207};
+    private final TileEntityStructure tileStructure;
+    private Mirror mirror = Mirror.NONE;
+    private Rotation rotation = Rotation.NONE;
+    private TileEntityStructure.Mode mode = TileEntityStructure.Mode.DATA;
+    private boolean ignoreEntities;
+    private boolean showAir;
+    private boolean showBoundingBox;
+    private GuiTextField nameEdit;
+    private GuiTextField posXEdit;
+    private GuiTextField posYEdit;
+    private GuiTextField posZEdit;
+    private GuiTextField sizeXEdit;
+    private GuiTextField sizeYEdit;
+    private GuiTextField sizeZEdit;
+    private GuiTextField integrityEdit;
+    private GuiTextField seedEdit;
+    private GuiTextField dataEdit;
+    private GuiButton doneButton;
+    private GuiButton cancelButton;
+    private GuiButton saveButton;
+    private GuiButton loadButton;
+    private GuiButton rotateZeroDegreesButton;
+    private GuiButton rotateNinetyDegreesButton;
+    private GuiButton rotate180DegreesButton;
+    private GuiButton rotate270DegressButton;
+    private GuiButton modeButton;
+    private GuiButton detectSizeButton;
+    private GuiButton showEntitiesButton;
+    private GuiButton mirrorButton;
+    private GuiButton showAirButton;
+    private GuiButton showBoundingBoxButton;
+    private final List<GuiTextField> tabOrder = Lists.<GuiTextField>newArrayList();
+    private final DecimalFormat decimalFormat = new DecimalFormat("0.0###");
 
     public GuiEditStructure(TileEntityStructure p_i47142_1_)
     {
-        this.field_189846_f = p_i47142_1_;
-        this.field_189844_T.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
+        this.tileStructure = p_i47142_1_;
+        this.decimalFormat.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
     }
 
     /**
@@ -74,16 +74,16 @@ public class GuiEditStructure extends GuiScreen
      */
     public void updateScreen()
     {
-        this.field_189853_u.updateCursorCounter();
-        this.field_189854_v.updateCursorCounter();
-        this.field_189855_w.updateCursorCounter();
-        this.field_189856_x.updateCursorCounter();
-        this.field_189857_y.updateCursorCounter();
-        this.field_189858_z.updateCursorCounter();
-        this.field_189825_A.updateCursorCounter();
-        this.field_189826_B.updateCursorCounter();
-        this.field_189827_C.updateCursorCounter();
-        this.field_189828_D.updateCursorCounter();
+        this.nameEdit.updateCursorCounter();
+        this.posXEdit.updateCursorCounter();
+        this.posYEdit.updateCursorCounter();
+        this.posZEdit.updateCursorCounter();
+        this.sizeXEdit.updateCursorCounter();
+        this.sizeYEdit.updateCursorCounter();
+        this.sizeZEdit.updateCursorCounter();
+        this.integrityEdit.updateCursorCounter();
+        this.seedEdit.updateCursorCounter();
+        this.dataEdit.updateCursorCounter();
     }
 
     /**
@@ -94,74 +94,74 @@ public class GuiEditStructure extends GuiScreen
     {
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
-        this.field_189829_E = this.func_189646_b(new GuiButton(0, this.width / 2 - 4 - 150, 210, 150, 20, I18n.format("gui.done", new Object[0])));
-        this.field_189830_F = this.func_189646_b(new GuiButton(1, this.width / 2 + 4, 210, 150, 20, I18n.format("gui.cancel", new Object[0])));
-        this.field_189831_G = this.func_189646_b(new GuiButton(9, this.width / 2 + 4 + 100, 185, 50, 20, I18n.format("structure_block.button.save", new Object[0])));
-        this.field_189832_H = this.func_189646_b(new GuiButton(10, this.width / 2 + 4 + 100, 185, 50, 20, I18n.format("structure_block.button.load", new Object[0])));
-        this.field_189837_M = this.func_189646_b(new GuiButton(18, this.width / 2 - 4 - 150, 185, 50, 20, "MODE"));
-        this.field_189838_N = this.func_189646_b(new GuiButton(19, this.width / 2 + 4 + 100, 120, 50, 20, I18n.format("structure_block.button.detect_size", new Object[0])));
-        this.field_189839_O = this.func_189646_b(new GuiButton(20, this.width / 2 + 4 + 100, 160, 50, 20, "ENTITIES"));
-        this.field_189840_P = this.func_189646_b(new GuiButton(21, this.width / 2 - 20, 185, 40, 20, "MIRROR"));
-        this.field_189841_Q = this.func_189646_b(new GuiButton(22, this.width / 2 + 4 + 100, 80, 50, 20, "SHOWAIR"));
-        this.field_189842_R = this.func_189646_b(new GuiButton(23, this.width / 2 + 4 + 100, 80, 50, 20, "SHOWBB"));
-        this.field_189833_I = this.func_189646_b(new GuiButton(11, this.width / 2 - 1 - 40 - 1 - 40 - 20, 185, 40, 20, "0"));
-        this.field_189834_J = this.func_189646_b(new GuiButton(12, this.width / 2 - 1 - 40 - 20, 185, 40, 20, "90"));
-        this.field_189835_K = this.func_189646_b(new GuiButton(13, this.width / 2 + 1 + 20, 185, 40, 20, "180"));
-        this.field_189836_L = this.func_189646_b(new GuiButton(14, this.width / 2 + 1 + 40 + 1 + 20, 185, 40, 20, "270"));
-        this.field_189853_u = new GuiTextField(2, this.fontRendererObj, this.width / 2 - 152, 40, 300, 20);
-        this.field_189853_u.setMaxStringLength(64);
-        this.field_189853_u.setText(this.field_189846_f.func_189715_d());
-        this.field_189843_S.add(this.field_189853_u);
-        BlockPos blockpos = this.field_189846_f.func_189711_e();
-        this.field_189854_v = new GuiTextField(3, this.fontRendererObj, this.width / 2 - 152, 80, 80, 20);
-        this.field_189854_v.setMaxStringLength(15);
-        this.field_189854_v.setText(Integer.toString(blockpos.getX()));
-        this.field_189843_S.add(this.field_189854_v);
-        this.field_189855_w = new GuiTextField(4, this.fontRendererObj, this.width / 2 - 72, 80, 80, 20);
-        this.field_189855_w.setMaxStringLength(15);
-        this.field_189855_w.setText(Integer.toString(blockpos.getY()));
-        this.field_189843_S.add(this.field_189855_w);
-        this.field_189856_x = new GuiTextField(5, this.fontRendererObj, this.width / 2 + 8, 80, 80, 20);
-        this.field_189856_x.setMaxStringLength(15);
-        this.field_189856_x.setText(Integer.toString(blockpos.getZ()));
-        this.field_189843_S.add(this.field_189856_x);
-        BlockPos blockpos1 = this.field_189846_f.func_189717_g();
-        this.field_189857_y = new GuiTextField(6, this.fontRendererObj, this.width / 2 - 152, 120, 80, 20);
-        this.field_189857_y.setMaxStringLength(15);
-        this.field_189857_y.setText(Integer.toString(blockpos1.getX()));
-        this.field_189843_S.add(this.field_189857_y);
-        this.field_189858_z = new GuiTextField(7, this.fontRendererObj, this.width / 2 - 72, 120, 80, 20);
-        this.field_189858_z.setMaxStringLength(15);
-        this.field_189858_z.setText(Integer.toString(blockpos1.getY()));
-        this.field_189843_S.add(this.field_189858_z);
-        this.field_189825_A = new GuiTextField(8, this.fontRendererObj, this.width / 2 + 8, 120, 80, 20);
-        this.field_189825_A.setMaxStringLength(15);
-        this.field_189825_A.setText(Integer.toString(blockpos1.getZ()));
-        this.field_189843_S.add(this.field_189825_A);
-        this.field_189826_B = new GuiTextField(15, this.fontRendererObj, this.width / 2 - 152, 120, 80, 20);
-        this.field_189826_B.setMaxStringLength(15);
-        this.field_189826_B.setText(this.field_189844_T.format((double)this.field_189846_f.func_189702_n()));
-        this.field_189843_S.add(this.field_189826_B);
-        this.field_189827_C = new GuiTextField(16, this.fontRendererObj, this.width / 2 - 72, 120, 80, 20);
-        this.field_189827_C.setMaxStringLength(31);
-        this.field_189827_C.setText(Long.toString(this.field_189846_f.func_189719_o()));
-        this.field_189843_S.add(this.field_189827_C);
-        this.field_189828_D = new GuiTextField(17, this.fontRendererObj, this.width / 2 - 152, 120, 240, 20);
-        this.field_189828_D.setMaxStringLength(128);
-        this.field_189828_D.setText(this.field_189846_f.func_189708_j());
-        this.field_189843_S.add(this.field_189828_D);
-        this.field_189847_g = this.field_189846_f.func_189716_h();
-        this.func_189816_h();
-        this.field_189848_h = this.field_189846_f.func_189726_i();
-        this.func_189824_i();
-        this.field_189849_i = this.field_189846_f.func_189700_k();
-        this.func_189823_j();
-        this.field_189850_r = this.field_189846_f.func_189713_m();
-        this.func_189822_a();
-        this.field_189851_s = this.field_189846_f.func_189707_H();
-        this.func_189814_f();
-        this.field_189852_t = this.field_189846_f.func_189721_I();
-        this.func_189815_g();
+        this.doneButton = this.addButton(new GuiButton(0, this.width / 2 - 4 - 150, 210, 150, 20, I18n.format("gui.done", new Object[0])));
+        this.cancelButton = this.addButton(new GuiButton(1, this.width / 2 + 4, 210, 150, 20, I18n.format("gui.cancel", new Object[0])));
+        this.saveButton = this.addButton(new GuiButton(9, this.width / 2 + 4 + 100, 185, 50, 20, I18n.format("structure_block.button.save", new Object[0])));
+        this.loadButton = this.addButton(new GuiButton(10, this.width / 2 + 4 + 100, 185, 50, 20, I18n.format("structure_block.button.load", new Object[0])));
+        this.modeButton = this.addButton(new GuiButton(18, this.width / 2 - 4 - 150, 185, 50, 20, "MODE"));
+        this.detectSizeButton = this.addButton(new GuiButton(19, this.width / 2 + 4 + 100, 120, 50, 20, I18n.format("structure_block.button.detect_size", new Object[0])));
+        this.showEntitiesButton = this.addButton(new GuiButton(20, this.width / 2 + 4 + 100, 160, 50, 20, "ENTITIES"));
+        this.mirrorButton = this.addButton(new GuiButton(21, this.width / 2 - 20, 185, 40, 20, "MIRROR"));
+        this.showAirButton = this.addButton(new GuiButton(22, this.width / 2 + 4 + 100, 80, 50, 20, "SHOWAIR"));
+        this.showBoundingBoxButton = this.addButton(new GuiButton(23, this.width / 2 + 4 + 100, 80, 50, 20, "SHOWBB"));
+        this.rotateZeroDegreesButton = this.addButton(new GuiButton(11, this.width / 2 - 1 - 40 - 1 - 40 - 20, 185, 40, 20, "0"));
+        this.rotateNinetyDegreesButton = this.addButton(new GuiButton(12, this.width / 2 - 1 - 40 - 20, 185, 40, 20, "90"));
+        this.rotate180DegreesButton = this.addButton(new GuiButton(13, this.width / 2 + 1 + 20, 185, 40, 20, "180"));
+        this.rotate270DegressButton = this.addButton(new GuiButton(14, this.width / 2 + 1 + 40 + 1 + 20, 185, 40, 20, "270"));
+        this.nameEdit = new GuiTextField(2, this.fontRendererObj, this.width / 2 - 152, 40, 300, 20);
+        this.nameEdit.setMaxStringLength(64);
+        this.nameEdit.setText(this.tileStructure.getName());
+        this.tabOrder.add(this.nameEdit);
+        BlockPos blockpos = this.tileStructure.getPosition();
+        this.posXEdit = new GuiTextField(3, this.fontRendererObj, this.width / 2 - 152, 80, 80, 20);
+        this.posXEdit.setMaxStringLength(15);
+        this.posXEdit.setText(Integer.toString(blockpos.getX()));
+        this.tabOrder.add(this.posXEdit);
+        this.posYEdit = new GuiTextField(4, this.fontRendererObj, this.width / 2 - 72, 80, 80, 20);
+        this.posYEdit.setMaxStringLength(15);
+        this.posYEdit.setText(Integer.toString(blockpos.getY()));
+        this.tabOrder.add(this.posYEdit);
+        this.posZEdit = new GuiTextField(5, this.fontRendererObj, this.width / 2 + 8, 80, 80, 20);
+        this.posZEdit.setMaxStringLength(15);
+        this.posZEdit.setText(Integer.toString(blockpos.getZ()));
+        this.tabOrder.add(this.posZEdit);
+        BlockPos blockpos1 = this.tileStructure.getStructureSize();
+        this.sizeXEdit = new GuiTextField(6, this.fontRendererObj, this.width / 2 - 152, 120, 80, 20);
+        this.sizeXEdit.setMaxStringLength(15);
+        this.sizeXEdit.setText(Integer.toString(blockpos1.getX()));
+        this.tabOrder.add(this.sizeXEdit);
+        this.sizeYEdit = new GuiTextField(7, this.fontRendererObj, this.width / 2 - 72, 120, 80, 20);
+        this.sizeYEdit.setMaxStringLength(15);
+        this.sizeYEdit.setText(Integer.toString(blockpos1.getY()));
+        this.tabOrder.add(this.sizeYEdit);
+        this.sizeZEdit = new GuiTextField(8, this.fontRendererObj, this.width / 2 + 8, 120, 80, 20);
+        this.sizeZEdit.setMaxStringLength(15);
+        this.sizeZEdit.setText(Integer.toString(blockpos1.getZ()));
+        this.tabOrder.add(this.sizeZEdit);
+        this.integrityEdit = new GuiTextField(15, this.fontRendererObj, this.width / 2 - 152, 120, 80, 20);
+        this.integrityEdit.setMaxStringLength(15);
+        this.integrityEdit.setText(this.decimalFormat.format((double)this.tileStructure.getIntegrity()));
+        this.tabOrder.add(this.integrityEdit);
+        this.seedEdit = new GuiTextField(16, this.fontRendererObj, this.width / 2 - 72, 120, 80, 20);
+        this.seedEdit.setMaxStringLength(31);
+        this.seedEdit.setText(Long.toString(this.tileStructure.getSeed()));
+        this.tabOrder.add(this.seedEdit);
+        this.dataEdit = new GuiTextField(17, this.fontRendererObj, this.width / 2 - 152, 120, 240, 20);
+        this.dataEdit.setMaxStringLength(128);
+        this.dataEdit.setText(this.tileStructure.getMetadata());
+        this.tabOrder.add(this.dataEdit);
+        this.mirror = this.tileStructure.getMirror();
+        this.updateMirrorButton();
+        this.rotation = this.tileStructure.getRotation();
+        this.updateDirectionButtons();
+        this.mode = this.tileStructure.getMode();
+        this.updateMode();
+        this.ignoreEntities = this.tileStructure.ignoresEntities();
+        this.updateEntitiesButton();
+        this.showAir = this.tileStructure.showsAir();
+        this.updateToggleAirButton();
+        this.showBoundingBox = this.tileStructure.showsBoundingBox();
+        this.updateToggleBoundingBox();
     }
 
     /**
@@ -181,301 +181,301 @@ public class GuiEditStructure extends GuiScreen
         {
             if (button.id == 1)
             {
-                this.field_189846_f.setMirror(this.field_189847_g);
-                this.field_189846_f.setRotation(this.field_189848_h);
-                this.field_189846_f.setMode(this.field_189849_i);
-                this.field_189846_f.setIgnoresEntities(this.field_189850_r);
-                this.field_189846_f.func_189703_e(this.field_189851_s);
-                this.field_189846_f.func_189710_f(this.field_189852_t);
+                this.tileStructure.setMirror(this.mirror);
+                this.tileStructure.setRotation(this.rotation);
+                this.tileStructure.setMode(this.mode);
+                this.tileStructure.setIgnoresEntities(this.ignoreEntities);
+                this.tileStructure.setShowAir(this.showAir);
+                this.tileStructure.setShowBoundingBox(this.showBoundingBox);
                 this.mc.displayGuiScreen((GuiScreen)null);
             }
             else if (button.id == 0)
             {
-                if (this.func_189820_b(1))
+                if (this.sendToServer(1))
                 {
                     this.mc.displayGuiScreen((GuiScreen)null);
                 }
             }
             else if (button.id == 9)
             {
-                if (this.field_189846_f.func_189700_k() == TileEntityStructure.Mode.SAVE)
+                if (this.tileStructure.getMode() == TileEntityStructure.Mode.SAVE)
                 {
-                    this.func_189820_b(2);
+                    this.sendToServer(2);
                     this.mc.displayGuiScreen((GuiScreen)null);
                 }
             }
             else if (button.id == 10)
             {
-                if (this.field_189846_f.func_189700_k() == TileEntityStructure.Mode.LOAD)
+                if (this.tileStructure.getMode() == TileEntityStructure.Mode.LOAD)
                 {
-                    this.func_189820_b(3);
+                    this.sendToServer(3);
                     this.mc.displayGuiScreen((GuiScreen)null);
                 }
             }
             else if (button.id == 11)
             {
-                this.field_189846_f.setRotation(Rotation.NONE);
-                this.func_189824_i();
+                this.tileStructure.setRotation(Rotation.NONE);
+                this.updateDirectionButtons();
             }
             else if (button.id == 12)
             {
-                this.field_189846_f.setRotation(Rotation.CLOCKWISE_90);
-                this.func_189824_i();
+                this.tileStructure.setRotation(Rotation.CLOCKWISE_90);
+                this.updateDirectionButtons();
             }
             else if (button.id == 13)
             {
-                this.field_189846_f.setRotation(Rotation.CLOCKWISE_180);
-                this.func_189824_i();
+                this.tileStructure.setRotation(Rotation.CLOCKWISE_180);
+                this.updateDirectionButtons();
             }
             else if (button.id == 14)
             {
-                this.field_189846_f.setRotation(Rotation.COUNTERCLOCKWISE_90);
-                this.func_189824_i();
+                this.tileStructure.setRotation(Rotation.COUNTERCLOCKWISE_90);
+                this.updateDirectionButtons();
             }
             else if (button.id == 18)
             {
-                this.field_189846_f.func_189724_l();
-                this.func_189823_j();
+                this.tileStructure.nextMode();
+                this.updateMode();
             }
             else if (button.id == 19)
             {
-                if (this.field_189846_f.func_189700_k() == TileEntityStructure.Mode.SAVE)
+                if (this.tileStructure.getMode() == TileEntityStructure.Mode.SAVE)
                 {
-                    this.func_189820_b(4);
+                    this.sendToServer(4);
                     this.mc.displayGuiScreen((GuiScreen)null);
                 }
             }
             else if (button.id == 20)
             {
-                this.field_189846_f.setIgnoresEntities(!this.field_189846_f.func_189713_m());
-                this.func_189822_a();
+                this.tileStructure.setIgnoresEntities(!this.tileStructure.ignoresEntities());
+                this.updateEntitiesButton();
             }
             else if (button.id == 22)
             {
-                this.field_189846_f.func_189703_e(!this.field_189846_f.func_189707_H());
-                this.func_189814_f();
+                this.tileStructure.setShowAir(!this.tileStructure.showsAir());
+                this.updateToggleAirButton();
             }
             else if (button.id == 23)
             {
-                this.field_189846_f.func_189710_f(!this.field_189846_f.func_189721_I());
-                this.func_189815_g();
+                this.tileStructure.setShowBoundingBox(!this.tileStructure.showsBoundingBox());
+                this.updateToggleBoundingBox();
             }
             else if (button.id == 21)
             {
-                switch (this.field_189846_f.func_189716_h())
+                switch (this.tileStructure.getMirror())
                 {
                     case NONE:
-                        this.field_189846_f.setMirror(Mirror.LEFT_RIGHT);
+                        this.tileStructure.setMirror(Mirror.LEFT_RIGHT);
                         break;
                     case LEFT_RIGHT:
-                        this.field_189846_f.setMirror(Mirror.FRONT_BACK);
+                        this.tileStructure.setMirror(Mirror.FRONT_BACK);
                         break;
                     case FRONT_BACK:
-                        this.field_189846_f.setMirror(Mirror.NONE);
+                        this.tileStructure.setMirror(Mirror.NONE);
                 }
 
-                this.func_189816_h();
+                this.updateMirrorButton();
             }
         }
     }
 
-    private void func_189822_a()
+    private void updateEntitiesButton()
     {
-        boolean flag = !this.field_189846_f.func_189713_m();
+        boolean flag = !this.tileStructure.ignoresEntities();
 
         if (flag)
         {
-            this.field_189839_O.displayString = I18n.format("options.on", new Object[0]);
+            this.showEntitiesButton.displayString = I18n.format("options.on", new Object[0]);
         }
         else
         {
-            this.field_189839_O.displayString = I18n.format("options.off", new Object[0]);
+            this.showEntitiesButton.displayString = I18n.format("options.off", new Object[0]);
         }
     }
 
-    private void func_189814_f()
+    private void updateToggleAirButton()
     {
-        boolean flag = this.field_189846_f.func_189707_H();
+        boolean flag = this.tileStructure.showsAir();
 
         if (flag)
         {
-            this.field_189841_Q.displayString = I18n.format("options.on", new Object[0]);
+            this.showAirButton.displayString = I18n.format("options.on", new Object[0]);
         }
         else
         {
-            this.field_189841_Q.displayString = I18n.format("options.off", new Object[0]);
+            this.showAirButton.displayString = I18n.format("options.off", new Object[0]);
         }
     }
 
-    private void func_189815_g()
+    private void updateToggleBoundingBox()
     {
-        boolean flag = this.field_189846_f.func_189721_I();
+        boolean flag = this.tileStructure.showsBoundingBox();
 
         if (flag)
         {
-            this.field_189842_R.displayString = I18n.format("options.on", new Object[0]);
+            this.showBoundingBoxButton.displayString = I18n.format("options.on", new Object[0]);
         }
         else
         {
-            this.field_189842_R.displayString = I18n.format("options.off", new Object[0]);
+            this.showBoundingBoxButton.displayString = I18n.format("options.off", new Object[0]);
         }
     }
 
-    private void func_189816_h()
+    private void updateMirrorButton()
     {
-        Mirror mirror = this.field_189846_f.func_189716_h();
+        Mirror mirror = this.tileStructure.getMirror();
 
         switch (mirror)
         {
             case NONE:
-                this.field_189840_P.displayString = "|";
+                this.mirrorButton.displayString = "|";
                 break;
             case LEFT_RIGHT:
-                this.field_189840_P.displayString = "< >";
+                this.mirrorButton.displayString = "< >";
                 break;
             case FRONT_BACK:
-                this.field_189840_P.displayString = "^ v";
+                this.mirrorButton.displayString = "^ v";
         }
     }
 
-    private void func_189824_i()
+    private void updateDirectionButtons()
     {
-        this.field_189833_I.enabled = true;
-        this.field_189834_J.enabled = true;
-        this.field_189835_K.enabled = true;
-        this.field_189836_L.enabled = true;
+        this.rotateZeroDegreesButton.enabled = true;
+        this.rotateNinetyDegreesButton.enabled = true;
+        this.rotate180DegreesButton.enabled = true;
+        this.rotate270DegressButton.enabled = true;
 
-        switch (this.field_189846_f.func_189726_i())
+        switch (this.tileStructure.getRotation())
         {
             case NONE:
-                this.field_189833_I.enabled = false;
+                this.rotateZeroDegreesButton.enabled = false;
                 break;
             case CLOCKWISE_180:
-                this.field_189835_K.enabled = false;
+                this.rotate180DegreesButton.enabled = false;
                 break;
             case COUNTERCLOCKWISE_90:
-                this.field_189836_L.enabled = false;
+                this.rotate270DegressButton.enabled = false;
                 break;
             case CLOCKWISE_90:
-                this.field_189834_J.enabled = false;
+                this.rotateNinetyDegreesButton.enabled = false;
         }
     }
 
-    private void func_189823_j()
+    private void updateMode()
     {
-        this.field_189853_u.setFocused(false);
-        this.field_189854_v.setFocused(false);
-        this.field_189855_w.setFocused(false);
-        this.field_189856_x.setFocused(false);
-        this.field_189857_y.setFocused(false);
-        this.field_189858_z.setFocused(false);
-        this.field_189825_A.setFocused(false);
-        this.field_189826_B.setFocused(false);
-        this.field_189827_C.setFocused(false);
-        this.field_189828_D.setFocused(false);
-        this.field_189853_u.setVisible(false);
-        this.field_189853_u.setFocused(false);
-        this.field_189854_v.setVisible(false);
-        this.field_189855_w.setVisible(false);
-        this.field_189856_x.setVisible(false);
-        this.field_189857_y.setVisible(false);
-        this.field_189858_z.setVisible(false);
-        this.field_189825_A.setVisible(false);
-        this.field_189826_B.setVisible(false);
-        this.field_189827_C.setVisible(false);
-        this.field_189828_D.setVisible(false);
-        this.field_189831_G.visible = false;
-        this.field_189832_H.visible = false;
-        this.field_189838_N.visible = false;
-        this.field_189839_O.visible = false;
-        this.field_189840_P.visible = false;
-        this.field_189833_I.visible = false;
-        this.field_189834_J.visible = false;
-        this.field_189835_K.visible = false;
-        this.field_189836_L.visible = false;
-        this.field_189841_Q.visible = false;
-        this.field_189842_R.visible = false;
+        this.nameEdit.setFocused(false);
+        this.posXEdit.setFocused(false);
+        this.posYEdit.setFocused(false);
+        this.posZEdit.setFocused(false);
+        this.sizeXEdit.setFocused(false);
+        this.sizeYEdit.setFocused(false);
+        this.sizeZEdit.setFocused(false);
+        this.integrityEdit.setFocused(false);
+        this.seedEdit.setFocused(false);
+        this.dataEdit.setFocused(false);
+        this.nameEdit.setVisible(false);
+        this.nameEdit.setFocused(false);
+        this.posXEdit.setVisible(false);
+        this.posYEdit.setVisible(false);
+        this.posZEdit.setVisible(false);
+        this.sizeXEdit.setVisible(false);
+        this.sizeYEdit.setVisible(false);
+        this.sizeZEdit.setVisible(false);
+        this.integrityEdit.setVisible(false);
+        this.seedEdit.setVisible(false);
+        this.dataEdit.setVisible(false);
+        this.saveButton.visible = false;
+        this.loadButton.visible = false;
+        this.detectSizeButton.visible = false;
+        this.showEntitiesButton.visible = false;
+        this.mirrorButton.visible = false;
+        this.rotateZeroDegreesButton.visible = false;
+        this.rotateNinetyDegreesButton.visible = false;
+        this.rotate180DegreesButton.visible = false;
+        this.rotate270DegressButton.visible = false;
+        this.showAirButton.visible = false;
+        this.showBoundingBoxButton.visible = false;
 
-        switch (this.field_189846_f.func_189700_k())
+        switch (this.tileStructure.getMode())
         {
             case SAVE:
-                this.field_189853_u.setVisible(true);
-                this.field_189853_u.setFocused(true);
-                this.field_189854_v.setVisible(true);
-                this.field_189855_w.setVisible(true);
-                this.field_189856_x.setVisible(true);
-                this.field_189857_y.setVisible(true);
-                this.field_189858_z.setVisible(true);
-                this.field_189825_A.setVisible(true);
-                this.field_189831_G.visible = true;
-                this.field_189838_N.visible = true;
-                this.field_189839_O.visible = true;
-                this.field_189841_Q.visible = true;
+                this.nameEdit.setVisible(true);
+                this.nameEdit.setFocused(true);
+                this.posXEdit.setVisible(true);
+                this.posYEdit.setVisible(true);
+                this.posZEdit.setVisible(true);
+                this.sizeXEdit.setVisible(true);
+                this.sizeYEdit.setVisible(true);
+                this.sizeZEdit.setVisible(true);
+                this.saveButton.visible = true;
+                this.detectSizeButton.visible = true;
+                this.showEntitiesButton.visible = true;
+                this.showAirButton.visible = true;
                 break;
             case LOAD:
-                this.field_189853_u.setVisible(true);
-                this.field_189853_u.setFocused(true);
-                this.field_189854_v.setVisible(true);
-                this.field_189855_w.setVisible(true);
-                this.field_189856_x.setVisible(true);
-                this.field_189826_B.setVisible(true);
-                this.field_189827_C.setVisible(true);
-                this.field_189832_H.visible = true;
-                this.field_189839_O.visible = true;
-                this.field_189840_P.visible = true;
-                this.field_189833_I.visible = true;
-                this.field_189834_J.visible = true;
-                this.field_189835_K.visible = true;
-                this.field_189836_L.visible = true;
-                this.field_189842_R.visible = true;
-                this.func_189824_i();
+                this.nameEdit.setVisible(true);
+                this.nameEdit.setFocused(true);
+                this.posXEdit.setVisible(true);
+                this.posYEdit.setVisible(true);
+                this.posZEdit.setVisible(true);
+                this.integrityEdit.setVisible(true);
+                this.seedEdit.setVisible(true);
+                this.loadButton.visible = true;
+                this.showEntitiesButton.visible = true;
+                this.mirrorButton.visible = true;
+                this.rotateZeroDegreesButton.visible = true;
+                this.rotateNinetyDegreesButton.visible = true;
+                this.rotate180DegreesButton.visible = true;
+                this.rotate270DegressButton.visible = true;
+                this.showBoundingBoxButton.visible = true;
+                this.updateDirectionButtons();
                 break;
             case CORNER:
-                this.field_189853_u.setVisible(true);
-                this.field_189853_u.setFocused(true);
+                this.nameEdit.setVisible(true);
+                this.nameEdit.setFocused(true);
                 break;
             case DATA:
-                this.field_189828_D.setVisible(true);
-                this.field_189828_D.setFocused(true);
+                this.dataEdit.setVisible(true);
+                this.dataEdit.setFocused(true);
         }
 
-        this.field_189837_M.displayString = I18n.format("structure_block.mode." + this.field_189846_f.func_189700_k().getName(), new Object[0]);
+        this.modeButton.displayString = I18n.format("structure_block.mode." + this.tileStructure.getMode().getName(), new Object[0]);
     }
 
-    private boolean func_189820_b(int p_189820_1_)
+    private boolean sendToServer(int p_189820_1_)
     {
         try
         {
             PacketBuffer packetbuffer = new PacketBuffer(Unpooled.buffer());
-            this.field_189846_f.func_189705_a(packetbuffer);
+            this.tileStructure.writeCoordinates(packetbuffer);
             packetbuffer.writeByte(p_189820_1_);
-            packetbuffer.writeString(this.field_189846_f.func_189700_k().toString());
-            packetbuffer.writeString(this.field_189853_u.getText());
-            packetbuffer.writeInt(this.func_189817_c(this.field_189854_v.getText()));
-            packetbuffer.writeInt(this.func_189817_c(this.field_189855_w.getText()));
-            packetbuffer.writeInt(this.func_189817_c(this.field_189856_x.getText()));
-            packetbuffer.writeInt(this.func_189817_c(this.field_189857_y.getText()));
-            packetbuffer.writeInt(this.func_189817_c(this.field_189858_z.getText()));
-            packetbuffer.writeInt(this.func_189817_c(this.field_189825_A.getText()));
-            packetbuffer.writeString(this.field_189846_f.func_189716_h().toString());
-            packetbuffer.writeString(this.field_189846_f.func_189726_i().toString());
-            packetbuffer.writeString(this.field_189828_D.getText());
-            packetbuffer.writeBoolean(this.field_189846_f.func_189713_m());
-            packetbuffer.writeBoolean(this.field_189846_f.func_189707_H());
-            packetbuffer.writeBoolean(this.field_189846_f.func_189721_I());
-            packetbuffer.writeFloat(this.func_189819_b(this.field_189826_B.getText()));
-            packetbuffer.writeVarLong(this.func_189821_a(this.field_189827_C.getText()));
+            packetbuffer.writeString(this.tileStructure.getMode().toString());
+            packetbuffer.writeString(this.nameEdit.getText());
+            packetbuffer.writeInt(this.parseCoordinate(this.posXEdit.getText()));
+            packetbuffer.writeInt(this.parseCoordinate(this.posYEdit.getText()));
+            packetbuffer.writeInt(this.parseCoordinate(this.posZEdit.getText()));
+            packetbuffer.writeInt(this.parseCoordinate(this.sizeXEdit.getText()));
+            packetbuffer.writeInt(this.parseCoordinate(this.sizeYEdit.getText()));
+            packetbuffer.writeInt(this.parseCoordinate(this.sizeZEdit.getText()));
+            packetbuffer.writeString(this.tileStructure.getMirror().toString());
+            packetbuffer.writeString(this.tileStructure.getRotation().toString());
+            packetbuffer.writeString(this.dataEdit.getText());
+            packetbuffer.writeBoolean(this.tileStructure.ignoresEntities());
+            packetbuffer.writeBoolean(this.tileStructure.showsAir());
+            packetbuffer.writeBoolean(this.tileStructure.showsBoundingBox());
+            packetbuffer.writeFloat(this.parseIntegrity(this.integrityEdit.getText()));
+            packetbuffer.writeVarLong(this.parseSeed(this.seedEdit.getText()));
             this.mc.getConnection().sendPacket(new CPacketCustomPayload("MC|Struct", packetbuffer));
             return true;
         }
         catch (Exception exception)
         {
-            field_189845_a.warn((String)"Could not send structure block info", (Throwable)exception);
+            LOGGER.warn((String)"Could not send structure block info", (Throwable)exception);
             return false;
         }
     }
 
-    private long func_189821_a(String p_189821_1_)
+    private long parseSeed(String p_189821_1_)
     {
         try
         {
@@ -487,7 +487,7 @@ public class GuiEditStructure extends GuiScreen
         }
     }
 
-    private float func_189819_b(String p_189819_1_)
+    private float parseIntegrity(String p_189819_1_)
     {
         try
         {
@@ -499,7 +499,7 @@ public class GuiEditStructure extends GuiScreen
         }
     }
 
-    private int func_189817_c(String p_189817_1_)
+    private int parseCoordinate(String p_189817_1_)
     {
         try
         {
@@ -517,54 +517,54 @@ public class GuiEditStructure extends GuiScreen
      */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
-        if (this.field_189853_u.getVisible() && func_190301_b(typedChar, keyCode))
+        if (this.nameEdit.getVisible() && isValidCharacterForName(typedChar, keyCode))
         {
-            this.field_189853_u.textboxKeyTyped(typedChar, keyCode);
+            this.nameEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189854_v.getVisible())
+        if (this.posXEdit.getVisible())
         {
-            this.field_189854_v.textboxKeyTyped(typedChar, keyCode);
+            this.posXEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189855_w.getVisible())
+        if (this.posYEdit.getVisible())
         {
-            this.field_189855_w.textboxKeyTyped(typedChar, keyCode);
+            this.posYEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189856_x.getVisible())
+        if (this.posZEdit.getVisible())
         {
-            this.field_189856_x.textboxKeyTyped(typedChar, keyCode);
+            this.posZEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189857_y.getVisible())
+        if (this.sizeXEdit.getVisible())
         {
-            this.field_189857_y.textboxKeyTyped(typedChar, keyCode);
+            this.sizeXEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189858_z.getVisible())
+        if (this.sizeYEdit.getVisible())
         {
-            this.field_189858_z.textboxKeyTyped(typedChar, keyCode);
+            this.sizeYEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189825_A.getVisible())
+        if (this.sizeZEdit.getVisible())
         {
-            this.field_189825_A.textboxKeyTyped(typedChar, keyCode);
+            this.sizeZEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189826_B.getVisible())
+        if (this.integrityEdit.getVisible())
         {
-            this.field_189826_B.textboxKeyTyped(typedChar, keyCode);
+            this.integrityEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189827_C.getVisible())
+        if (this.seedEdit.getVisible())
         {
-            this.field_189827_C.textboxKeyTyped(typedChar, keyCode);
+            this.seedEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
-        if (this.field_189828_D.getVisible())
+        if (this.dataEdit.getVisible())
         {
-            this.field_189828_D.textboxKeyTyped(typedChar, keyCode);
+            this.dataEdit.textboxKeyTyped(typedChar, keyCode);
         }
 
         if (keyCode == 15)
@@ -572,7 +572,7 @@ public class GuiEditStructure extends GuiScreen
             GuiTextField guitextfield = null;
             GuiTextField guitextfield1 = null;
 
-            for (GuiTextField guitextfield2 : this.field_189843_S)
+            for (GuiTextField guitextfield2 : this.tabOrder)
             {
                 if (guitextfield != null && guitextfield2.getVisible())
                 {
@@ -588,7 +588,7 @@ public class GuiEditStructure extends GuiScreen
 
             if (guitextfield != null && guitextfield1 == null)
             {
-                for (GuiTextField guitextfield3 : this.field_189843_S)
+                for (GuiTextField guitextfield3 : this.tabOrder)
                 {
                     if (guitextfield3.getVisible() && guitextfield3 != guitextfield)
                     {
@@ -609,20 +609,20 @@ public class GuiEditStructure extends GuiScreen
         {
             if (keyCode == 1)
             {
-                this.actionPerformed(this.field_189830_F);
+                this.actionPerformed(this.cancelButton);
             }
         }
         else
         {
-            this.actionPerformed(this.field_189829_E);
+            this.actionPerformed(this.doneButton);
         }
     }
 
-    private static boolean func_190301_b(char p_190301_0_, int p_190301_1_)
+    private static boolean isValidCharacterForName(char p_190301_0_, int p_190301_1_)
     {
         boolean flag = true;
 
-        for (int i : field_190302_a)
+        for (int i : LEGAL_KEY_CODES)
         {
             if (i == p_190301_1_)
             {
@@ -630,7 +630,7 @@ public class GuiEditStructure extends GuiScreen
             }
         }
 
-        for (char c0 : ChatAllowedCharacters.field_189861_b)
+        for (char c0 : ChatAllowedCharacters.ILLEGAL_STRUCTURE_CHARACTERS)
         {
             if (c0 == p_190301_0_)
             {
@@ -649,54 +649,54 @@ public class GuiEditStructure extends GuiScreen
     {
         super.mouseClicked(mouseX, mouseY, mouseButton);
 
-        if (this.field_189853_u.getVisible())
+        if (this.nameEdit.getVisible())
         {
-            this.field_189853_u.mouseClicked(mouseX, mouseY, mouseButton);
+            this.nameEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189854_v.getVisible())
+        if (this.posXEdit.getVisible())
         {
-            this.field_189854_v.mouseClicked(mouseX, mouseY, mouseButton);
+            this.posXEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189855_w.getVisible())
+        if (this.posYEdit.getVisible())
         {
-            this.field_189855_w.mouseClicked(mouseX, mouseY, mouseButton);
+            this.posYEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189856_x.getVisible())
+        if (this.posZEdit.getVisible())
         {
-            this.field_189856_x.mouseClicked(mouseX, mouseY, mouseButton);
+            this.posZEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189857_y.getVisible())
+        if (this.sizeXEdit.getVisible())
         {
-            this.field_189857_y.mouseClicked(mouseX, mouseY, mouseButton);
+            this.sizeXEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189858_z.getVisible())
+        if (this.sizeYEdit.getVisible())
         {
-            this.field_189858_z.mouseClicked(mouseX, mouseY, mouseButton);
+            this.sizeYEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189825_A.getVisible())
+        if (this.sizeZEdit.getVisible())
         {
-            this.field_189825_A.mouseClicked(mouseX, mouseY, mouseButton);
+            this.sizeZEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189826_B.getVisible())
+        if (this.integrityEdit.getVisible())
         {
-            this.field_189826_B.mouseClicked(mouseX, mouseY, mouseButton);
+            this.integrityEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189827_C.getVisible())
+        if (this.seedEdit.getVisible())
         {
-            this.field_189827_C.mouseClicked(mouseX, mouseY, mouseButton);
+            this.seedEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        if (this.field_189828_D.getVisible())
+        if (this.dataEdit.getVisible())
         {
-            this.field_189828_D.mouseClicked(mouseX, mouseY, mouseButton);
+            this.dataEdit.mouseClicked(mouseX, mouseY, mouseButton);
         }
     }
 
@@ -706,21 +706,21 @@ public class GuiEditStructure extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        TileEntityStructure.Mode tileentitystructure$mode = this.field_189846_f.func_189700_k();
+        TileEntityStructure.Mode tileentitystructure$mode = this.tileStructure.getMode();
         this.drawCenteredString(this.fontRendererObj, I18n.format("tile.structureBlock.name", new Object[0]), this.width / 2, 10, 16777215);
 
         if (tileentitystructure$mode != TileEntityStructure.Mode.DATA)
         {
             this.drawString(this.fontRendererObj, I18n.format("structure_block.structure_name", new Object[0]), this.width / 2 - 153, 30, 10526880);
-            this.field_189853_u.drawTextBox();
+            this.nameEdit.drawTextBox();
         }
 
         if (tileentitystructure$mode == TileEntityStructure.Mode.LOAD || tileentitystructure$mode == TileEntityStructure.Mode.SAVE)
         {
             this.drawString(this.fontRendererObj, I18n.format("structure_block.position", new Object[0]), this.width / 2 - 153, 70, 10526880);
-            this.field_189854_v.drawTextBox();
-            this.field_189855_w.drawTextBox();
-            this.field_189856_x.drawTextBox();
+            this.posXEdit.drawTextBox();
+            this.posYEdit.drawTextBox();
+            this.posZEdit.drawTextBox();
             String s = I18n.format("structure_block.include_entities", new Object[0]);
             int i = this.fontRendererObj.getStringWidth(s);
             this.drawString(this.fontRendererObj, s, this.width / 2 + 154 - i, 150, 10526880);
@@ -729,9 +729,9 @@ public class GuiEditStructure extends GuiScreen
         if (tileentitystructure$mode == TileEntityStructure.Mode.SAVE)
         {
             this.drawString(this.fontRendererObj, I18n.format("structure_block.size", new Object[0]), this.width / 2 - 153, 110, 10526880);
-            this.field_189857_y.drawTextBox();
-            this.field_189858_z.drawTextBox();
-            this.field_189825_A.drawTextBox();
+            this.sizeXEdit.drawTextBox();
+            this.sizeYEdit.drawTextBox();
+            this.sizeZEdit.drawTextBox();
             String s2 = I18n.format("structure_block.detect_size", new Object[0]);
             int k = this.fontRendererObj.getStringWidth(s2);
             this.drawString(this.fontRendererObj, s2, this.width / 2 + 154 - k, 110, 10526880);
@@ -743,8 +743,8 @@ public class GuiEditStructure extends GuiScreen
         if (tileentitystructure$mode == TileEntityStructure.Mode.LOAD)
         {
             this.drawString(this.fontRendererObj, I18n.format("structure_block.integrity", new Object[0]), this.width / 2 - 153, 110, 10526880);
-            this.field_189826_B.drawTextBox();
-            this.field_189827_C.drawTextBox();
+            this.integrityEdit.drawTextBox();
+            this.seedEdit.drawTextBox();
             String s3 = I18n.format("structure_block.show_boundingbox", new Object[0]);
             int l = this.fontRendererObj.getStringWidth(s3);
             this.drawString(this.fontRendererObj, s3, this.width / 2 + 154 - l, 70, 10526880);
@@ -753,7 +753,7 @@ public class GuiEditStructure extends GuiScreen
         if (tileentitystructure$mode == TileEntityStructure.Mode.DATA)
         {
             this.drawString(this.fontRendererObj, I18n.format("structure_block.custom_data", new Object[0]), this.width / 2 - 153, 110, 10526880);
-            this.field_189828_D.drawTextBox();
+            this.dataEdit.drawTextBox();
         }
 
         String s4 = "structure_block.mode_info." + tileentitystructure$mode.getName();

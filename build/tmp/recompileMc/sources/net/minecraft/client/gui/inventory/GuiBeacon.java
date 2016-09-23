@@ -225,9 +225,9 @@ public class GuiBeacon extends GuiContainer
             private final int iconY;
             private boolean selected;
 
-            protected Button(int p_i1077_1_, int p_i1077_2_, int p_i1077_3_, ResourceLocation iconTextureIn, int iconXIn, int iconYIn)
+            protected Button(int buttonId, int x, int y, ResourceLocation iconTextureIn, int iconXIn, int iconYIn)
             {
-                super(p_i1077_1_, p_i1077_2_, p_i1077_3_, 22, 22, "");
+                super(buttonId, x, y, 22, 22, "");
                 this.iconTexture = iconTextureIn;
                 this.iconX = iconXIn;
                 this.iconY = iconYIn;
@@ -284,9 +284,9 @@ public class GuiBeacon extends GuiContainer
     @SideOnly(Side.CLIENT)
     class CancelButton extends GuiBeacon.Button
     {
-        public CancelButton(int p_i1074_2_, int p_i1074_3_, int p_i1074_4_)
+        public CancelButton(int buttonId, int x, int y)
         {
-            super(p_i1074_2_, p_i1074_3_, p_i1074_4_, GuiBeacon.BEACON_GUI_TEXTURES, 112, 220);
+            super(buttonId, x, y, GuiBeacon.BEACON_GUI_TEXTURES, 112, 220);
         }
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
@@ -298,9 +298,9 @@ public class GuiBeacon extends GuiContainer
     @SideOnly(Side.CLIENT)
     class ConfirmButton extends GuiBeacon.Button
     {
-        public ConfirmButton(int p_i1075_2_, int p_i1075_3_, int p_i1075_4_)
+        public ConfirmButton(int buttonId, int x, int y)
         {
-            super(p_i1075_2_, p_i1075_3_, p_i1075_4_, GuiBeacon.BEACON_GUI_TEXTURES, 90, 220);
+            super(buttonId, x, y, GuiBeacon.BEACON_GUI_TEXTURES, 90, 220);
         }
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
@@ -315,11 +315,11 @@ public class GuiBeacon extends GuiContainer
         private final Potion effect;
         private final int tier;
 
-        public PowerButton(int p_i47045_2_, int p_i47045_3_, int p_i47045_4_, Potion p_i47045_5_, int p_i47045_6_)
+        public PowerButton(int buttonId, int x, int y, Potion effectIn, int tierIn)
         {
-            super(p_i47045_2_, p_i47045_3_, p_i47045_4_, GuiContainer.INVENTORY_BACKGROUND, p_i47045_5_.getStatusIconIndex() % 8 * 18, 198 + p_i47045_5_.getStatusIconIndex() / 8 * 18);
-            this.effect = p_i47045_5_;
-            this.tier = p_i47045_6_;
+            super(buttonId, x, y, GuiContainer.INVENTORY_BACKGROUND, effectIn.getStatusIconIndex() % 8 * 18, 198 + effectIn.getStatusIconIndex() / 8 * 18);
+            this.effect = effectIn;
+            this.tier = tierIn;
         }
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)

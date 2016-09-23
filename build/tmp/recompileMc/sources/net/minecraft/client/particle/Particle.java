@@ -29,7 +29,8 @@ public class Particle
     protected double motionZ;
     private AxisAlignedBB boundingBox;
     protected boolean isCollided;
-    protected boolean field_190017_n;
+    /** Determines if particle to block collision is to be used */
+    protected boolean canCollide;
     protected boolean isExpired;
     protected float width;
     protected float height;
@@ -51,12 +52,14 @@ public class Particle
     /** Particle alpha */
     protected float particleAlpha;
     protected TextureAtlasSprite particleTexture;
-    protected float field_190014_F;
-    protected float field_190015_G;
+    /** The amount the particle will be rotated in rendering. */
+    protected float particleAngle;
+    /** The particle angle from the last tick. Appears to be used for calculating the rendered angle with partial ticks. */
+    protected float prevParticleAngle;
     public static double interpPosX;
     public static double interpPosY;
     public static double interpPosZ;
-    public static Vec3d field_190016_K;
+    public static Vec3d cameraViewDir;
 
     protected Particle(World worldIn, double posXIn, double posYIn, double posZIn)
     {
@@ -79,7 +82,7 @@ public class Particle
         this.particleScale = (this.rand.nextFloat() * 0.5F + 0.5F) * 2.0F;
         this.particleMaxAge = (int)(4.0F / (this.rand.nextFloat() * 0.9F + 0.1F));
         this.particleAge = 0;
-        this.field_190017_n = true;
+        this.canCollide = true;
     }
 
     public Particle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
@@ -201,13 +204,13 @@ public class Particle
         int k = i & 65535;
         Vec3d[] avec3d = new Vec3d[] {new Vec3d((double)(-rotationX * f4 - rotationXY * f4), (double)(-rotationZ * f4), (double)(-rotationYZ * f4 - rotationXZ * f4)), new Vec3d((double)(-rotationX * f4 + rotationXY * f4), (double)(rotationZ * f4), (double)(-rotationYZ * f4 + rotationXZ * f4)), new Vec3d((double)(rotationX * f4 + rotationXY * f4), (double)(rotationZ * f4), (double)(rotationYZ * f4 + rotationXZ * f4)), new Vec3d((double)(rotationX * f4 - rotationXY * f4), (double)(-rotationZ * f4), (double)(rotationYZ * f4 - rotationXZ * f4))};
 
-        if (this.field_190014_F != 0.0F)
+        if (this.particleAngle != 0.0F)
         {
-            float f8 = this.field_190014_F + (this.field_190014_F - this.field_190015_G) * partialTicks;
+            float f8 = this.particleAngle + (this.particleAngle - this.prevParticleAngle) * partialTicks;
             float f9 = MathHelper.cos(f8 * 0.5F);
-            float f10 = MathHelper.sin(f8 * 0.5F) * (float)field_190016_K.xCoord;
-            float f11 = MathHelper.sin(f8 * 0.5F) * (float)field_190016_K.yCoord;
-            float f12 = MathHelper.sin(f8 * 0.5F) * (float)field_190016_K.zCoord;
+            float f10 = MathHelper.sin(f8 * 0.5F) * (float)cameraViewDir.xCoord;
+            float f11 = MathHelper.sin(f8 * 0.5F) * (float)cameraViewDir.yCoord;
+            float f12 = MathHelper.sin(f8 * 0.5F) * (float)cameraViewDir.zCoord;
             Vec3d vec3d = new Vec3d((double)f10, (double)f11, (double)f12);
 
             for (int l = 0; l < 4; ++l)
@@ -222,6 +225,10 @@ public class Particle
         worldRendererIn.pos((double)f5 + avec3d[3].xCoord, (double)f6 + avec3d[3].yCoord, (double)f7 + avec3d[3].zCoord).tex((double)f, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
     }
 
+    /**
+     * Retrieve what effect layer (what texture) the particle should be rendered with. 0 for the particle sprite sheet,
+     * 1 for the main Texture atlas, and 3 for a custom texture
+     */
     public int getFXLayer()
     {
         return 0;
@@ -303,7 +310,7 @@ public class Particle
     {
         double d0 = y;
 
-        if (this.field_190017_n)
+        if (this.canCollide)
         {
             List<AxisAlignedBB> list = this.worldObj.getCollisionBoxes((Entity)null, this.getEntityBoundingBox().addCoord(x, y, z));
 
@@ -374,8 +381,8 @@ public class Particle
         return this.boundingBox;
     }
 
-    public void setEntityBoundingBox(AxisAlignedBB p_187108_1_)
+    public void setEntityBoundingBox(AxisAlignedBB bb)
     {
-        this.boundingBox = p_187108_1_;
+        this.boundingBox = bb;
     }
 }

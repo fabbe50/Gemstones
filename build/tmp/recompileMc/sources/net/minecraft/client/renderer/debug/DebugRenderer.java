@@ -13,56 +13,59 @@ public class DebugRenderer
 {
     public final DebugRenderer.IDebugRenderer debugRendererPathfinding;
     public final DebugRenderer.IDebugRenderer debugRendererWater;
-    public final DebugRenderer.IDebugRenderer field_190077_c;
-    public final DebugRenderer.IDebugRenderer field_190078_d;
-    private boolean field_190079_e;
-    private boolean field_190080_f;
-    private boolean field_190081_g;
-    private boolean field_190082_h;
+    public final DebugRenderer.IDebugRenderer debugRendererChunkBorder;
+    public final DebugRenderer.IDebugRenderer debugRendererHeightMap;
+    private boolean chunkBordersEnabled;
+    private boolean pathfindingEnabled;
+    private boolean waterEnabled;
+    private boolean heightmapEnabled;
 
     public DebugRenderer(Minecraft clientIn)
     {
         this.debugRendererPathfinding = new DebugRendererPathfinding(clientIn);
         this.debugRendererWater = new DebugRendererWater(clientIn);
-        this.field_190077_c = new DebugRendererChunkBorder(clientIn);
-        this.field_190078_d = new DebugRendererHeightMap(clientIn);
+        this.debugRendererChunkBorder = new DebugRendererChunkBorder(clientIn);
+        this.debugRendererHeightMap = new DebugRendererHeightMap(clientIn);
     }
 
-    public boolean func_190074_a()
+    public boolean shouldRender()
     {
-        return this.field_190079_e || this.field_190080_f || this.field_190081_g;
+        return this.chunkBordersEnabled || this.pathfindingEnabled || this.waterEnabled;
     }
 
-    public boolean func_190075_b()
+    /**
+     * Toggles the debug screen's visibility.
+     */
+    public boolean toggleDebugScreen()
     {
-        this.field_190079_e = !this.field_190079_e;
-        return this.field_190079_e;
+        this.chunkBordersEnabled = !this.chunkBordersEnabled;
+        return this.chunkBordersEnabled;
     }
 
-    public void func_190073_a(float p_190073_1_, long p_190073_2_)
+    public void renderDebug(float partialTicks, long finishTimeNano)
     {
-        if (this.field_190080_f)
+        if (this.pathfindingEnabled)
         {
-            this.debugRendererPathfinding.func_190060_a(p_190073_1_, p_190073_2_);
+            this.debugRendererPathfinding.render(partialTicks, finishTimeNano);
         }
 
-        if (this.field_190079_e && !Minecraft.getMinecraft().func_189648_am())
+        if (this.chunkBordersEnabled && !Minecraft.getMinecraft().isReducedDebug())
         {
-            this.field_190077_c.func_190060_a(p_190073_1_, p_190073_2_);
+            this.debugRendererChunkBorder.render(partialTicks, finishTimeNano);
         }
 
-        if (this.field_190081_g)
+        if (this.waterEnabled)
         {
-            this.debugRendererWater.func_190060_a(p_190073_1_, p_190073_2_);
+            this.debugRendererWater.render(partialTicks, finishTimeNano);
         }
 
-        if (this.field_190082_h)
+        if (this.heightmapEnabled)
         {
-            this.field_190078_d.func_190060_a(p_190073_1_, p_190073_2_);
+            this.debugRendererHeightMap.render(partialTicks, finishTimeNano);
         }
     }
 
-    public static void func_190076_a(String p_190076_0_, double p_190076_1_, double p_190076_3_, double p_190076_5_, float p_190076_7_, int p_190076_8_)
+    public static void renderDebugText(String str, double x, double y, double z, float partialTicks, int color)
     {
         Minecraft minecraft = Minecraft.getMinecraft();
 
@@ -70,11 +73,11 @@ public class DebugRenderer
         {
             FontRenderer fontrenderer = minecraft.fontRendererObj;
             EntityPlayer entityplayer = minecraft.thePlayer;
-            double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)p_190076_7_;
-            double d1 = entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)p_190076_7_;
-            double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)p_190076_7_;
+            double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks;
+            double d1 = entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks;
+            double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
             GlStateManager.pushMatrix();
-            GlStateManager.translate((float)(p_190076_1_ - d0), (float)(p_190076_3_ - d1) + 0.07F, (float)(p_190076_5_ - d2));
+            GlStateManager.translate((float)(x - d0), (float)(y - d1) + 0.07F, (float)(z - d2));
             GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
             GlStateManager.scale(0.02F, -0.02F, 0.02F);
             RenderManager rendermanager = minecraft.getRenderManager();
@@ -85,7 +88,7 @@ public class DebugRenderer
             GlStateManager.enableDepth();
             GlStateManager.depthMask(true);
             GlStateManager.scale(-1.0F, 1.0F, 1.0F);
-            fontrenderer.drawString(p_190076_0_, -fontrenderer.getStringWidth(p_190076_0_) / 2, 0, p_190076_8_);
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, 0, color);
             GlStateManager.enableLighting();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             GlStateManager.popMatrix();
@@ -95,6 +98,6 @@ public class DebugRenderer
     @SideOnly(Side.CLIENT)
     public interface IDebugRenderer
     {
-        void func_190060_a(float p_190060_1_, long p_190060_2_);
+        void render(float p_190060_1_, long p_190060_2_);
     }
 }
